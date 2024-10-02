@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
 
 const TODOS = [
@@ -9,16 +10,26 @@ const TODOS = [
 
 export default function TodoList() {
   const [tasks, setTasks] = useState(TODOS);
+  const [newTask, setNewTask] = useState("");
 
   function deleteTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
+
   function editTask(id, updatedTitle) {
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, title: updatedTitle } : task,
       ),
     );
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (newTask.trim() !== "") {
+      setTasks([...tasks, { id: uuidv4(), title: newTask, completed: false }]);
+      setNewTask("");
+    }
   }
 
   return (
@@ -32,6 +43,15 @@ export default function TodoList() {
           handleEdit={editTask}
         />
       ))}
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Type a task to add"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button type="submit">+ Add a task</button>
+      </form>
     </ul>
   );
 }
