@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 
-export default function TodoItem({ task, handleDelete, handleEdit }) {
+function TodoItem(
+  { task, handleDelete, handleEdit, draggableProps, dragHandleProps },
+  ref,
+) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
 
@@ -11,7 +14,7 @@ export default function TodoItem({ task, handleDelete, handleEdit }) {
   }
 
   return (
-    <li>
+    <li ref={ref} {...draggableProps} {...dragHandleProps}>
       {isEditing ? (
         <form onSubmit={handleSubmit}>
           <input
@@ -32,3 +35,5 @@ export default function TodoItem({ task, handleDelete, handleEdit }) {
     </li>
   );
 }
+
+export default forwardRef(TodoItem);
