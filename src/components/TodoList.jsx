@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import TodoItem from "./TodoItem";
 import { useTasks } from "./useTasks";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const initialTasks = [
   { id: uuidv4(), title: "Start building Planero", completed: true },
@@ -34,7 +35,7 @@ export default function TodoList() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    addTask();
+    addTask(newTask);
     setNewTask("");
   }
 
@@ -51,7 +52,7 @@ export default function TodoList() {
               // bind ref to DOM element
               ref={provided.innerRef}
               style={{ padding: 0 }}
-              className="bg-gray-100 rounded-lg p-4 shadow-md"
+              className="bg-gray-100 p-4 rounded-lg shadow-lg w-full max-w-md mx-auto"
             >
               {tasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
@@ -69,14 +70,21 @@ export default function TodoList() {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="mt-4 flex w-full">
                 <input
                   type="text"
-                  placeholder="Type a task to add"
+                  placeholder="Type a task to add..."
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
+                  className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button type="submit">+ Add a task</button>
+                <button
+                  type="submit"
+                  className="ml-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <AiOutlinePlus className="inline-flex" />
+                  Add new task
+                </button>
               </form>
             </ul>
           )}
