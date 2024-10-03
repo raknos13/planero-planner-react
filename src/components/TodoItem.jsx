@@ -1,4 +1,5 @@
 import { useState, forwardRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TodoItem(
   { task, handleDelete, handleEdit, draggableProps, dragHandleProps },
@@ -14,7 +15,12 @@ function TodoItem(
   }
 
   return (
-    <li ref={ref} {...draggableProps} {...dragHandleProps}>
+    <li
+      ref={ref}
+      {...draggableProps}
+      {...dragHandleProps}
+      className="bg-white p-4 mb-3 rounded-lg shadow-lg hover:bg-gray-50 cursor-pointer"
+    >
       {isEditing ? (
         <form onSubmit={handleSubmit}>
           <input
@@ -28,7 +34,10 @@ function TodoItem(
       ) : (
         <>
           {task.title}
-          <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button onClick={() => setIsEditing(true)}>
+            <FontAwesomeIcon icon="fa-regular fa-pen-to-square" />
+            Edit
+          </button>
           <button onClick={() => handleDelete(task.id)}>Delete</button>
         </>
       )}

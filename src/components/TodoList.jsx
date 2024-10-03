@@ -39,46 +39,49 @@ export default function TodoList() {
   }
 
   return (
-    // Wrap drag-and-drop context
-    <DragDropContext onDragEnd={onDragEnd}>
-      {/* Define droppable area */}
-      <Droppable droppableId="droppable">
-        {(provided) => (
-          <ul
-            // pass necessary props to make the list droppable
-            {...provided.droppableProps}
-            // bind ref to DOM element
-            ref={provided.innerRef}
-            style={{ padding: 0 }}
-          >
-            {tasks.map((task, index) => (
-              <Draggable key={task.id} draggableId={task.id} index={index}>
-                {(provided) => (
-                  <TodoItem
-                    ref={provided.innerRef}
-                    draggableProps={provided.draggableProps}
-                    dragHandleProps={provided.dragHandleProps}
-                    // key={index}
-                    task={task}
-                    handleEdit={editTask}
-                    handleDelete={deleteTask}
-                  />
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Type a task to add"
-                value={newTask}
-                onChange={(e) => setNewTask(e.target.value)}
-              />
-              <button type="submit">+ Add a task</button>
-            </form>
-          </ul>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <div className="container mx-auto p-4">
+      {/* Wrap drag-and-drop context */}
+      <DragDropContext onDragEnd={onDragEnd}>
+        {/* Define droppable area */}
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <ul
+              // pass necessary props to make the list droppable
+              {...provided.droppableProps}
+              // bind ref to DOM element
+              ref={provided.innerRef}
+              style={{ padding: 0 }}
+              className="bg-gray-100 rounded-lg p-4 shadow-md"
+            >
+              {tasks.map((task, index) => (
+                <Draggable key={task.id} draggableId={task.id} index={index}>
+                  {(provided) => (
+                    <TodoItem
+                      ref={provided.innerRef}
+                      draggableProps={provided.draggableProps}
+                      dragHandleProps={provided.dragHandleProps}
+                      // key={index}
+                      task={task}
+                      handleEdit={editTask}
+                      handleDelete={deleteTask}
+                    />
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+              <form onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Type a task to add"
+                  value={newTask}
+                  onChange={(e) => setNewTask(e.target.value)}
+                />
+                <button type="submit">+ Add a task</button>
+              </form>
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
 }
