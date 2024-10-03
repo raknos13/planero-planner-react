@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import TodoItem from "./TodoItem";
+import { useTasks } from "./useTasks";
 
 const initialTasks = [
   { id: uuidv4(), title: "Start building Planero", completed: true },
@@ -10,7 +11,8 @@ const initialTasks = [
 ];
 
 export default function TodoList() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const { tasks, addTask, deleteTask, editTask, reorderTasks } =
+    useTasks(initialTasks);
   const [newTask, setNewTask] = useState("");
 
   // Function to handle what happens when dragging ends
@@ -27,40 +29,13 @@ export default function TodoList() {
       return;
     }
 
-    // Reordering the list of tasks
-    const reorderedTasks = Array.from(tasks);
-    // Remove the dragged task,
-    // used array destructuring for [removed], as splice() returns an array
-    // and we need the element
-    const [removed] = reorderedTasks.splice(source.index, 1);
-    // Insert it at the new position
-    reorderedTasks.splice(destination.index, 0, removed);
-
-    setTasks(reorderedTasks);
-  }
-
-  function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
-  }
-
-  function editTask(id, updatedTitle) {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, title: updatedTitle } : task,
-      ),
-    );
-  }
-
-  function addNewTask() {
-    if (newTask.trim() !== "") {
-      setTasks([...tasks, { id: uuidv4(), title: newTask, completed: false }]);
-      setNewTask("");
-    }
+    reorderTasks(source.index, destination.index);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    addNewTask();
+    addTask();
+    setNewTask("");
   }
 
   return (
