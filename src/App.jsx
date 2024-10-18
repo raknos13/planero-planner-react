@@ -1,4 +1,4 @@
-import TodoList from "./components/TodoList.jsx";
+import Board from "./components/Board.jsx";
 
 export default function App() {
   return (
@@ -7,7 +7,7 @@ export default function App() {
         Planero project manager
       </h1>
       <ul>
-        <TodoList />
+        <Board />
       </ul>
     </>
   );
