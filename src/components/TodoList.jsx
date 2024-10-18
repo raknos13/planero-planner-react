@@ -53,6 +53,9 @@ export default function TodoList() {
               ref={provided.innerRef}
               style={{ padding: 0 }}
             >
+              <div className="font-bold mb-2 p-1">
+                <span>Todo</span>
+              </div>
               {tasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
                   {(provided) => (
