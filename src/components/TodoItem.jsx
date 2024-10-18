@@ -47,6 +47,7 @@ function TodoItem(
       {...draggableProps}
       {...dragHandleProps}
       className="text-sm bg-white p-4 rounded-md shadow mb-2 flex items-center justify-between"
+      style={{ position: "relative" }}
     >
       <input
         type="checkbox"
@@ -93,15 +94,15 @@ function TodoItem(
           </button>
         </form>
       ) : (
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between items-center w-full group">
           <div>
-            <span>{task.title}</span>
+            <span className="w-full">{task.title}</span>
           </div>
-          <div className="flex gap-2">
+          {/* Hide buttons by default, show on hover */}
+          <div className="absolute top-3 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white">
             <button
               onClick={() => {
                 setIsEditing(true);
-                // autoResizeTextArea();
               }}
               className="hover:bg-yellow-600 hover:text-white rounded-md p-1"
             >

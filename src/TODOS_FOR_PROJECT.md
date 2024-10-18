@@ -2,9 +2,9 @@
 
 ## TodoItem
 
-[] Hide the edit and delete buttons by default and make them visible on hover
-[] Use absolute positioning to overlay the buttons over the text when user hovers over the task
-[] Ensure the task expands to take the entire width, when buttons are hidden
+[x] Hide the edit and delete buttons by default and make them visible on hover
+[x] Use absolute positioning to overlay the buttons over the text when user hovers over the task
+[x] Ensure the task expands to take the entire width, when buttons are hidden
 
 - Introduce Boards
 
