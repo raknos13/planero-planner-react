@@ -46,7 +46,7 @@ function TodoItem(
       ref={ref}
       {...draggableProps}
       {...dragHandleProps}
-      className="text-sm bg-white p-4 rounded-md shadow mb-2 flex items-center justify-between"
+      className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex items-center justify-between"
       style={{ position: "relative" }}
     >
       <input
@@ -99,7 +99,7 @@ function TodoItem(
             <span className="w-full">{task.title}</span>
           </div>
           {/* Hide buttons by default, show on hover */}
-          <div className="absolute top-3 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white">
+          <div className="absolute top-1 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white">
             <button
               onClick={() => {
                 setIsEditing(true);

@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
+import { AiOutlinePlus } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import TodoItem from "./TodoItem";
 import { useTasks } from "./useTasks";
-import { AiOutlinePlus } from "react-icons/ai";
 
 const initialTasks = [
   { id: uuidv4(), title: "Start building Planero", completed: true },
@@ -40,7 +40,7 @@ export default function TodoList() {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-3 bg-gray-200 rounded-xl w-[300px]">
       {/* Wrap drag-and-drop context */}
       <DragDropContext onDragEnd={onDragEnd}>
         {/* Define droppable area */}
@@ -52,7 +52,6 @@ export default function TodoList() {
               // bind ref to DOM element
               ref={provided.innerRef}
               style={{ padding: 0 }}
-              className="bg-gray-100 p-4 rounded-lg shadow-lg w-full max-w-md mx-auto"
             >
               {tasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
@@ -70,19 +69,15 @@ export default function TodoList() {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <form onSubmit={handleSubmit} className="mt-4 flex w-full">
+              <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   placeholder="Type a task to add..."
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
-                  className="flex-grow p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <button
-                  type="submit"
-                  className="ml-2 bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <AiOutlinePlus className="inline-flex" />
+                <button type="submit">
+                  <AiOutlinePlus />
                   Add new task
                 </button>
               </form>
