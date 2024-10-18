@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useRef } from "react";
 import {
   AiOutlineEdit,
   AiOutlineDelete,
@@ -12,11 +12,14 @@ function TodoItem(
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
+  const textareaRef = useRef(null);
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleEdit(task.id, editedTitle);
-    setIsEditing(false);
+    if (editedTitle.trim()) {
+      handleEdit(task.id, { ...task, title: editedTitle });
+      setIsEditing(false);
+    }
   }
 
   return (
@@ -24,38 +27,68 @@ function TodoItem(
       ref={ref}
       {...draggableProps}
       {...dragHandleProps}
-      className="flex items-center justify-start gap-3 bg-white p-4 mb-3 rounded-lg shadow-lg hover:bg-gray-50 cursor-pointer"
+      className="bg-white p-4 rounded-md shadow mb-2 flex items-center justify-between"
     >
-      <input type="checkbox" checked={task.completed} />{" "}
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() =>
+          handleEdit(task.id, { ...task, completed: !task.completed })
+        }
+        className="mr-2"
+      />
       {isEditing ? (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
+        <form
+          onSubmit={handleSubmit}
+          className="flex gap-2 items-center w-full"
+        >
+          {/* <input */}
+          {/*   type="textarea" */}
+          {/*   value={editedTitle} */}
+          {/*   onChange={(e) => setEditedTitle(e.target.value)} */}
+          {/*   className="w-full p-2 border rounded-md" */}
+          {/* /> */}
+          <textarea
             value={editedTitle}
-            onChange={(e) => setEditedTitle(e.target.value)}
+            ref={textareaRef}
+            wrap="soft"
+            onChange={(e) => {
+              setEditedTitle(e.target.value);
+              // e.target.autofocus = true;
+              textareaRef.current.autofocus = true;
+            }}
+            className="w-full p-2 border rounded-md"
           />
-          <button type="submit">
-            <AiOutlineCheck />
+          <button
+            type="submit"
+            className="text-green-600 p-1 rounded-md border border-gray-100 hover:bg-green-400 hover:text-white"
+          >
+            <AiOutlineCheck size={20} /> {/* confirm edit */}
           </button>
-          <button onClick={() => setIsEditing(false)}>
-            <AiOutlineClose />
+          <button
+            onClick={() => setIsEditing(false)}
+            className="text-red-600 p-1 rounded-md border border-gray-100 hover:bg-red-400 hover:text-white"
+          >
+            <AiOutlineClose size={20} /> {/* cancel edit */}
           </button>
         </form>
       ) : (
-        <div className="flex justify-between gap-2">
-          <div>{task.title}</div>
+        <div className="flex justify-between items-center w-full">
           <div>
-            <button onClick={() => setIsEditing(true)}>
-              <AiOutlineEdit
-                className="text-gray-500 hover:text-blue-500 cursor-pointer"
-                size={20}
-              />
+            <span>{task.title}</span>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setIsEditing(true)}
+              className="hover:bg-yellow-600 hover:text-white rounded-md p-1"
+            >
+              <AiOutlineEdit size={20} />
             </button>{" "}
-            <button onClick={() => handleDelete(task.id)}>
-              <AiOutlineDelete
-                className="text-gray-500 hover:text-red-500 cursor-pointer"
-                size={20}
-              />
+            <button
+              onClick={() => handleDelete(task.id)}
+              className="hover:bg-red-600 hover:text-white rounded-md p-1"
+            >
+              <AiOutlineDelete size={20} />
             </button>
           </div>
         </div>
