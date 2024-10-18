@@ -70,15 +70,18 @@ export default function TodoList() {
               ))}
               {provided.placeholder}
               <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
+                <textarea
                   placeholder="Type a task to add..."
                   value={newTask}
                   onChange={(e) => setNewTask(e.target.value)}
+                  className="mb-1 p-2 w-full rounded-lg"
                 />
-                <button type="submit">
+                <button
+                  type="submit"
+                  className="flex justify-start items-center gap-2 p-1 bg-white rounded-md w-full hover:bg-gray-400"
+                >
                   <AiOutlinePlus />
-                  Add new task
+                  <span>Add new task</span>
                 </button>
               </form>
             </ul>
