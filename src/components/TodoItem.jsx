@@ -1,4 +1,4 @@
-import { useState, forwardRef, useRef } from "react";
+import { useState, forwardRef, useRef, useEffect } from "react";
 import {
   AiOutlineEdit,
   AiOutlineDelete,
@@ -12,7 +12,17 @@ function TodoItem(
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
+
   const textareaRef = useRef(null);
+
+  // focus on the textarea and select the previous text
+  // when user clicks on the edit btn
+  useEffect(() => {
+    if (isEditing && textareaRef.current) {
+      textareaRef.current.focus();
+      textareaRef.current.select();
+    }
+  }, [isEditing]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -55,7 +65,7 @@ function TodoItem(
             onChange={(e) => {
               setEditedTitle(e.target.value);
               // e.target.autofocus = true;
-              textareaRef.current.autofocus = true;
+              // textareaRef.current.autofocus = true;
             }}
             className="w-full p-2 border rounded-md"
           />
