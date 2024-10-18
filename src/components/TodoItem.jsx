@@ -21,6 +21,7 @@ function TodoItem(
     if (isEditing && textareaRef.current) {
       textareaRef.current.focus();
       textareaRef.current.select();
+      autoResizeTextArea();
     }
   }, [isEditing]);
 
@@ -32,12 +33,20 @@ function TodoItem(
     }
   }
 
+  // automatically resize textarea
+  // based on the lines of text
+  function autoResizeTextArea() {
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }
+
   return (
     <li
       ref={ref}
       {...draggableProps}
       {...dragHandleProps}
-      className="bg-white p-4 rounded-md shadow mb-2 flex items-center justify-between"
+      className="text-sm bg-white p-4 rounded-md shadow mb-2 flex items-center justify-between"
     >
       <input
         type="checkbox"
@@ -52,22 +61,23 @@ function TodoItem(
           onSubmit={handleSubmit}
           className="flex gap-2 items-center w-full"
         >
-          {/* <input */}
-          {/*   type="textarea" */}
-          {/*   value={editedTitle} */}
-          {/*   onChange={(e) => setEditedTitle(e.target.value)} */}
-          {/*   className="w-full p-2 border rounded-md" */}
-          {/* /> */}
           <textarea
             value={editedTitle}
             ref={textareaRef}
-            wrap="soft"
+            // wrap="soft"
+            rows={1}
             onChange={(e) => {
               setEditedTitle(e.target.value);
-              // e.target.autofocus = true;
-              // textareaRef.current.autofocus = true;
+              autoResizeTextArea();
             }}
-            className="w-full p-2 border rounded-md"
+            onKeyDown={(e) => {
+              // Submit the edit, when enter is pressed.
+              if (e.key == "Enter") {
+                e.preventDefault();
+                handleSubmit(e);
+              }
+            }}
+            className="resize-none w-full p-2 border rounded-md"
           />
           <button
             type="submit"
@@ -89,7 +99,10 @@ function TodoItem(
           </div>
           <div className="flex gap-2">
             <button
-              onClick={() => setIsEditing(true)}
+              onClick={() => {
+                setIsEditing(true);
+                // autoResizeTextArea();
+              }}
               className="hover:bg-yellow-600 hover:text-white rounded-md p-1"
             >
               <AiOutlineEdit size={20} />
