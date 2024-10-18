@@ -15,6 +15,7 @@ export default function TodoList() {
   const { tasks, addTask, deleteTask, editTask, reorderTasks } =
     useTasks(initialTasks);
   const [newTask, setNewTask] = useState("");
+  const [isAddingNewTask, setIsAddingNewTask] = useState(false);
 
   // Function to handle what happens when dragging ends
   function onDragEnd(result) {
@@ -34,13 +35,18 @@ export default function TodoList() {
   }
 
   function handleSubmit(e) {
+    isAddingNewTask(true);
     e.preventDefault();
     addTask(newTask);
     setNewTask("");
+    isAddingNewTask(false);
   }
 
   return (
-    <div className="container mx-auto p-3 bg-gray-200 rounded-xl w-[300px]">
+    <div className="container mx-auto p-2 bg-gray-200 rounded-xl w-[300px]">
+      <div className="font-bold mb-2 p-1">
+        <span>Todo</span>
+      </div>
       {/* Wrap drag-and-drop context */}
       <DragDropContext onDragEnd={onDragEnd}>
         {/* Define droppable area */}
@@ -53,9 +59,6 @@ export default function TodoList() {
               ref={provided.innerRef}
               style={{ padding: 0 }}
             >
-              <div className="font-bold mb-2 p-1">
-                <span>Todo</span>
-              </div>
               {tasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
                   {(provided) => (
@@ -72,25 +75,29 @@ export default function TodoList() {
                 </Draggable>
               ))}
               {provided.placeholder}
-              <form onSubmit={handleSubmit}>
-                <textarea
-                  placeholder="Type a task to add..."
-                  value={newTask}
-                  onChange={(e) => setNewTask(e.target.value)}
-                  className="mb-1 p-2 w-full rounded-lg"
-                />
-                <button
-                  type="submit"
-                  className="flex justify-start items-center gap-2 p-1 bg-white rounded-md w-full hover:bg-gray-400"
-                >
-                  <AiOutlinePlus />
-                  <span>Add new task</span>
-                </button>
-              </form>
             </ul>
           )}
         </Droppable>
       </DragDropContext>
+      <form onSubmit={handleSubmit}>
+        {isAddingNewTask ? (
+          <textarea
+            placeholder="Type a task to add..."
+            value={newTask}
+            onChange={(e) => setNewTask(e.target.value)}
+            className="mb-1 p-2 w-full rounded-lg text-sm"
+          />
+        ) : (
+          ""
+        )}
+        <button
+          type="submit"
+          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+        >
+          <AiOutlinePlus />
+          <span>Add new task</span>
+        </button>
+      </form>
     </div>
   );
 }
