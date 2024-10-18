@@ -1,5 +1,11 @@
 # Todo's for the project
 
+## TodoItem
+
+[] Hide the edit and delete buttons by default and make them visible on hover
+[] Use absolute positioning to overlay the buttons over the text when user hovers over the task
+[] Ensure the task expands to take the entire width, when buttons are hidden
+
 - Introduce Boards
 
 Create a new Board component that will contain multiple lists.
