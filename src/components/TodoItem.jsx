@@ -46,7 +46,7 @@ function TodoItem(
       ref={ref}
       {...draggableProps}
       {...dragHandleProps}
-      className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex items-center justify-between"
+      className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       style={{ position: "relative" }}
     >
       <input
