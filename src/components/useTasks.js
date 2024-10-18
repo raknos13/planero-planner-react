@@ -8,12 +8,8 @@ export function useTasks(initialTasks) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
-  function editTask(id, updatedTitle) {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, title: updatedTitle } : task,
-      ),
-    );
+  function editTask(id, updatedTask) {
+    setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)));
   }
 
   function addTask(newTaskTitle) {
