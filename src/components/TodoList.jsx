@@ -96,21 +96,26 @@ export default function TodoList() {
           className="mb-1 p-2 w-full rounded-lg text-sm"
         />
       )}
-      <button
-        // type="submit"
-        onClick={() => {
-          setIsAddingNewTask(true);
-        }}
-        className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
-      >
-        <AiOutlinePlus />
-        <span>Add new task</span>
-      </button>
-      {isAddingNewTask && (
-        <button onClick={() => setIsAddingNewTask(false)}>
-          <AiOutlineClose />
+      <div className="flex">
+        <button
+          // type="submit"
+          onClick={() => {
+            setIsAddingNewTask(true);
+          }}
+          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+        >
+          <AiOutlinePlus />
+          <span>Add new task</span>
         </button>
-      )}
+        {isAddingNewTask && (
+          <button
+            onClick={() => setIsAddingNewTask(false)}
+            className="p-1 px-2 rounded-md hover:bg-gray-400"
+          >
+            <AiOutlineClose />
+          </button>
+        )}
+      </div>
     </div>
   );
 }
