@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
 import { useTasks } from "./useTasks";
@@ -17,29 +17,33 @@ export default function TodoList() {
   const [newTask, setNewTask] = useState("");
   const [isAddingNewTask, setIsAddingNewTask] = useState(false);
 
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    if (textareaRef.current && isAddingNewTask) {
+      textareaRef.current.focus();
+    }
+  }, [isAddingNewTask]);
+
   // Function to handle what happens when dragging ends
   function onDragEnd(result) {
     const { destination, source } = result;
-
     // If there's no destination (dropped outside), do nothing
     if (!destination) {
       return;
     }
-
     // If position hasn't changed do nothing
     if (destination.index === source.index) {
       return;
     }
-
     reorderTasks(source.index, destination.index);
   }
 
   function handleSubmit(e) {
-    isAddingNewTask(true);
     e.preventDefault();
     addTask(newTask);
     setNewTask("");
-    isAddingNewTask(false);
+    // setIsAddingNewTask(false);
   }
 
   return (
@@ -57,7 +61,6 @@ export default function TodoList() {
               {...provided.droppableProps}
               // bind ref to DOM element
               ref={provided.innerRef}
-              style={{ padding: 0 }}
             >
               {tasks.map((task, index) => (
                 <Draggable key={task.id} draggableId={task.id} index={index}>
@@ -79,25 +82,35 @@ export default function TodoList() {
           )}
         </Droppable>
       </DragDropContext>
-      <form onSubmit={handleSubmit}>
-        {isAddingNewTask ? (
-          <textarea
-            placeholder="Type a task to add..."
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            className="mb-1 p-2 w-full rounded-lg text-sm"
-          />
-        ) : (
-          ""
-        )}
-        <button
-          type="submit"
-          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
-        >
-          <AiOutlinePlus />
-          <span>Add new task</span>
+      {isAddingNewTask && (
+        <textarea
+          placeholder="Type a task to add..."
+          value={newTask}
+          ref={textareaRef}
+          onChange={(e) => setNewTask(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSubmit(e);
+            }
+          }}
+          className="mb-1 p-2 w-full rounded-lg text-sm"
+        />
+      )}
+      <button
+        // type="submit"
+        onClick={() => {
+          setIsAddingNewTask(true);
+        }}
+        className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+      >
+        <AiOutlinePlus />
+        <span>Add new task</span>
+      </button>
+      {isAddingNewTask && (
+        <button onClick={() => setIsAddingNewTask(false)}>
+          <AiOutlineClose />
         </button>
-      </form>
+      )}
     </div>
   );
 }
