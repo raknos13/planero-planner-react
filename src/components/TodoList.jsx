@@ -93,7 +93,10 @@ export default function TodoList() {
               handleSubmit(e);
             }
           }}
-          onBlur={() => setIsAddingNewTask(false)}
+          onBlur={() => {
+            setIsAddingNewTask(false);
+            setNewTask("");
+          }}
           className="mb-1 p-2 w-full rounded-lg text-sm"
         />
       )}
