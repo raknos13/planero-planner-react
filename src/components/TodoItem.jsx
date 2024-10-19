@@ -12,7 +12,6 @@ const TodoItem = forwardRef(function TodoItem(
 ) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
-
   const textareaRef = useRef(null);
 
   // focus on the textarea and select the previous text
@@ -37,8 +36,27 @@ const TodoItem = forwardRef(function TodoItem(
   // based on the lines of text
   function autoResizeTextArea() {
     const textarea = textareaRef.current;
-    textarea.style.height = "auto";
-    textarea.style.height = `${textarea.scrollHeight}px`;
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }
+
+  function handleCheckboxChange() {
+    handleEdit(task.id, { ...task, completed: !task.completed });
+  }
+
+  function handleKeyDown(e) {
+    // Submit the edit, when enter is pressed.
+    // and Shift enter inserts a new line
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+    if (e.key === "Escape") {
+      setIsEditing(false);
+      setEditedTitle(task.title);
+    }
   }
 
   return (
@@ -52,9 +70,7 @@ const TodoItem = forwardRef(function TodoItem(
         <input
           type="checkbox"
           checked={task.completed}
-          onChange={() =>
-            handleEdit(task.id, { ...task, completed: !task.completed })
-          }
+          onChange={handleCheckboxChange}
           className="mr-2"
         />
         {isEditing ? (
@@ -71,13 +87,7 @@ const TodoItem = forwardRef(function TodoItem(
                 setEditedTitle(e.target.value);
                 autoResizeTextArea();
               }}
-              onKeyDown={(e) => {
-                // Submit the edit, when enter is pressed.
-                if (e.key == "Enter") {
-                  e.preventDefault();
-                  handleSubmit(e);
-                }
-              }}
+              onKeyDown={handleKeyDown}
               className="resize-none w-full p-2 border rounded-md"
             />
             <button
