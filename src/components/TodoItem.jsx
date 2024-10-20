@@ -88,7 +88,7 @@ const TodoItem = forwardRef(function TodoItem(
                 autoResizeTextArea();
               }}
               onKeyDown={handleKeyDown}
-              className="resize-none w-full p-2 border rounded-md"
+              className="resize-none w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
             />
             <button
               type="submit"
@@ -97,7 +97,10 @@ const TodoItem = forwardRef(function TodoItem(
               <AiOutlineCheck size={20} /> {/* confirm edit */}
             </button>
             <button
-              onClick={() => setIsEditing(false)}
+              onClick={() => {
+                setIsEditing(false);
+                setEditedTitle(task.title);
+              }}
               className="text-red-600 p-1 rounded-md border border-gray-100 hover:bg-red-400 hover:text-white"
             >
               <AiOutlineClose size={20} /> {/* cancel edit */}
@@ -113,18 +116,16 @@ const TodoItem = forwardRef(function TodoItem(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1 right-2 gap-1 hidden group-hover:flex transition-opacity duration-300 bg-white">
+            <div className="absolute top-1 right-2 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white">
               <button
-                onClick={() => {
-                  setIsEditing(true);
-                }}
-                className="hover:bg-yellow-600 hover:text-white rounded-md p-1"
+                onClick={() => setIsEditing(true)}
+                className="hover:bg-yellow-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineEdit size={20} />
               </button>{" "}
               <button
                 onClick={() => handleDelete(task.id)}
-                className="hover:bg-red-600 hover:text-white rounded-md p-1"
+                className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineDelete size={20} />
               </button>
