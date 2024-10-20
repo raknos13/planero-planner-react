@@ -3,7 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
-import { useTasks } from "./useTasks";
+import { useTasks } from "../hooks/useTasks";
 
 const initialTasks = [
   { id: uuidv4(), title: "Start building Planero", completed: true },
