@@ -1,19 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import TodoItem from "./TodoItem";
 import { useTasks } from "../hooks/useTasks";
 
-const initialTasks = [
-  { id: uuidv4(), title: "Start building Planero", completed: true },
-  { id: uuidv4(), title: "Stop procrastinating", completed: false },
-  { id: uuidv4(), title: "You can't learn unless you build", completed: true },
-];
-
-export default function TodoList() {
-  const { tasks, addTask, deleteTask, editTask, reorderTasks } =
-    useTasks(initialTasks);
+export default function TodoList({ initialTasks, title, onDragEnd }) {
+  const { tasks, addTask, deleteTask, editTask } = useTasks(initialTasks);
   const [newTask, setNewTask] = useState("");
   const [isAddingNewTask, setIsAddingNewTask] = useState(false);
 
@@ -25,20 +18,6 @@ export default function TodoList() {
     }
   }, [isAddingNewTask]);
 
-  // Function to handle what happens when dragging ends
-  function onDragEnd(result) {
-    const { destination, source } = result;
-    // If there's no destination (dropped outside), do nothing
-    if (!destination) {
-      return;
-    }
-    // If position hasn't changed do nothing
-    if (destination.index === source.index) {
-      return;
-    }
-    reorderTasks(source.index, destination.index);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
     addTask(newTask);
@@ -49,7 +28,7 @@ export default function TodoList() {
   return (
     <div className="container mx-2 p-2 bg-gray-200 rounded-xl w-[300px] h-min">
       <div className="font-bold mb-2 p-1">
-        <span>Todo</span>
+        <span>{title}</span>
       </div>
       {/* Wrap drag-and-drop context */}
       <DragDropContext onDragEnd={onDragEnd}>
@@ -62,21 +41,22 @@ export default function TodoList() {
               // bind ref to DOM element
               ref={provided.innerRef}
             >
-              {tasks.map((task, index) => (
-                <Draggable key={task.id} draggableId={task.id} index={index}>
-                  {(provided) => (
-                    <TodoItem
-                      ref={provided.innerRef}
-                      draggableProps={provided.draggableProps}
-                      dragHandleProps={provided.dragHandleProps}
-                      // key={index}
-                      task={task}
-                      handleEdit={editTask}
-                      handleDelete={deleteTask}
-                    />
-                  )}
-                </Draggable>
-              ))}
+              {tasks &&
+                tasks.map((task, index) => (
+                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                    {(provided) => (
+                      <TodoItem
+                        ref={provided.innerRef}
+                        draggableProps={provided.draggableProps}
+                        dragHandleProps={provided.dragHandleProps}
+                        // key={index}
+                        task={task}
+                        handleEdit={editTask}
+                        handleDelete={deleteTask}
+                      />
+                    )}
+                  </Draggable>
+                ))}
               {provided.placeholder}
             </ul>
           )}
