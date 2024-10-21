@@ -47,7 +47,7 @@ export default function TodoList() {
   }
 
   return (
-    <div className="container mx-auto p-2 bg-gray-200 rounded-xl w-[300px]">
+    <div className="container mx-2 p-2 bg-gray-200 rounded-xl w-[300px] h-min">
       <div className="font-bold mb-2 p-1">
         <span>Todo</span>
       </div>
