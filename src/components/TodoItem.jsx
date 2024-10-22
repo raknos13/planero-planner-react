@@ -6,8 +6,8 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 
-const TodoItem = forwardRef(function TodoItem(
-  { task, handleDelete, handleEdit, draggableProps, dragHandleProps },
+const ListItem = forwardRef(function ListItem(
+  { listId, task, handleDelete, handleEdit, draggableProps, dragHandleProps },
   ref,
 ) {
   const [isEditing, setIsEditing] = useState(false);
@@ -27,7 +27,7 @@ const TodoItem = forwardRef(function TodoItem(
   function handleSubmit(e) {
     e.preventDefault();
     if (editedTitle.trim()) {
-      handleEdit(task.id, { ...task, title: editedTitle });
+      handleEdit(listId, task.id, { ...task, title: editedTitle });
       setIsEditing(false);
     }
   }
@@ -124,7 +124,7 @@ const TodoItem = forwardRef(function TodoItem(
                 <AiOutlineEdit size={20} />
               </button>{" "}
               <button
-                onClick={() => handleDelete(task.id)}
+                onClick={() => handleDelete(list.id, task.id)}
                 className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineDelete size={20} />
@@ -137,4 +137,4 @@ const TodoItem = forwardRef(function TodoItem(
   );
 });
 
-export default TodoItem;
+export default ListItem;
