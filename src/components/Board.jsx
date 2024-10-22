@@ -98,75 +98,80 @@ export default function Board() {
     setData({
       ...data,
       lists: { ...list, cardIds: updatedCardIds },
-      cards: { ...cards, [newCardId]: newCard },
+      cards: { ...data.cards, [newCardId]: newCard },
     });
   }
 
   function editCard(cardId, updatedCard) {
-    const card = data.cards[cardId];
     const updatedCards = { ...data.cards, [cardId]: updatedCard };
-    setData(
+    setData({
       ...data,
       cards: updatedCards,
-    )
+    });
   }
 
   // Function to handle what happens when dragging ends
   function onDragEnd(result) {
     const { destination, source, type } = result;
     // If there's no destination (dropped outside), do nothing
-    if (
-      !destination ||
-      (destination.droppableId === source.droppableId &&
-        destination.index === source.index)
-    ) {
+    if (!destination) {
       return;
     }
 
     // Handle list reordering
     if (type === "list") {
-      const newLists = Array.from(lists);
-      const [movedList] = newLists.splice(source.index, 1);
-      newLists.splice(destination.index, 0, movedList);
-
-      setLists(newLists);
+      const newListOrder = Array.from(data.listOrder);
+      const [movedList] = newListOrder.splice(source.index, 1);
+      newListOrder.splice(destination.index, 0, movedList);
+      setData({
+        ...data,
+        listOrder: newListOrder,
+      });
       return;
     }
 
     // Handle card reordering
-    const sourceList = lists.find((list) => list.id === source.droppableId);
-    const destList = lists.find((list) => list.id === destination.droppableId);
-
-    // Create new array references for updating state
-    const newSourceTasks = Array.from(sourceList.cards);
-    const [movedTask] = newSourceTasks.splice(source.index, 1);
+    const sourceList = data.lists[source.droppableId];
+    const destList = data.lists[destination.droppableId];
 
     // If moving to same list
-    if (source.droppableId === destination.droppableId) {
-      newSourceTasks.splice(destination.index, 0, movedTask);
+    if (sourceList === destList) {
+      const newCardIds = Array.from(sourceList.cardIds);
+      const [movedCard] = newCardIds.splice(source.index, 1);
+      newCardIds.splice(destination.index, 0, movedCard);
 
-      const newLists = lists.map((list) =>
-        list.id === sourceList.id ? { ...list, cards: newSourceTasks } : list,
-      );
-
-      setLists(newLists);
-    }
-    // If moving to different list
-    else {
-      const newDestTasks = Array.from(destList.cards);
-      newDestTasks.splice(destination.index, 0, movedTask);
-
-      const newLists = lists.map((list) => {
-        if (list.id === sourceList.id) {
-          return { ...list, cards: newSourceTasks };
-        }
-        if (list.id === destList.id) {
-          return { ...list, cards: newDestTasks };
-        }
-        return list;
+      setData({
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: {
+            ...sourceList,
+            cardIds: newCardIds,
+          },
+        },
       });
+    } else {
+      // If moving to different list
+      const sourceCardIds = Array.from(sourceList.cardIds);
+      const destCardIds = Array.from(destList.cardIds);
 
-      setLists(newLists);
+      const [movedCard] = sourceCardIds.splice(source.index, 1);
+      destCardIds.splice(destination.index, 0, movedCard);
+
+      setData({
+        ...data,
+        lists: {
+          ...data.lists,
+          [sourceList.id]: {
+            ...sourceList,
+            cardIds: sourceCardIds,
+          },
+          [destList.id]: {
+            ...destList,
+            cardIds: destCardIds,
+          },
+        },
+      });
     }
   }
 
@@ -181,6 +186,8 @@ export default function Board() {
           >
             {data.listOrder.map((listId, index) => {
               const list = data.lists[listId];
+              const cards = list.cardIds.map((cardId) => data.cards[cardId]);
+
               return (
                 <Draggable key={list.id} draggableId={list.id} index={index}>
                   {(provided) => (
@@ -191,7 +198,7 @@ export default function Board() {
                     >
                       <List
                         list={list}
-                        cards={list.cards.map((cardId) => data.cards[cardId])}
+                        cards={cards}
                         onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
                       />
