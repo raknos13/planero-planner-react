@@ -44,9 +44,9 @@ export default function TodoList({
             // bind ref to DOM element
             ref={provided.innerRef}
           >
-            {list.tasks &&
-              list.tasks.map((task, index) => (
-                <Draggable key={task.id} draggableId={task.id} index={index}>
+            {list.cards &&
+              list.cards.map((card, index) => (
+                <Draggable key={card.id} draggableId={card.id} index={index}>
                   {(provided) => (
                     <ListItem
                       ref={provided.innerRef}
@@ -54,7 +54,7 @@ export default function TodoList({
                       dragHandleProps={provided.dragHandleProps}
                       // key={index}
                       listId={list.id}
-                      task={task}
+                      card={card}
                       handleEdit={editTask}
                       handleDelete={deleteTask}
                     />
@@ -68,7 +68,7 @@ export default function TodoList({
 
       {isAddingNewTask && (
         <textarea
-          placeholder="Type a task to add..."
+          placeholder="Type a card to add..."
           value={newTask.title}
           ref={textareaRef}
           onChange={(e) =>
@@ -97,10 +97,10 @@ export default function TodoList({
           onClick={() => {
             setIsAddingNewTask(true);
           }}
-          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+          className="flex justify-start cards-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
         >
           <AiOutlinePlus />
-          <span>Add new task</span>
+          <span>Add new card</span>
         </button>
         {isAddingNewTask && (
           <button

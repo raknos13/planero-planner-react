@@ -7,11 +7,11 @@ import {
 } from "react-icons/ai";
 
 const ListItem = forwardRef(function ListItem(
-  { listId, task, handleDelete, handleEdit, draggableProps, dragHandleProps },
+  { listId, card, handleDelete, handleEdit, draggableProps, dragHandleProps },
   ref,
 ) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(task.title);
+  const [editedTitle, setEditedTitle] = useState(card.title);
   const textareaRef = useRef(null);
 
   // focus on the textarea and select the previous text
@@ -27,7 +27,7 @@ const ListItem = forwardRef(function ListItem(
   function handleSubmit(e) {
     e.preventDefault();
     if (editedTitle.trim()) {
-      handleEdit(listId, task.id, { ...task, title: editedTitle });
+      handleEdit(listId, card.id, { ...card, title: editedTitle });
       setIsEditing(false);
     }
   }
@@ -43,7 +43,7 @@ const ListItem = forwardRef(function ListItem(
   }
 
   function handleCheckboxChange() {
-    handleEdit(task.id, { ...task, completed: !task.completed });
+    handleEdit(card.id, { ...card, completed: !card.completed });
   }
 
   function handleKeyDown(e) {
@@ -55,7 +55,7 @@ const ListItem = forwardRef(function ListItem(
     }
     if (e.key === "Escape") {
       setIsEditing(false);
-      setEditedTitle(task.title);
+      setEditedTitle(card.title);
     }
   }
 
@@ -65,18 +65,18 @@ const ListItem = forwardRef(function ListItem(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex cards-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       >
         <input
           type="checkbox"
-          checked={task.completed}
+          checked={card.completed}
           onChange={handleCheckboxChange}
           className="mr-2"
         />
         {isEditing ? (
           <form
             onSubmit={handleSubmit}
-            className="flex gap-2 items-center w-full"
+            className="flex gap-2 cards-center w-full"
           >
             <textarea
               value={editedTitle}
@@ -99,7 +99,7 @@ const ListItem = forwardRef(function ListItem(
             <button
               onClick={() => {
                 setIsEditing(false);
-                setEditedTitle(task.title);
+                setEditedTitle(card.title);
               }}
               className="text-red-600 p-1 rounded-md border border-gray-100 hover:bg-red-400 hover:text-white"
             >
@@ -107,12 +107,12 @@ const ListItem = forwardRef(function ListItem(
             </button>
           </form>
         ) : (
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between cards-center w-full">
             <div>
               <span
-                className={`w-full ${task.completed ? "line-through text-gray-500" : ""}`}
+                className={`w-full ${card.completed ? "line-through text-gray-500" : ""}`}
               >
-                {task.title}
+                {card.title}
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
@@ -124,7 +124,7 @@ const ListItem = forwardRef(function ListItem(
                 <AiOutlineEdit size={20} />
               </button>{" "}
               <button
-                onClick={() => handleDelete(list.id, task.id)}
+                onClick={() => handleDelete(list.id, card.id)}
                 className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineDelete size={20} />
