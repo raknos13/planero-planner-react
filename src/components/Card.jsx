@@ -6,7 +6,7 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 
-const ListItem = forwardRef(function ListItem(
+const Card = forwardRef(function Card(
   { listId, card, handleDelete, handleEdit, draggableProps, dragHandleProps },
   ref,
 ) {
@@ -137,4 +137,4 @@ const ListItem = forwardRef(function ListItem(
   );
 });
 
-export default ListItem;
+export default Card;
