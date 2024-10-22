@@ -20,18 +20,18 @@ export function useTasks(initialTasks) {
     ]);
   }
 
-  function reorderTasks(sourceIndex, destinationIndex) {
-    // Reordering the list of tasks
-    const reorderedTasks = Array.from(tasks);
-    // Remove the dragged task,
-    // used array destructuring for [removed], as splice() returns an array
-    // and we need the element
-    const [removed] = reorderedTasks.splice(sourceIndex, 1);
-    // Insert it at the new position
-    reorderedTasks.splice(destinationIndex, 0, removed);
+  // function reorderTasks(sourceIndex, destinationIndex) {
+  //   // Reordering the list of tasks
+  //   const reorderedTasks = Array.from(tasks);
+  //   // Remove the dragged task,
+  //   // used array destructuring for [removed], as splice() returns an array
+  //   // and we need the element
+  //   const [removed] = reorderedTasks.splice(sourceIndex, 1);
+  //   // Insert it at the new position
+  //   reorderedTasks.splice(destinationIndex, 0, removed);
+  //
+  //   setTasks(reorderedTasks);
+  // }
 
-    setTasks(reorderedTasks);
-  }
-
-  return { tasks, addTask, deleteTask, editTask, reorderTasks };
+  return { tasks, addTask, deleteTask, editTask };
 }
