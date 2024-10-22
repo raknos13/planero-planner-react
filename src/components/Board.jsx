@@ -102,14 +102,13 @@ export default function Board() {
     });
   }
 
-  function editTask(listId, cardId, updatedTask) {
-    const list = lists.find((list) => list.id === listId);
-    updateListTasks(
-      listId,
-      list.map((card) => {
-        card.id === cardId ? updatedTask : card;
-      }),
-    );
+  function editCard(cardId, updatedCard) {
+    const card = data.cards[cardId];
+    const updatedCards = { ...data.cards, [cardId]: updatedCard };
+    setData(
+      ...data,
+      cards: updatedCards,
+    )
   }
 
   // Function to handle what happens when dragging ends
