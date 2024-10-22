@@ -1,4 +1,4 @@
-import TodoList from "./List";
+import List from "./List";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -54,10 +54,11 @@ const initialBoardData = {
       labels: ["todo"],
     },
   },
+  listOrder: ["list-1", "list-2", "list-3"],
 };
 
 export default function Board() {
-  const [lists, setLists] = useState(initialData.lists);
+  const [data, setData] = useState(initialBoardData);
 
   function updateListTasks(listId, updatedTasks) {
     setLists((prevLists) =>
@@ -160,23 +161,27 @@ export default function Board() {
             ref={provided.innerRef}
             className="flex justify-start w-auto h-screen mx-3 my-3"
           >
-            {lists.map((list, index) => (
-              <Draggable key={list.id} draggableId={list.id} index={index}>
-                {(provided) => (
-                  <div ref={provided.innerRef} {...provided.draggableProps}>
-                    <TodoList
-                      title="Todo"
-                      list={list}
-                      addTask={addTask}
-                      editTask={editTask}
-                      deleteTask={deleteTask}
-                      onDragEnd={onDragEnd}
-                      dragHandleProps={provided.dragHandleProps}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
+            {data.listOrder.map((listId, index) => {
+              const list = data.lists[listId];
+              return (
+                <Draggable key={list.id} draggableId={list.id} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <List
+                        list={list}
+                        tasks={list.tasks.map((taskId) => data.tasks[taskId])}
+                        onDragEnd={onDragEnd}
+                        dragHandleProps={provided.dragHandleProps}
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
             {provided.placeholder}
           </div>
         )}
