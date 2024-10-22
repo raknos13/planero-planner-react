@@ -1,4 +1,4 @@
-import TodoList from "./TodoList";
+import TodoList from "./List";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
