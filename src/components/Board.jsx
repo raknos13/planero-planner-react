@@ -9,49 +9,54 @@ const initialBoardData = {
     "list-1": {
       id: "list-1",
       title: "To Do",
-      taskIds: ["task-1", "task-2", "task-3"],
+      cardIds: ["card-1", "card-2", "card-3"],
     },
     "list-2": {
       id: "list-2",
       title: "In Progress",
-      taskIds: ["task-4", "task-5"],
+      cardIds: ["card-4", "card-5"],
     },
     "list-3": {
       id: "list-3",
       title: "Paused",
-      taskIds: [],
+      cardIds: [],
     },
   },
-  tasks: {
-    "task-1": {
-      id: "task-1",
+  cards: {
+    "card-1": {
+      id: "card-1",
       title: "Start building Planero",
       description: "Start from a todo list and build up",
       labels: ["project"],
+      completed: false,
     },
-    "task-2": {
-      id: "task-2",
+    "card-2": {
+      id: "card-2",
       title: "Learn React",
       description: "Learn state management",
       labels: ["learning"],
+      completed: true,
     },
-    "task-3": {
-      id: "task-3",
+    "card-3": {
+      id: "card-3",
       title: "You can't learn unless you build",
       description: "Implementing stuff is important",
       labels: ["learning"],
+      completed: false,
     },
-    "task-4": {
-      id: "task-4",
+    "card-4": {
+      id: "card-4",
       title: "Write documentation",
       description: "Document the process",
       labels: ["documentation"],
+      completed: false,
     },
-    "task-5": {
-      id: "task-5",
+    "card-5": {
+      id: "card-5",
       title: "Normalize the data structure",
       description: "Normalize to improve performance",
       labels: ["todo"],
+      completed: true,
     },
   },
   listOrder: ["list-1", "list-2", "list-3"],
@@ -60,35 +65,49 @@ const initialBoardData = {
 export default function Board() {
   const [data, setData] = useState(initialBoardData);
 
-  function updateListTasks(listId, updatedTasks) {
-    setLists((prevLists) =>
-      prevLists.map((list) =>
-        list.id === listId ? { ...list, tasks: updatedTasks } : list,
-      ),
-    );
+  function deleteCard(listId, cardId) {
+    const list = data.lists[listId];
+    const newCardIds = list.cardIds.filter((id) => id !== cardId);
+
+    const { [cardId]: deletedCard, ...remainingCards } = data.cards;
+
+    setData({
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: { ...list, cardIds: newCardIds },
+      },
+      cards: remainingCards,
+    });
   }
 
-  function deleteTask(listId, taskId) {
-    const list = lists.find((list) => list.id === listId);
-    updateListTasks(
-      listId,
-      list.tasks.filter((task) => task.id !== taskId),
-    );
-  }
-
-  function addTask(listId, newTaskTitle) {
+  function addCard(listId, newCardTitle) {
     if (newTaskTitle.trim === "") return;
-    const newTask = { id: uuidv4(), title: newTaskTitle, completed: false };
-    const list = lists.find((list) => list.id === listId);
-    updateListTasks(listId, [...list.tasks, newTask]);
+
+    const newCardId = uuidv4();
+    const newCard = {
+      id: newCardId,
+      title: newCardTitle,
+      completed: false,
+      description: "",
+      labels: "",
+    };
+
+    const list = data.lists[listId];
+    const updatedCardIds = [...list.cardIds, newCardId];
+    setData({
+      ...data,
+      lists: { ...list, cardIds: updatedCardIds },
+      cards: { ...cards, [newCardId]: newCard },
+    });
   }
 
-  function editTask(listId, taskId, updatedTask) {
+  function editTask(listId, cardId, updatedTask) {
     const list = lists.find((list) => list.id === listId);
     updateListTasks(
       listId,
-      list.map((task) => {
-        task.id === taskId ? updatedTask : task;
+      list.map((card) => {
+        card.id === cardId ? updatedTask : card;
       }),
     );
   }
@@ -115,12 +134,12 @@ export default function Board() {
       return;
     }
 
-    // Handle task reordering
+    // Handle card reordering
     const sourceList = lists.find((list) => list.id === source.droppableId);
     const destList = lists.find((list) => list.id === destination.droppableId);
 
     // Create new array references for updating state
-    const newSourceTasks = Array.from(sourceList.tasks);
+    const newSourceTasks = Array.from(sourceList.cards);
     const [movedTask] = newSourceTasks.splice(source.index, 1);
 
     // If moving to same list
@@ -128,22 +147,22 @@ export default function Board() {
       newSourceTasks.splice(destination.index, 0, movedTask);
 
       const newLists = lists.map((list) =>
-        list.id === sourceList.id ? { ...list, tasks: newSourceTasks } : list,
+        list.id === sourceList.id ? { ...list, cards: newSourceTasks } : list,
       );
 
       setLists(newLists);
     }
     // If moving to different list
     else {
-      const newDestTasks = Array.from(destList.tasks);
+      const newDestTasks = Array.from(destList.cards);
       newDestTasks.splice(destination.index, 0, movedTask);
 
       const newLists = lists.map((list) => {
         if (list.id === sourceList.id) {
-          return { ...list, tasks: newSourceTasks };
+          return { ...list, cards: newSourceTasks };
         }
         if (list.id === destList.id) {
-          return { ...list, tasks: newDestTasks };
+          return { ...list, cards: newDestTasks };
         }
         return list;
       });
@@ -173,7 +192,7 @@ export default function Board() {
                     >
                       <List
                         list={list}
-                        tasks={list.tasks.map((taskId) => data.tasks[taskId])}
+                        cards={list.cards.map((cardId) => data.cards[cardId])}
                         onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
                       />
