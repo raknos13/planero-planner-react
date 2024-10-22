@@ -4,35 +4,56 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTasks } from "../hooks/useTasks";
 
-const initialData = {
-  lists: [
-    {
+const initialBoardData = {
+  lists: {
+    "list-1": {
       id: "list-1",
-      title: "Todo",
-      tasks: [
-        { id: "task-1", title: "Start building Planero", completed: true },
-        { id: "task-2", title: "Stop procrastinating", completed: false },
-        {
-          id: "task-3",
-          title: "You can't learn unless you build",
-          completed: true,
-        },
-      ],
+      title: "To Do",
+      taskIds: ["task-1", "task-2", "task-3"],
     },
-    {
+    "list-2": {
       id: "list-2",
       title: "In Progress",
-      tasks: [
-        { id: "task-1", title: "Make the lists draggable", completed: false },
-        {
-          id: "task-2",
-          title: "Keep working on the project every single day",
-          completed: false,
-        },
-      ],
+      taskIds: ["task-4", "task-5"],
     },
-    { id: "list-3", title: "Done", tasks: [] },
-  ],
+    "list-3": {
+      id: "list-3",
+      title: "Paused",
+      taskIds: [],
+    },
+  },
+  tasks: {
+    "task-1": {
+      id: "task-1",
+      title: "Start building Planero",
+      description: "Start from a todo list and build up",
+      labels: ["project"],
+    },
+    "task-2": {
+      id: "task-2",
+      title: "Learn React",
+      description: "Learn state management",
+      labels: ["learning"],
+    },
+    "task-3": {
+      id: "task-3",
+      title: "You can't learn unless you build",
+      description: "Implementing stuff is important",
+      labels: ["learning"],
+    },
+    "task-4": {
+      id: "task-4",
+      title: "Write documentation",
+      description: "Document the process",
+      labels: ["documentation"],
+    },
+    "task-5": {
+      id: "task-5",
+      title: "Normalize the data structure",
+      description: "Normalize to improve performance",
+      labels: ["todo"],
+    },
+  },
 };
 
 export default function Board() {
