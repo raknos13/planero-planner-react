@@ -115,7 +115,7 @@ const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1 right-2 gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white">
+            <div className="absolute top-1.5 right-2 gap-1 hidden group-hover:flex transition-opacity duration-300 bg-white">
               <button
                 onClick={() => setIsEditing(true)}
                 className="hover:bg-yellow-600 hover:text-white rounded-md p-1 transition-colors duration-200"
@@ -123,7 +123,7 @@ const Card = forwardRef(function Card(
                 <AiOutlineEdit size={20} />
               </button>{" "}
               <button
-                onClick={() => handleDelete(list.id, card.id)}
+                onClick={() => handleDelete(listId, card.id)}
                 className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineDelete size={20} />
