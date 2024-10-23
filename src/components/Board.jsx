@@ -2,6 +2,7 @@ import List from "./List";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import AddNew from "./AddNew";
 
 const initialBoardData = {
   lists: {
@@ -72,6 +73,7 @@ export default function Board() {
   const [data, setData] = useState(initialBoardData);
 
   function addList(title) {
+    if (title.trim()) return;
     const newListId = `list-${uuidv4()}`;
     const newList = {
       id: newListId,
@@ -84,16 +86,28 @@ export default function Board() {
         ...data.lists,
         [newListId]: newList,
       },
-      listOrder: { ...data.listOrder, newListId },
+      listOrder: [...data.listOrder, newListId],
+    });
+  }
+
+  function addCard(listId, newCard) {
+    if (newCard.title.trim() === "") return;
+    const list = data.lists[listId];
+    const updatedCardIds = [...list.cardIds, newCard.id];
+    setData({
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: { ...list, cardIds: updatedCardIds },
+      },
+      cards: { ...data.cards, [newCard.id]: newCard },
     });
   }
 
   function deleteCard(listId, cardId) {
     const list = data.lists[listId];
     const newCardIds = list.cardIds.filter((id) => id !== cardId);
-
     const { [cardId]: deletedCard, ...remainingCards } = data.cards;
-
     setData({
       ...data,
       lists: {
@@ -101,27 +115,6 @@ export default function Board() {
         [listId]: { ...list, cardIds: newCardIds },
       },
       cards: remainingCards,
-    });
-  }
-
-  function addCard(listId, newCard) {
-    if (newCard.title.trim() === "") return;
-
-    // const newCardId = uuidv4();
-    // const newCard = {
-    //   id: newCardId,
-    //   title: newCardTitle,
-    //   completed: false,
-    //   description: "",
-    //   labels: "",
-    // };
-
-    const list = data.lists[listId];
-    const updatedCardIds = [...list.cardIds, newCard.id];
-    setData({
-      ...data,
-      lists: { ...data.lists, [listId]: { ...list, cardIds: updatedCardIds } },
-      cards: { ...data.cards, [newCard.id]: newCard },
     });
   }
 
@@ -137,9 +130,7 @@ export default function Board() {
   function onDragEnd(result) {
     const { destination, source, type } = result;
     // If there's no destination (dropped outside), do nothing
-    if (!destination) {
-      return;
-    }
+    if (!destination) return;
 
     // Handle list reordering
     if (type === "list") {
@@ -235,12 +226,10 @@ export default function Board() {
               );
             })}
             {provided.placeholder}
+            <AddNew type="list" handleAddNew={addList} />
           </div>
         )}
       </Droppable>
-      <div className="bg-gray-600 rounded-md w-[300px]">
-        <button>Add new List</button>
-      </div>
     </DragDropContext>
   );
 }
