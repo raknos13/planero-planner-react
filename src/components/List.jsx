@@ -3,6 +3,8 @@ import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import Card from "./Card";
 import { v4 as uuidv4 } from "uuid";
+import AddNew from "./AddNew";
+import { TiLeaf } from "react-icons/ti";
 
 export default function List({
   list,
@@ -20,36 +22,17 @@ export default function List({
     completed: false,
   };
   const [newCard, setNewCard] = useState(cardTemplate);
-  const [isAddingNewCard, setIsAddingNewCard] = useState(false);
-  const textareaRef = useRef(null);
-  const isClickingAddButton = useRef(false);
 
-  useEffect(() => {
-    if (textareaRef.current && isAddingNewCard) {
-      const timeoutFocus = setTimeout(() => {
-        textareaRef.current.focus();
-      }, 0);
-      return () => clearTimeout(timeoutFocus);
-    }
-  }, [isAddingNewCard, newCard]);
+  function handleCardAdd(title) {
+    if (!title.trim()) return;
+    const card = {
+      ...newCard,
+      id: `card-${uuidv4()}`,
+      title: title,
+    };
 
-  function handleCardAdd() {
-    if (newCard.title.trim()) {
-      addCard(list.id, newCard);
-      setNewCard(cardTemplate);
-      setIsAddingNewCard(true);
-    }
-  }
-
-  function handleKeyDown(e) {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleCardAdd();
-    }
-    if (e.key === "Escape") {
-      setIsAddingNewCard(false);
-      setNewCard(cardTemplate);
-    }
+    addCard(list.id, card);
+    setNewCard(cardTemplate);
   }
 
   return (
@@ -88,54 +71,7 @@ export default function List({
         )}
       </Droppable>
 
-      {isAddingNewCard && (
-        <textarea
-          placeholder="Enter a title..."
-          value={newCard.title}
-          ref={textareaRef}
-          onChange={(e) =>
-            setNewCard({
-              ...newCard,
-              id: uuidv4(),
-              title: e.target.value,
-            })
-          }
-          onKeyDown={handleKeyDown}
-          onBlur={() => {
-            if (!newCard.title.trim() && !isClickingAddButton.current) {
-              setIsAddingNewCard(false);
-              setNewCard(cardTemplate);
-            }
-          }}
-          className="mb-1 p-2 w-full rounded-lg text-sm"
-        />
-      )}
-
-      <div className="flex">
-        <button
-          onMouseDown={() => {
-            isClickingAddButton.current = true;
-          }}
-          onClick={() => {
-            setIsAddingNewCard(true);
-            handleCardAdd();
-            textareaRef.current?.focus();
-            isClickingAddButton.current = false; //reset after handling click
-          }}
-          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
-        >
-          <AiOutlinePlus />
-          <span>Add new card</span>
-        </button>
-        {isAddingNewCard && (
-          <button
-            onClick={() => setIsAddingNewCard(false)}
-            className="p-1 px-2 rounded-md hover:bg-gray-400"
-          >
-            <AiOutlineClose />
-          </button>
-        )}
-      </div>
+      <AddNew type="card" handleAddNew={handleCardAdd} />
     </div>
   );
 }
