@@ -24,14 +24,6 @@ const Card = forwardRef(function Card(
     }
   }, [isEditing]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (editedTitle.trim()) {
-      handleEdit(listId, card.id, { ...card, title: editedTitle });
-      setIsEditing(false);
-    }
-  }
-
   // automatically resize textarea
   // based on the lines of text
   function autoResizeTextArea() {
@@ -39,6 +31,14 @@ const Card = forwardRef(function Card(
     if (textarea) {
       textarea.style.height = "auto";
       textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (editedTitle.trim()) {
+      handleEdit(card.id, { ...card, title: editedTitle });
+      setIsEditing(false);
     }
   }
 
@@ -50,7 +50,6 @@ const Card = forwardRef(function Card(
     // Submit the edit, when enter is pressed.
     // and Shift enter inserts a new line
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
       handleSubmit(e);
     }
     if (e.key === "Escape") {
