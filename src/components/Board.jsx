@@ -8,12 +8,12 @@ const initialBoardData = {
     "list-1": {
       id: "list-1",
       title: "To Do",
-      cardIds: ["card-1", "card-2", "card-3"],
+      cardIds: ["card-3", "card-1", "card-2", "card-4"],
     },
     "list-2": {
       id: "list-2",
       title: "In Progress",
-      cardIds: ["card-4", "card-5"],
+      cardIds: ["card-5", "card-6"],
     },
     "list-3": {
       id: "list-3",
@@ -24,14 +24,14 @@ const initialBoardData = {
   cards: {
     "card-1": {
       id: "card-1",
-      title: "Start building Planero",
+      title: "Implement list drag and drop",
       description: "Start from a todo list and build up",
       labels: ["project"],
-      completed: false,
+      completed: true,
     },
     "card-2": {
       id: "card-2",
-      title: "Learn React",
+      title: "Learn State management in React",
       description: "Learn state management",
       labels: ["learning"],
       completed: true,
@@ -57,12 +57,36 @@ const initialBoardData = {
       labels: ["todo"],
       completed: true,
     },
+    "card-6": {
+      id: "card-6",
+      title: "Implement AddNewList component",
+      description: "",
+      labels: ["todo"],
+      completed: false,
+    },
   },
   listOrder: ["list-1", "list-2", "list-3"],
 };
 
 export default function Board() {
   const [data, setData] = useState(initialBoardData);
+
+  function addList(title) {
+    const newListId = `list-${uuidv4()}`;
+    const newList = {
+      id: newListId,
+      title: title,
+      cardIds: [],
+    };
+    setData({
+      ...data,
+      lists: {
+        ...data.lists,
+        [newListId]: newList,
+      },
+      listOrder: { ...data.listOrder, newListId },
+    });
+  }
 
   function deleteCard(listId, cardId) {
     const list = data.lists[listId];
