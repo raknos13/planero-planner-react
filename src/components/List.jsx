@@ -53,7 +53,7 @@ export default function List({
           <span>{list.title}</span>
         </div>
       </div>
-      <Droppable droppableId="droppable">
+      <Droppable droppableId={list.id}>
         {(provided) => (
           <ul
             // pass necessary props to make the list droppable
