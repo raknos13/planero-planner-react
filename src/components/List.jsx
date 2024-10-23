@@ -24,7 +24,6 @@ export default function List({
   const [newCard, setNewCard] = useState(cardTemplate);
 
   function handleCardAdd(title) {
-    if (!title.trim()) return;
     const cardId = `card-${uuidv4()}`;
     const card = {
       ...newCard,
@@ -32,7 +31,7 @@ export default function List({
       title: title,
     };
 
-    addCard(cardId, card);
+    addCard(list.id, card);
     setNewCard(cardTemplate);
   }
 

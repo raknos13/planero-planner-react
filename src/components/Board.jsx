@@ -73,7 +73,6 @@ export default function Board() {
   const [data, setData] = useState(initialBoardData);
 
   function addList(title) {
-    if (title.trim()) return;
     const newListId = `list-${uuidv4()}`;
     const newList = {
       id: newListId,
@@ -91,7 +90,7 @@ export default function Board() {
   }
 
   function addCard(listId, newCard) {
-    if (newCard.title.trim() === "") return;
+    // if (newCard.title.trim() === "") return;
     const list = data.lists[listId];
     const updatedCardIds = [...list.cardIds, newCard.id];
     setData({
