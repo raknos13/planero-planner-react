@@ -102,7 +102,7 @@ export default function List({
           }
           onKeyDown={handleKeyDown}
           onBlur={() => {
-            if (!newCard.title.trim() && !isClickingAddButton) {
+            if (!newCard.title.trim() && !isClickingAddButton.current) {
               setIsAddingNewCard(false);
               setNewCard(cardTemplate);
             }
