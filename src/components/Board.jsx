@@ -2,7 +2,7 @@ import List from "./List";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useTasks } from "../hooks/useTasks";
+import { useCards } from "../hooks/useCards";
 
 const initialBoardData = {
   lists: {
@@ -82,7 +82,7 @@ export default function Board() {
   }
 
   function addCard(listId, newCardTitle) {
-    if (newTaskTitle.trim === "") return;
+    if (newCardTitle.trim === "") return;
 
     const newCardId = uuidv4();
     const newCard = {
@@ -199,6 +199,9 @@ export default function Board() {
                       <List
                         list={list}
                         cards={cards}
+                        deleteCard={deleteCard}
+                        editCard={editCard}
+                        addCard={addCard}
                         onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
                       />
