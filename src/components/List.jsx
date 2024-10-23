@@ -13,7 +13,7 @@ export default function List({
   dragHandleProps,
 }) {
   const cardTemplate = {
-    id: "Add a unique ID",
+    id: "",
     title: "",
     description: "Add a description",
     labels: "",
@@ -22,23 +22,29 @@ export default function List({
   const [newCard, setNewCard] = useState(cardTemplate);
   const [isAddingNewCard, setIsAddingNewCard] = useState(false);
   const textareaRef = useRef(null);
+  const isClickingAddButton = useRef(false);
 
   useEffect(() => {
     if (textareaRef.current && isAddingNewCard) {
-      textareaRef.current.focus();
+      const timeoutFocus = setTimeout(() => {
+        textareaRef.current.focus();
+      }, 0);
+      return () => clearTimeout(timeoutFocus);
     }
-  }, [isAddingNewCard]);
+  }, [isAddingNewCard, newCard]);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    addCard(list.id, newCard);
-    setNewCard(cardTemplate);
-    // setIsAddingNewCard(false);
+  function handleCardAdd() {
+    if (newCard.title.trim()) {
+      addCard(list.id, newCard);
+      setNewCard(cardTemplate);
+      setIsAddingNewCard(true);
+    }
   }
 
   function handleKeyDown(e) {
     if (e.key === "Enter" && !e.shiftKey) {
-      handleSubmit(e);
+      e.preventDefault();
+      handleCardAdd();
     }
     if (e.key === "Escape") {
       setIsAddingNewCard(false);
@@ -60,6 +66,7 @@ export default function List({
             {...provided.droppableProps}
             // bind ref to DOM element
             ref={provided.innerRef}
+            // className="min-h-[10px]"
           >
             {cards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id} index={index}>
@@ -95,8 +102,10 @@ export default function List({
           }
           onKeyDown={handleKeyDown}
           onBlur={() => {
-            setIsAddingNewCard(false);
-            setNewCard(cardTemplate);
+            if (!newCard.title.trim() && !isClickingAddButton) {
+              setIsAddingNewCard(false);
+              setNewCard(cardTemplate);
+            }
           }}
           className="mb-1 p-2 w-full rounded-lg text-sm"
         />
@@ -104,8 +113,16 @@ export default function List({
 
       <div className="flex">
         <button
-          onClick={() => setIsAddingNewCard(true)}
-          className="flex justify-start cards-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+          onMouseDown={() => {
+            isClickingAddButton.current = true;
+          }}
+          onClick={() => {
+            setIsAddingNewCard(true);
+            handleCardAdd();
+            textareaRef.current?.focus();
+            isClickingAddButton.current = false; //reset after handling click
+          }}
+          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
         >
           <AiOutlinePlus />
           <span>Add new card</span>
