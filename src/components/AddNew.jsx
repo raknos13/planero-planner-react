@@ -16,12 +16,18 @@ const AddNew = ({ type, handleAddNew }) => {
     }
   }, [isAddingNew, newTitle]);
 
+  function handleSubmit() {
+    if (newTitle.trim()) {
+      handleAddNew(newTitle);
+      setNewTitle("");
+    }
+    setIsAddingNew(true);
+  }
+
   function handleKeyDown(e) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleAddNew(newTitle);
-      setNewTitle("");
-      setIsAddingNew(true);
+      handleSubmit();
     }
     if (e.key === "Escape") {
       setIsAddingNew(false);
@@ -55,8 +61,7 @@ const AddNew = ({ type, handleAddNew }) => {
           }}
           onClick={() => {
             setIsAddingNew(true);
-            handleAddNew(newTitle);
-            setNewTitle("");
+            handleSubmit();
             inputRef.current?.focus();
             isClickingAddButton.current = false; //reset after handling click
           }}
