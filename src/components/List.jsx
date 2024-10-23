@@ -25,13 +25,14 @@ export default function List({
 
   function handleCardAdd(title) {
     if (!title.trim()) return;
+    const cardId = `card-${uuidv4()}`;
     const card = {
       ...newCard,
-      id: `card-${uuidv4()}`,
+      id: cardId,
       title: title,
     };
 
-    addCard(list.id, card);
+    addCard(cardId, card);
     setNewCard(cardTemplate);
   }
 
