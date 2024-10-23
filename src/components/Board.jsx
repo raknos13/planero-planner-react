@@ -2,7 +2,6 @@ import List from "./List";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useCards } from "../hooks/useCards";
 
 const initialBoardData = {
   lists: {
@@ -81,24 +80,24 @@ export default function Board() {
     });
   }
 
-  function addCard(listId, newCardTitle) {
-    if (newCardTitle.trim === "") return;
+  function addCard(listId, newCard) {
+    // if (newCard.title.trim === "") return;
 
-    const newCardId = uuidv4();
-    const newCard = {
-      id: newCardId,
-      title: newCardTitle,
-      completed: false,
-      description: "",
-      labels: "",
-    };
+    // const newCardId = uuidv4();
+    // const newCard = {
+    //   id: newCardId,
+    //   title: newCardTitle,
+    //   completed: false,
+    //   description: "",
+    //   labels: "",
+    // };
 
     const list = data.lists[listId];
-    const updatedCardIds = [...list.cardIds, newCardId];
+    const updatedCardIds = [...list.cardIds, newCard.id];
     setData({
       ...data,
-      lists: { ...list, cardIds: updatedCardIds },
-      cards: { ...data.cards, [newCardId]: newCard },
+      lists: { ...data.lists, [listId]: { ...list, cardIds: updatedCardIds } },
+      cards: { ...data.cards, [newCard.id]: newCard },
     });
   }
 
