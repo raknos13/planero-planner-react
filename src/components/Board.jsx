@@ -81,7 +81,7 @@ export default function Board() {
   }
 
   function addCard(listId, newCard) {
-    // if (newCard.title.trim === "") return;
+    if (newCard.title.trim === "") return;
 
     // const newCardId = uuidv4();
     // const newCard = {
@@ -181,7 +181,7 @@ export default function Board() {
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="flex justify-start w-auto h-screen mx-3 my-3"
+            className="flex justify-start w-auto mx-3 my-3"
           >
             {data.listOrder.map((listId, index) => {
               const list = data.lists[listId];
@@ -203,6 +203,7 @@ export default function Board() {
                         addCard={addCard}
                         onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
+                        // className="h-min"
                       />
                     </div>
                   )}
@@ -213,6 +214,9 @@ export default function Board() {
           </div>
         )}
       </Droppable>
+      <div className="bg-gray-600 rounded-md">
+        <button>Add new List</button>
+      </div>
     </DragDropContext>
   );
 }
