@@ -81,7 +81,7 @@ export default function Board() {
   }
 
   function addCard(listId, newCard) {
-    if (newCard.title.trim === "") return;
+    if (newCard.title.trim() === "") return;
 
     // const newCardId = uuidv4();
     // const newCard = {
@@ -214,7 +214,7 @@ export default function Board() {
           </div>
         )}
       </Droppable>
-      <div className="bg-gray-600 rounded-md">
+      <div className="bg-gray-600 rounded-md w-[300px]">
         <button>Add new List</button>
       </div>
     </DragDropContext>
