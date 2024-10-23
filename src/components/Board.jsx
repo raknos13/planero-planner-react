@@ -194,6 +194,7 @@ export default function Board() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
+                      className="h-min"
                     >
                       <List
                         list={list}
@@ -203,7 +204,6 @@ export default function Board() {
                         addCard={addCard}
                         onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
-                        // className="h-min"
                       />
                     </div>
                   )}
