@@ -107,9 +107,10 @@ const Card = forwardRef(function Card(
           </form>
         ) : (
           <div className="flex justify-between cards-center w-full">
-            <div>
+            <div className="overflow-hidden w-full">
               <span
-                className={`w-full ${card.completed ? "line-through text-gray-500" : ""}`}
+                className={`${card.completed ? "line-through text-gray-500" : ""}`}
+                style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
               >
                 {card.title}
               </span>
