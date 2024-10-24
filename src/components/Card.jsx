@@ -64,7 +64,7 @@ const Card = forwardRef(function Card(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-white p-2 rounded-lg shadow mb-2 flex cards-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm bg-white border-box p-2 rounded-lg shadow mb-2 flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       >
         <input
           type="checkbox"
@@ -106,11 +106,11 @@ const Card = forwardRef(function Card(
             </button>
           </form>
         ) : (
-          <div className="flex justify-between cards-center w-full">
-            <div className="overflow-hidden w-full">
+          <div className="flex justify-between items-center w-full max-w-full">
+            <div className="w-full max-w-full break-words">
               <span
                 className={`${card.completed ? "line-through text-gray-500" : ""}`}
-                style={{ wordBreak: "break-word", overflowWrap: "anywhere" }}
+                style={{ wordBreak: "break-word" }}
               >
                 {card.title}
               </span>
