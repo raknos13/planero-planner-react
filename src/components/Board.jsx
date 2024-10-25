@@ -195,12 +195,11 @@ export default function Board() {
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="flex justify-start w-auto mx-3 my-3"
+            className="flex h-screen justify-start overflow-x-auto whitespace-nowrap scroll-smooth snap-x snap-mandatory  mx-4 my-4"
           >
             {data.listOrder.map((listId, index) => {
               const list = data.lists[listId];
               const cards = list.cardIds.map((cardId) => data.cards[cardId]);
-
               return (
                 <Draggable key={list.id} draggableId={list.id} index={index}>
                   {(provided) => (
@@ -216,7 +215,6 @@ export default function Board() {
                         deleteCard={deleteCard}
                         editCard={editCard}
                         addCard={addCard}
-                        onDragEnd={onDragEnd}
                         dragHandleProps={provided.dragHandleProps}
                       />
                     </div>
@@ -225,7 +223,9 @@ export default function Board() {
               );
             })}
             {provided.placeholder}
-            <AddNew type="list" handleAddNew={addList} />
+            <div className="min-w-[250px] bg-gray-200 h-min rounded-xl p-2 mx-2 mr-4">
+              <AddNew type="list" handleAddNew={addList} />
+            </div>
           </div>
         )}
       </Droppable>
