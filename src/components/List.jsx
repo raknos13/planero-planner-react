@@ -1,10 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import Card from "./Card";
 import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
-import { TiLeaf } from "react-icons/ti";
 
 export default function List({
   list,
@@ -30,17 +28,14 @@ export default function List({
       id: cardId,
       title: title,
     };
-
     addCard(list.id, card);
     setNewCard(cardTemplate);
   }
 
   return (
-    <div className="container mx-2 p-2 bg-gray-200 rounded-xl w-[300px] h-min">
-      <div {...dragHandleProps}>
-        <div className="font-bold mb-2 p-1">
-          <span>{list.title}</span>
-        </div>
+    <div className="h-auto mx-2 p-2 w-80 bg-gray-200 rounded-xl snap-start">
+      <div className="mb-2 p-1" {...dragHandleProps}>
+        <span className="text-sm font-bold">{list.title}</span>
       </div>
       <Droppable droppableId={list.id}>
         {(provided) => (
