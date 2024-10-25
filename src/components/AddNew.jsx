@@ -97,8 +97,8 @@ const AddNew = ({ type, handleAddNew }) => {
   }
 
   return (
-    <div>
-      {isAddingNew && (
+    <div className="bg-gray-200 h-min rounded-lg w-full">
+      {isAddingNew && type === "card" && (
         <textarea
           placeholder="Enter a title..."
           value={newTitle}
@@ -109,14 +109,25 @@ const AddNew = ({ type, handleAddNew }) => {
           className="mb-1 p-2 px-3 w-full rounded-lg text-sm"
         />
       )}
+      {isAddingNew && type === "list" && (
+        <input
+          placeholder="Enter a title..."
+          value={newTitle}
+          ref={inputRef}
+          onChange={(e) => setNewTitle(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
+          className="mb-1 p-2 px-3 w-full rounded-lg text-sm"
+        />
+      )}
 
-      <div className="flex">
+      <div className="flex w-full">
         <button
           onMouseDown={() => {
             hasClickedAddButton.current = true;
           }}
           onClick={handleClick}
-          className="flex justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+          className="flex flex-grow justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
         >
           <AiOutlinePlus />
           <span>Add new {type}</span>
@@ -124,7 +135,7 @@ const AddNew = ({ type, handleAddNew }) => {
         {isAddingNew && (
           <button
             onClick={handleCancel}
-            className="p-1 px-2 rounded-md hover:bg-gray-400"
+            className="flex-shrink-0 p-1 px-2 rounded-md hover:bg-gray-400"
           >
             <AiOutlineClose />
           </button>
