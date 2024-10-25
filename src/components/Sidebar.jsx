@@ -7,7 +7,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen ${isCollapsed ? "w-10" : "w-52"} flex-shrink-0 bg-gray-200`}
+      className={`h-screen transition-all ease-linear duration-200 ${isCollapsed ? "w-10" : "w-52"} flex-shrink-0 bg-gray-200`}
     >
       {!isCollapsed && (
         <div className="flex justify-between align-center p-2">
@@ -15,14 +15,20 @@ const Sidebar = () => {
           <div>
             <AiOutlinePlus />
           </div>
-          <button onClick={() => setIsCollapsed(!isCollapsed)}>
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hover:bg-gray-400 p-1 m-1 rounded-md"
+          >
             <FiChevronLeft />
           </button>
         </div>
       )}
       {isCollapsed && (
         <div>
-          <button onClick={() => setIsCollapsed(!isCollapsed)}>
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hover:bg-gray-400 p-1 m-1 rounded-md"
+          >
             <FiChevronRight />
           </button>
         </div>
