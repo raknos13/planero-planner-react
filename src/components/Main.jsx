@@ -4,7 +4,7 @@ import Header from "./Header.jsx";
 
 export default function Main() {
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen overflow-hidden">
       <Header />
       <div className="flex">
         <Sidebar />
