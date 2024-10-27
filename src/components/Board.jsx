@@ -1,7 +1,7 @@
-import List from "./List";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import List from "./List";
 import AddNew from "./AddNew";
 
 const initialData = {
