@@ -4,13 +4,11 @@ import Header from "./Header.jsx";
 
 export default function Main() {
   return (
-    <div className="h-screen w-screen overflow-hidden">
+    <div className="h-screen w-screen overflow-hidden flex flex-col">
       <Header />
-      <div className="flex">
-        <Sidebar />
-        <div className="flex-1 mt-2">
+      <div className="flex flex-grow">
+          <Sidebar />
           <Board />
-        </div>
       </div>
     </div>
   );
