@@ -5,6 +5,13 @@ import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
 
 const initialBoardData = {
+  boards: {
+    "board-1": {
+      id: "board-1",
+      title: "Sample board",
+      listIds: ["list-1", "list-2", "list-3"],
+    },
+  },
   lists: {
     "list-1": {
       id: "list-1",
