@@ -72,7 +72,7 @@ export default function List({
           </ul>
         )}
       </Droppable>
-      <AddNew type="card" handleAddNew={handleCardAdd} />
+      <AddNew type="card" multiAddMode={true} handleAddNew={handleCardAdd} />
     </div>
   );
 }

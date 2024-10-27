@@ -168,7 +168,11 @@ export default function Board() {
                 })}
                 {provided.placeholder}
                 <div className="min-w-[250px] bg-gray-200 h-min rounded-xl p-2 mx-2 mr-4">
-                  <AddNew type="list" handleAddNew={addList} />
+                  <AddNew
+                    type="list"
+                    multiAddMode={false}
+                    handleAddNew={addList}
+                  />
                 </div>
               </div>
             </div>
