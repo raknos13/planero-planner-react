@@ -6,20 +6,37 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-screen transition-all ease-linear duration-200 ${isCollapsed ? "w-10" : "w-52"} flex-shrink-0 bg-gray-200`}
+      className={`h-screen transition-all ease-linear duration-100 ${isCollapsed ? "w-10" : "w-52"} flex-shrink-0 bg-gray-200`}
     >
       {!isCollapsed && (
-        <div className="flex justify-between align-center p-3 ">
-          <h1 className="font-bold text-sm">User's workspace</h1>
-          <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hover:bg-gray-400 p-1 rounded-md"
-          >
-            <FiChevronLeft size={18} />
-          </button>
-          {/* <div> */}
-          {/*   <FiPlus /> */}
-          {/* </div> */}
+        <div>
+          <div className="flex justify-between items-center p-3 border-b border-b-slate-400">
+            <h1 className="font-bold text-xs">User&apos;s workspace</h1>
+            <button
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="hover:bg-gray-400 p-1 rounded-md"
+            >
+              <FiChevronLeft size={18} />
+            </button>
+          </div>
+          <div className="boardList">
+            <div className="flex justify-between items-center px-3 py-2">
+              <h6 className="text-sm font-bold">Your boards</h6>
+              <button className="hover:bg-gray-400 p-1 rounded-md">
+                <FiPlus size={18} />
+              </button>
+            </div>
+          </div>
+          <ul>
+            <li>
+              <button className="px-3 py-2 w-full text-sm flex justify-start align-baseline">
+                <span className="w-5 h-max rounded-sm mr-2 bg-red-500">
+                  &nbsp;
+                </span>
+                <span>My test board</span>
+              </button>
+            </li>
+          </ul>
         </div>
       )}
       {isCollapsed && (
@@ -28,7 +45,7 @@ const Sidebar = () => {
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="hover:bg-gray-400 p-1 rounded-md"
           >
-            <FiChevronRight />
+            <FiChevronRight size={18} />
           </button>
         </div>
       )}
