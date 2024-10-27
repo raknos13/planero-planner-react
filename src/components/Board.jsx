@@ -4,7 +4,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
 
-const initialBoardData = {
+const initialData = {
   boards: {
     "board-1": {
       id: "board-1",
@@ -77,7 +77,7 @@ const initialBoardData = {
 };
 
 export default function Board() {
-  const [data, setData] = useState(initialBoardData);
+  const [data, setData] = useState(initialData);
 
   function addList(title) {
     const newListId = `list-${uuidv4()}`;
