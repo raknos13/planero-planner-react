@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 
-const AddNew = ({ type, handleAddNew }) => {
+const AddNew = ({ type, multiAddMode = true, handleAddNew }) => {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const inputRef = useRef(null);
@@ -34,7 +34,7 @@ const AddNew = ({ type, handleAddNew }) => {
   //   };
   // }, []);
 
-  function handleClick() {
+  function handleSubmit() {
     if (!isAddingNew) {
       // handle initial click to open textarea
       setIsAddingNew(true);
@@ -44,8 +44,12 @@ const AddNew = ({ type, handleAddNew }) => {
         handleAddNew(newTitle);
         setNewTitle("");
       }
-      // Keep textarea focused after submission
-      inputRef.current?.focus();
+      if (!multiAddMode) {
+        setIsAddingNew(false);
+      } else {
+        // Keep textarea focused after submission
+        inputRef.current?.focus();
+      }
     }
     // set to true onMouseDown event
     hasClickedAddButton.current = false; //reset after handling click
@@ -63,7 +67,7 @@ const AddNew = ({ type, handleAddNew }) => {
         handleAddNew(newTitle);
         setNewTitle("");
       }
-      setIsAddingNew(true);
+      multiAddMode ? setIsAddingNew(true) : setIsAddingNew(false);
     }
     // else if (e.key === "Escape") {
     // // e.preventDefault();
@@ -126,7 +130,7 @@ const AddNew = ({ type, handleAddNew }) => {
           onMouseDown={() => {
             hasClickedAddButton.current = true;
           }}
-          onClick={handleClick}
+          onClick={handleSubmit}
           className="flex flex-grow justify-start items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
         >
           <AiOutlinePlus />
