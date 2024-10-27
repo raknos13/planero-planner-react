@@ -214,7 +214,7 @@ export default function Board() {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="h-min"
+                      className="listBody h-min"
                     >
                       <List
                         list={list}
