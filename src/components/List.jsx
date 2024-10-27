@@ -46,32 +46,30 @@ export default function List({
       </div>
       <Droppable droppableId={list.id}>
         {(provided) => (
-          <div
+          <ul
             // pass necessary props to make the list droppable
             {...provided.droppableProps}
             // bind ref to DOM element
             ref={provided.innerRef}
-            // className="min-h-[10px]"
+            className="min-h-1"
           >
-            <ul>
-              {cards.map((card, index) => (
-                <Draggable key={card.id} draggableId={card.id} index={index}>
-                  {(provided) => (
-                    <Card
-                      ref={provided.innerRef}
-                      draggableProps={provided.draggableProps}
-                      dragHandleProps={provided.dragHandleProps}
-                      listId={list.id}
-                      card={card}
-                      handleEdit={editCard}
-                      handleDelete={deleteCard}
-                    />
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ul>
-          </div>
+            {cards.map((card, index) => (
+              <Draggable key={card.id} draggableId={card.id} index={index}>
+                {(provided) => (
+                  <Card
+                    ref={provided.innerRef}
+                    draggableProps={provided.draggableProps}
+                    dragHandleProps={provided.dragHandleProps}
+                    listId={list.id}
+                    card={card}
+                    handleEdit={editCard}
+                    handleDelete={deleteCard}
+                  />
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </ul>
         )}
       </Droppable>
       <AddNew type="card" handleAddNew={handleCardAdd} />
