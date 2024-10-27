@@ -34,10 +34,10 @@ export default function List({
   }
 
   return (
-    <div className="h-auto mx-2 p-2 w-80 bg-gray-200 rounded-xl snap-start">
+    <div className="listContainer h-auto p-2 w-80 bg-gray-200 rounded-lg">
       <div
-        className="flex justify-between items-center mb-2 p-1"
         {...dragHandleProps}
+        className="listHeader flex justify-between items-center mb-2 p-1"
       >
         <span className="text-sm font-bold">{list.title}</span>
         <button className="p-1 rounded-md hover:bg-gray-400">
