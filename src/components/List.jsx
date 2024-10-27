@@ -40,6 +40,9 @@ export default function List({
         {...dragHandleProps}
       >
         <span className="text-sm font-bold">{list.title}</span>
+        <button className="p-1 rounded-md hover:bg-gray-400">
+          <FiMoreHorizontal />
+        </button>
       </div>
       <Droppable droppableId={list.id}>
         {(provided) => (
