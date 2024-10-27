@@ -202,36 +202,46 @@ export default function Board() {
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="flex h-screen justify-start overflow-x-auto whitespace-nowrap scroll-smooth snap-x snap-mandatory  mx-4 my-4"
+            // className="flex h-100 justify-start overflow-x-auto whitespace-nowrap scroll-smooth snap-x snap-mandatory  mx-4 my-4"
+            className="boardContainer flex flex-grow w-full h-full p-4 overflow-x-scroll"
           >
-            {data.listOrder.map((listId, index) => {
-              const list = data.lists[listId];
-              const cards = list.cardIds.map((cardId) => data.cards[cardId]);
-              return (
-                <Draggable key={list.id} draggableId={list.id} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      className="listBody h-min"
+            <div>
+              <div className="listContainer flex gap-3 h-min">
+                {data.listOrder.map((listId, index) => {
+                  const list = data.lists[listId];
+                  const cards = list.cardIds.map(
+                    (cardId) => data.cards[cardId],
+                  );
+                  return (
+                    <Draggable
+                      key={list.id}
+                      draggableId={list.id}
+                      index={index}
                     >
-                      <List
-                        list={list}
-                        cards={cards}
-                        deleteCard={deleteCard}
-                        editCard={editCard}
-                        addCard={addCard}
-                        dragHandleProps={provided.dragHandleProps}
-                      />
-                    </div>
-                  )}
-                </Draggable>
-              );
-            })}
-            {provided.placeholder}
-            <div className="min-w-[250px] bg-gray-200 h-min rounded-xl p-2 mx-2 mr-4">
-              <AddNew type="list" handleAddNew={addList} />
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <List
+                            list={list}
+                            cards={cards}
+                            deleteCard={deleteCard}
+                            editCard={editCard}
+                            addCard={addCard}
+                            dragHandleProps={provided.dragHandleProps}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+                <div className="min-w-[250px] bg-gray-200 h-min rounded-xl p-2 mx-2 mr-4">
+                  <AddNew type="list" handleAddNew={addList} />
+                </div>
+              </div>
             </div>
           </div>
         )}
