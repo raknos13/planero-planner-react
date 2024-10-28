@@ -6,7 +6,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`h-full flex-shrink-0 transition-all ease-linear duration-100 ${isCollapsed ? "w-10" : "w-52"} bg-gray-300`}
+      className={`h-full flex-shrink-0 transition-all ease-linear duration-100 ${isCollapsed ? "w-10" : "w-52"} bg-gray-200`}
     >
       {!isCollapsed && (
         <div>
