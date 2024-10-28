@@ -6,6 +6,7 @@ export const initialData = {
       listIds: ["list-1", "list-2", "list-3"],
     },
   },
+  activeBoardId: "board-1",
   lists: {
     "list-1": {
       id: "list-1",
@@ -23,6 +24,7 @@ export const initialData = {
       cardIds: [],
     },
   },
+  listOrder: ["list-1", "list-2", "list-3"],
   cards: {
     "card-1": {
       id: "card-1",
@@ -67,5 +69,4 @@ export const initialData = {
       completed: false,
     },
   },
-  listOrder: ["list-1", "list-2", "list-3"],
 };
