@@ -12,11 +12,69 @@ export function BoardProvider({ children }) {
     activeBoardId: "board-1",
   });
 
+  const addNewBoard = (title) => {
+    const newBoardId = `board-${uuidv4()}`;
+
+    setBoardsData((prevData) => ({
+      ...prevData,
+      boards: {
+        ...prevData.boards,
+        [newBoardId]: {
+          id: newBoardId,
+          title: title,
+          listIds: [],
+        },
+      },
+      activeBoardId: newBoardId,
+    }));
+  };
+
+  const switchBoard = (boardId) => {
+    setBoardsData((prevData) => ({
+      ...prevData,
+      activeBoardId: boardId,
+    }));
+  };
+
+  const deleteBoard = (boardId) => {
+    if (Object.keys(boardsData.boards).length <= 1) return;
+
+    const { [boardId]: deletedBoard, ...remainingBoards } = boardsData.boards;
+    const remainingLists = { ...boardsData.lists };
+    const remainingCards = { ...boardsData.cards };
+
+    deletedBoard.listIds.forEach((listId) => {
+      const list = remainingLists[listId];
+      if (list) {
+        list.cardIds.forEach((cardId) => {
+          delete remainingCards[cardId];
+        });
+        delete remainingLists[listId];
+      }
+    });
+
+    const newActiveBoardId =
+      boardId === boardsData.activeBoardId
+        ? Object.keys(remainingBoards)[0]
+        : boardsData.activeBoardId;
+
+    setBoardsData((prevData) => ({
+      ...prevData,
+      boards: remainingBoards,
+      lists: remainingLists,
+      cards: remainingCards,
+      activeBoardId: newActiveBoardId,
+    }));
+  };
+
   const value = {
     boards: boardsData.boards,
     lists: boardsData.lists,
     cards: boardsData.cards,
     activeBoardId: boardsData.activeBoardId,
+    addNewBoard,
+    switchBoard,
+    deleteBoard,
   };
 
   return (
