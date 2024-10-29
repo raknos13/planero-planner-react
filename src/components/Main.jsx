@@ -28,7 +28,7 @@ export default function Main() {
       <Header />
       <div className="flex flex-grow">
         <Sidebar />
-        <Board initialData={boardData} />
+        <Board boardData={boardData} />
       </div>
     </div>
   );
