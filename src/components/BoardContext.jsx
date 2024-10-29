@@ -39,11 +39,27 @@ export function BoardProvider({ children }) {
   };
 
   const deleteBoard = (boardId) => {
+    // Return if there's one or less boards
     if (Object.keys(boardsData.boards).length <= 1) return;
 
     const { [boardId]: deletedBoard, ...remainingBoards } = boardsData.boards;
     const remainingLists = { ...boardsData.lists };
     const remainingCards = { ...boardsData.cards };
+
+    // Accumulate all the cardIds from all lists that belong to the deletedBoard
+    const cardIdsToDelete = deletedBoard.listIds.reduce((cardIds, listId) => {
+      const list = remainingLists[listId];
+      if (list) {
+        cardIds.push(...list.cardIds);
+        delete remainingLists[listId];
+      }
+      return cardIds;
+    }, []);
+
+    // Delete the cards that correspond to those Ids
+    cardIdsToDelete.forEach((cardId) => {
+      delete remainingCards[cardId];
+    });
 
     deletedBoard.listIds.forEach((listId) => {
       const list = remainingLists[listId];
