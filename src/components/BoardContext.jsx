@@ -12,7 +12,7 @@ export function BoardProvider({ children }) {
     activeBoardId: "board-1",
   });
 
-  // Board Management Functions
+  // Board management functions
   const addNewBoard = (title) => {
     const newBoardId = `board-${uuidv4()}`;
 
@@ -69,7 +69,7 @@ export function BoardProvider({ children }) {
     }));
   };
 
-  // List Management functions
+  // List management functions
   function addList(title) {
     const newListId = `list-${uuidv4()}`;
     const activeBoard = boardsData.boards[boardsData.activeBoardId];
@@ -124,17 +124,30 @@ export function BoardProvider({ children }) {
     }));
   }
 
-  function addCard(listId, newCard) {
-    // if (newCard.title.trim() === "") return;
-    const list = data.lists[listId];
-    const updatedCardIds = [...list.cardIds, newCard.id];
-    setData({
-      ...data,
-      lists: {
-        ...data.lists,
-        [listId]: { ...list, cardIds: updatedCardIds },
-      },
-      cards: { ...data.cards, [newCard.id]: newCard },
+  // Card management functions
+  function addNewCard(listId, cardTitle) {
+    const newCardId = `card-${uuidv4()}`;
+    const newCard = {
+      id: newCardId,
+      title: cardTitle,
+      description: "",
+      labels: "",
+      completed: false,
+    };
+
+    setBoardsData((prevData) => {
+      const list = prevData.lists[listId];
+      return {
+        ...prevData,
+        cards: { ...prevData.cards, [newCardId]: newCard },
+        lists: {
+          ...prevData.lists,
+          [listId]: {
+            ...list,
+            cardIds: [...list.cardIds, newCardId],
+          },
+        },
+      };
     });
   }
 
@@ -170,7 +183,7 @@ export function BoardProvider({ children }) {
     deleteBoard,
     addList,
     deleteList,
-    addCard,
+    addCard: addNewCard,
     editCard,
     deleteCard,
     handleDragEng,
