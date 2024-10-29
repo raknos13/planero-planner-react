@@ -12,6 +12,7 @@ export function BoardProvider({ children }) {
     activeBoardId: "board-1",
   });
 
+  // Board Management Functions
   const addNewBoard = (title) => {
     const newBoardId = `board-${uuidv4()}`;
 
@@ -23,6 +24,7 @@ export function BoardProvider({ children }) {
           id: newBoardId,
           title: title,
           listIds: [],
+          listOrder: [],
         },
       },
       activeBoardId: newBoardId,
@@ -67,6 +69,79 @@ export function BoardProvider({ children }) {
     }));
   };
 
+  // List Management functions
+  function addList(title) {
+    const newListId = `list-${uuidv4()}`;
+    const activeBoard = boardsData.boards[boardsData.activeBoardId];
+
+    setBoardsData((prevData) => ({
+      ...prevData,
+      lists: {
+        ...prevData.lists,
+        [newListId]: {
+          id: newListId,
+          title: title,
+          cardIds: [],
+        },
+      },
+      boards: {
+        ...prevData.boards,
+        [activeBoard.id]: {
+          ...activeBoard,
+          listIds: [...activeBoard.lists, newListId],
+          listOrder: [...activeBoard.listOrder, newListId],
+        },
+      },
+    }));
+  }
+
+  function deleteList(listId) {
+    const activeBoard = boardsData.boards[boardsData.activeBoardId];
+    // fetch the list associated w the listId
+    const list = boardsData.lists[listId];
+    // get all the cards
+    const remainingCards = { ...boardsData.cards };
+
+    // delete the cards that belong to the list
+    list.cards.forEach((cardId) => delete remainingCards[cardId]);
+  }
+
+  function addCard(listId, newCard) {
+    // if (newCard.title.trim() === "") return;
+    const list = data.lists[listId];
+    const updatedCardIds = [...list.cardIds, newCard.id];
+    setData({
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: { ...list, cardIds: updatedCardIds },
+      },
+      cards: { ...data.cards, [newCard.id]: newCard },
+    });
+  }
+
+  function deleteCard(listId, cardId) {
+    const list = data.lists[listId];
+    const newCardIds = list.cardIds.filter((id) => id !== cardId);
+    const { [cardId]: deletedCard, ...remainingCards } = data.cards;
+    setData({
+      ...data,
+      lists: {
+        ...data.lists,
+        [listId]: { ...list, cardIds: newCardIds },
+      },
+      cards: remainingCards,
+    });
+  }
+
+  function editCard(cardId, updatedCard) {
+    const updatedCards = { ...data.cards, [cardId]: updatedCard };
+    setData({
+      ...data,
+      cards: updatedCards,
+    });
+  }
+
   const value = {
     boards: boardsData.boards,
     lists: boardsData.lists,
@@ -75,6 +150,12 @@ export function BoardProvider({ children }) {
     addNewBoard,
     switchBoard,
     deleteBoard,
+    addList,
+    deleteList,
+    addCard,
+    editCard,
+    deleteCard,
+    handleDragEng,
   };
 
   return (
