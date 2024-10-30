@@ -37,7 +37,7 @@ export default function List({ list, listCards, dragHandleProps }) {
         <span className="text-sm font-bold">{list.title}</span>
         <button
           className="p-1 rounded-md hover:bg-gray-400"
-          onClick={deleteList}
+          onClick={() => deleteList(list.id)}
         >
           <FiMoreHorizontal />
         </button>
