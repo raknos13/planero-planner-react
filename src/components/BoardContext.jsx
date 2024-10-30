@@ -146,6 +146,7 @@ export function BoardProvider({ children }) {
       description: "",
       labels: "",
       completed: false,
+      createdAt: new Date().toISOString(), // Track creation time
     };
 
     setBoardsData((prevData) => {
