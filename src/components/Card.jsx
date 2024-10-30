@@ -32,7 +32,7 @@ const Card = forwardRef(function Card(
     const textarea = textareaRef.current;
     if (textarea) {
       textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.height = `${textarea.scrollHeight + 1}px`;
     }
   }
 
@@ -66,7 +66,7 @@ const Card = forwardRef(function Card(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-white border-box p-2 rounded-lg shadow mb-2 flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm bg-white border-box mt-1 mb-1 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       >
         <input
           type="checkbox"
@@ -77,7 +77,7 @@ const Card = forwardRef(function Card(
         {isEditing ? (
           <form
             onSubmit={handleSubmit}
-            className="flex gap-2 cards-center w-full"
+            className="flex gap-2 items-center w-full"
           >
             <textarea
               value={editedTitle}
@@ -118,10 +118,10 @@ const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1.5 right-2 gap-1 hidden group-hover:flex transition-opacity duration-300 bg-white">
+            <div className="absolute top-2 right-2 gap-1 hidden group-hover:flex transition-opacity duration-300 bg-white">
               <button
                 onClick={() => setIsEditing(true)}
-                className="hover:bg-yellow-600 hover:text-white rounded-md p-1 transition-colors duration-200"
+                className="hover:bg-gray-300 rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineEdit size={20} />
               </button>{" "}
