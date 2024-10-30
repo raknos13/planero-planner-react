@@ -1,4 +1,9 @@
-import { FiChevronLeft, FiChevronRight, FiPlus } from "react-icons/fi";
+import {
+  FiChevronLeft,
+  FiChevronRight,
+  FiPlus,
+  FiMoreHorizontal,
+} from "react-icons/fi";
 import { useState } from "react";
 import { useBoardContext } from "./BoardContext";
 
@@ -10,7 +15,7 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full flex-shrink-0 transition-all ease-linear duration-100 
-                  ${isCollapsed ? "w-10" : "w-52"} bg-gray-200`}
+                  ${isCollapsed ? "w-8" : "w-52"} bg-gray-200`}
     >
       {!isCollapsed && (
         <div>
@@ -36,29 +41,26 @@ const Sidebar = () => {
           </div>
           <ul>
             {Object.values(boards).map((board) => (
-              <li key={board.id}>
+              <li
+                key={board.id}
+                className={`flex justify-between px-3 ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
+              >
                 <button
                   onClick={() => switchBoard(board.id)}
-                  className={`px-3 py-2 w-full text-sm flex justify-start align-baseline 
-                            ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
+                  className={`py-2 text-sm`}
                 >
                   <span>{board.title}</span>
                 </button>
+                <button onClick={() => deleteBoard(board.id)}>
+                  <FiMoreHorizontal />
+                </button>
               </li>
             ))}
-            {/* <li> */}
-            {/*   <button className="px-3 py-2 w-full text-sm flex justify-start align-baseline"> */}
-            {/*     <span className="w-5 h-max rounded-sm mr-2 bg-red-500"> */}
-            {/*       &nbsp; */}
-            {/*     </span> */}
-            {/*     <span>My test board</span> */}
-            {/*   </button> */}
-            {/* </li> */}
           </ul>
         </div>
       )}
       {isCollapsed && (
-        <div className="m-2">
+        <div className="m-0.5">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="hover:bg-gray-400 p-1 rounded-md"
