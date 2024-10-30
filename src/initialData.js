@@ -5,7 +5,6 @@ export const initialData = {
       id: "board-1",
       title: "Sample board",
       listIds: ["list-1", "list-2", "list-3"],
-      listOrder: ["list-1", "list-2", "list-3"],
     },
   },
   lists: {
