@@ -1,4 +1,5 @@
 export const initialData = {
+  activeBoardId: "board-1",
   boards: {
     "board-1": {
       id: "board-1",
@@ -67,5 +68,4 @@ export const initialData = {
       completed: false,
     },
   },
-  listOrder: ["list-1", "list-2", "list-3"],
 };

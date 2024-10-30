@@ -5,11 +5,13 @@ import {
   AiOutlineCheck,
   AiOutlineClose,
 } from "react-icons/ai";
+import { useBoardContext } from "./BoardContext";
 
 const Card = forwardRef(function Card(
-  { listId, card, handleDelete, handleEdit, draggableProps, dragHandleProps },
+  { listId, card, draggableProps, dragHandleProps },
   ref,
 ) {
+  const { deleteCard, editCard } = useBoardContext();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(card.title);
   const textareaRef = useRef(null);
@@ -37,13 +39,13 @@ const Card = forwardRef(function Card(
   function handleSubmit(e) {
     e.preventDefault();
     if (editedTitle.trim()) {
-      handleEdit(card.id, { ...card, title: editedTitle });
+      editCard(card.id, { ...card, title: editedTitle });
       setIsEditing(false);
     }
   }
 
   function handleCheckboxChange() {
-    handleEdit(card.id, { ...card, completed: !card.completed });
+    editCard(card.id, { ...card, completed: !card.completed });
   }
 
   function handleKeyDown(e) {
@@ -124,7 +126,7 @@ const Card = forwardRef(function Card(
                 <AiOutlineEdit size={20} />
               </button>{" "}
               <button
-                onClick={() => handleDelete(listId, card.id)}
+                onClick={() => deleteCard(listId, card.id)}
                 className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
               >
                 <AiOutlineDelete size={20} />

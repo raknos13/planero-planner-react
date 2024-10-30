@@ -1,37 +1,11 @@
-import { useState } from "react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Card from "./Card";
-import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
+import { useBoardContext } from "./BoardContext";
 
-export default function List({
-  list,
-  cards,
-  deleteCard,
-  addCard,
-  editCard,
-  dragHandleProps,
-}) {
-  const cardTemplate = {
-    id: "",
-    title: "",
-    description: "Add a description",
-    labels: "",
-    completed: false,
-  };
-  const [newCard, setNewCard] = useState(cardTemplate);
-
-  function handleCardAdd(title) {
-    const cardId = `card-${uuidv4()}`;
-    const card = {
-      ...newCard,
-      id: cardId,
-      title: title,
-    };
-    addCard(list.id, card);
-    setNewCard(cardTemplate);
-  }
+export default function List({ list, listCards, dragHandleProps }) {
+  const { deleteList, addNewCard } = useBoardContext();
 
   return (
     <div className="listContainer h-auto p-2 w-80 bg-gray-200 rounded-lg">
@@ -40,7 +14,10 @@ export default function List({
         className="listHeader flex justify-between items-center mb-2 p-1"
       >
         <span className="text-sm font-bold">{list.title}</span>
-        <button className="p-1 rounded-md hover:bg-gray-400">
+        <button
+          className="p-1 rounded-md hover:bg-gray-400"
+          onClick={() => deleteList(list.id)}
+        >
           <FiMoreHorizontal />
         </button>
       </div>
@@ -53,7 +30,7 @@ export default function List({
             ref={provided.innerRef}
             className="min-h-1"
           >
-            {cards.map((card, index) => (
+            {listCards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id} index={index}>
                 {(provided) => (
                   <Card
@@ -62,8 +39,6 @@ export default function List({
                     dragHandleProps={provided.dragHandleProps}
                     listId={list.id}
                     card={card}
-                    handleEdit={editCard}
-                    handleDelete={deleteCard}
                   />
                 )}
               </Draggable>
@@ -72,7 +47,12 @@ export default function List({
           </ul>
         )}
       </Droppable>
-      <AddNew type="card" multiAddMode={true} handleAddNew={handleCardAdd} />
+      <AddNew
+        type="card"
+        multiAddMode={true}
+        id={list.id}
+        handleAddNew={addNewCard}
+      />
     </div>
   );
 }
