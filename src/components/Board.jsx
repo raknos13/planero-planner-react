@@ -6,16 +6,8 @@ import AddNew from "./AddNew";
 import { useBoardContext } from "./BoardContext";
 
 export default function Board({ boardData }) {
-  const {
-    boards,
-    lists,
-    cards,
-    activeBoardId,
-    addNewList,
-    deleteList,
-    onDragEnd,
-  } = useBoardContext();
-  // const [data, setData] = useState(boardData);
+  const { boards, lists, cards, activeBoardId, addNewList, onDragEnd } =
+    useBoardContext();
 
   const activeBoard = boards[activeBoardId];
 
@@ -47,8 +39,8 @@ export default function Board({ boardData }) {
                           {...provided.dragHandleProps}
                         >
                           <List
-                            // list={list}
-                            // cards={cards}
+                            list={list}
+                            listCards={listCards}
                             dragHandleProps={provided.dragHandleProps}
                           />
                         </div>
