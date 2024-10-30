@@ -86,7 +86,7 @@ export function BoardProvider({ children }) {
   };
 
   // List management functions
-  function addList(title) {
+  function addNewList(title) {
     const newListId = `list-${uuidv4()}`;
     const activeBoard = boardsData.boards[boardsData.activeBoardId];
 
@@ -279,12 +279,12 @@ export function BoardProvider({ children }) {
     addNewBoard,
     switchBoard,
     deleteBoard,
-    addList,
+    addNewList,
     deleteList,
     addNewCard,
     editCard,
     deleteCard,
-    handleDragEnd,
+    onDragEnd: handleDragEnd,
   };
 
   return (
