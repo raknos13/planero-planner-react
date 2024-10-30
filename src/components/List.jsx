@@ -1,32 +1,11 @@
-import { useState } from "react";
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { FiMoreHorizontal } from "react-icons/fi";
 import Card from "./Card";
-import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
 import { useBoardContext } from "./BoardContext";
 
 export default function List({ list, listCards, dragHandleProps }) {
-  const cardTemplate = {
-    id: "",
-    title: "",
-    description: "Add a description",
-    labels: "",
-    completed: false,
-  };
   const { deleteList, addNewCard } = useBoardContext();
-  const [newCard, setNewCard] = useState(cardTemplate);
-
-  function handleCardAdd(title) {
-    const cardId = `card-${uuidv4()}`;
-    const card = {
-      ...newCard,
-      id: cardId,
-      title: title,
-    };
-    addNewCard(list.id, card);
-    setNewCard(cardTemplate);
-  }
 
   return (
     <div className="listContainer h-auto p-2 w-80 bg-gray-200 rounded-lg">
@@ -68,7 +47,12 @@ export default function List({ list, listCards, dragHandleProps }) {
           </ul>
         )}
       </Droppable>
-      <AddNew type="card" multiAddMode={true} handleAddNew={handleCardAdd} />
+      <AddNew
+        type="card"
+        multiAddMode={true}
+        id={list.id}
+        handleAddNew={addNewCard}
+      />
     </div>
   );
 }
