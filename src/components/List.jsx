@@ -4,15 +4,9 @@ import { FiMoreHorizontal } from "react-icons/fi";
 import Card from "./Card";
 import { v4 as uuidv4 } from "uuid";
 import AddNew from "./AddNew";
+import { useBoardContext } from "./BoardContext";
 
-export default function List({
-  list,
-  cards,
-  deleteCard,
-  addCard,
-  editCard,
-  dragHandleProps,
-}) {
+export default function List({ list, listCards, dragHandleProps }) {
   const cardTemplate = {
     id: "",
     title: "",
@@ -20,6 +14,7 @@ export default function List({
     labels: "",
     completed: false,
   };
+  const { deleteList, addNewCard } = useBoardContext();
   const [newCard, setNewCard] = useState(cardTemplate);
 
   function handleCardAdd(title) {
@@ -29,7 +24,7 @@ export default function List({
       id: cardId,
       title: title,
     };
-    addCard(list.id, card);
+    addNewCard(list.id, card);
     setNewCard(cardTemplate);
   }
 
@@ -40,7 +35,10 @@ export default function List({
         className="listHeader flex justify-between items-center mb-2 p-1"
       >
         <span className="text-sm font-bold">{list.title}</span>
-        <button className="p-1 rounded-md hover:bg-gray-400">
+        <button
+          className="p-1 rounded-md hover:bg-gray-400"
+          onClick={deleteList}
+        >
           <FiMoreHorizontal />
         </button>
       </div>
@@ -53,7 +51,7 @@ export default function List({
             ref={provided.innerRef}
             className="min-h-1"
           >
-            {cards.map((card, index) => (
+            {listCards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id} index={index}>
                 {(provided) => (
                   <Card
@@ -62,8 +60,6 @@ export default function List({
                     dragHandleProps={provided.dragHandleProps}
                     listId={list.id}
                     card={card}
-                    handleEdit={editCard}
-                    handleDelete={deleteCard}
                   />
                 )}
               </Draggable>
