@@ -104,7 +104,7 @@ export function BoardProvider({ children }) {
         ...prevData.boards,
         [activeBoard.id]: {
           ...activeBoard,
-          listIds: [...activeBoard.lists, newListId],
+          listIds: [...activeBoard.listIds, newListId],
           listOrder: [...activeBoard.listOrder, newListId],
         },
       },
