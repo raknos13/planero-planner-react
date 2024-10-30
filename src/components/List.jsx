@@ -8,14 +8,14 @@ export default function List({ list, listCards, dragHandleProps }) {
   const { deleteList, addNewCard } = useBoardContext();
 
   return (
-    <div className="listContainer h-auto p-2 w-80 bg-gray-200 rounded-lg">
+    <div className="listContainer p-2 w-64 bg-gray-200 rounded-lg">
       <div
         {...dragHandleProps}
         className="listHeader flex justify-between items-center mb-2 p-1"
       >
         <span className="text-sm font-bold">{list.title}</span>
         <button
-          className="p-1 rounded-md hover:bg-gray-400"
+          className="p-1 rounded-md hover:bg-gray-400 transition-colors"
           onClick={() => deleteList(list.id)}
         >
           <FiMoreHorizontal />
@@ -28,7 +28,7 @@ export default function List({ list, listCards, dragHandleProps }) {
             {...provided.droppableProps}
             // bind ref to DOM element
             ref={provided.innerRef}
-            className="min-h-1"
+            className="min-h-1 max-h-[calc(100vh-16rem)] overflow-y-scroll mb-2 flex flex-col"
           >
             {listCards.map((card, index) => (
               <Draggable key={card.id} draggableId={card.id} index={index}>
