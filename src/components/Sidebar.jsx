@@ -28,7 +28,7 @@ const Sidebar = () => {
               <h6 className="text-sm font-bold">Your boards</h6>
               <button
                 className="hover:bg-gray-400 p-1 rounded-md"
-                onClick={addNewBoard("New board")}
+                onClick={() => addNewBoard("New board")}
               >
                 <FiPlus size={18} />
               </button>
@@ -38,7 +38,7 @@ const Sidebar = () => {
             {Object.values(boards).map((board) => (
               <li key={board.id}>
                 <button
-                  onClick={switchBoard(board.id)}
+                  onClick={() => switchBoard(board.id)}
                   className={`px-3 py-2 w-full text-sm flex justify-start align-baseline 
                             ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
                 >
