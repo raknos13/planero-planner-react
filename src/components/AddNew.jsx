@@ -18,7 +18,13 @@ const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
 
   function handleSubmit() {
     if (newTitle.trim()) {
-      handleAddNew(id, newTitle);
+      // If id is provided (for cards), pass both id and title
+      // If no id (for lists), just pass the title
+      if (id) {
+        handleAddNew(id, newTitle);
+      } else {
+        handleAddNew(newTitle);
+      }
       setNewTitle("");
     }
     if (multiAddMode) {
@@ -46,6 +52,7 @@ const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   function handleBlur() {
     if (newTitle.trim()) {
       handleSubmit();
+      setIsAddingNew(false);
     } else {
       handleCancel();
     }
