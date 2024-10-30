@@ -119,7 +119,7 @@ export function BoardProvider({ children }) {
     const remainingCards = { ...boardsData.cards };
 
     // delete the cards that belong to the list
-    list.cards.forEach((cardId) => delete remainingCards[cardId]);
+    list.cardIds.forEach((cardId) => delete remainingCards[cardId]);
 
     // create new lists object and delete the list
     const remainingLists = { ...boardsData.lists };
@@ -131,7 +131,7 @@ export function BoardProvider({ children }) {
       cards: remainingCards,
       boards: {
         ...prevData.boards,
-        [activeBoard.Id]: {
+        [activeBoard.id]: {
           ...activeBoard,
           listIds: activeBoard.listIds.filter((id) => id !== listId),
           listOrder: activeBoard.listOrder.filter((id) => id !== listId),
