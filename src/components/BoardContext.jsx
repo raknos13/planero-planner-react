@@ -24,7 +24,6 @@ export function BoardProvider({ children }) {
           id: newBoardId,
           title: title,
           listIds: [],
-          listOrder: [],
         },
       },
       activeBoardId: newBoardId,
@@ -105,7 +104,6 @@ export function BoardProvider({ children }) {
         [activeBoard.id]: {
           ...activeBoard,
           listIds: [...activeBoard.listIds, newListId],
-          listOrder: [...activeBoard.listOrder, newListId],
         },
       },
     }));
@@ -134,7 +132,6 @@ export function BoardProvider({ children }) {
         [activeBoard.id]: {
           ...activeBoard,
           listIds: activeBoard.listIds.filter((id) => id !== listId),
-          listOrder: activeBoard.listOrder.filter((id) => id !== listId),
         },
       },
     }));
@@ -209,9 +206,9 @@ export function BoardProvider({ children }) {
 
     // Handle list reordering
     if (type === "list") {
-      const newListOrder = Array.from(activeBoard.listOrder);
-      const [movedList] = newListOrder.splice(source.index, 1);
-      newListOrder.splice(destination.index, 0, movedList);
+      const newListIds = Array.from(activeBoard.listIds);
+      const [movedList] = newListIds.splice(source.index, 1);
+      newListIds.splice(destination.index, 0, movedList);
 
       setBoardsData((prevData) => ({
         ...prevData,
@@ -219,7 +216,7 @@ export function BoardProvider({ children }) {
           ...prevData.boards,
           [activeBoard.id]: {
             ...activeBoard,
-            listOrder: newListOrder,
+            listIds: newListIds,
           },
         },
       }));

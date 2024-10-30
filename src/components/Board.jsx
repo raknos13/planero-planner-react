@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import List from "./List";
 import AddNew from "./AddNew";
@@ -23,7 +21,7 @@ export default function Board({ boardData }) {
           >
             <div>
               <div className="listContainer flex gap-3 h-min">
-                {activeBoard.listOrder.map((listId, index) => {
+                {activeBoard.listIds.map((listId, index) => {
                   const list = lists[listId];
                   const listCards = list.cardIds.map((cardId) => cards[cardId]);
                   return (
