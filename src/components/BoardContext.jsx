@@ -200,26 +200,35 @@ export function BoardProvider({ children }) {
   }
 
   // Function to handle what happens when dragging ends
-  function onDragEnd(result) {
+  function handleDragEnd(result) {
     const { destination, source, type } = result;
     // If there's no destination (dropped outside), do nothing
     if (!destination) return;
 
+    const activeBoard = boardsData.boards[boardsData.activeBoardId];
+
     // Handle list reordering
     if (type === "list") {
-      const newListOrder = Array.from(data.listOrder);
+      const newListOrder = Array.from(activeBoard.listOrder);
       const [movedList] = newListOrder.splice(source.index, 1);
       newListOrder.splice(destination.index, 0, movedList);
-      setData({
-        ...data,
-        listOrder: newListOrder,
-      });
+
+      setBoardsData((prevData) => ({
+        ...prevData,
+        boards: {
+          ...prevData.boards,
+          [activeBoard.id]: {
+            ...activeBoard,
+            listOrder: newListOrder,
+          },
+        },
+      }));
       return;
     }
 
     // Handle card reordering
-    const sourceList = data.lists[source.droppableId];
-    const destList = data.lists[destination.droppableId];
+    const sourceList = boardsData.lists[source.droppableId];
+    const destList = boardsData.lists[destination.droppableId];
 
     // If moving to same list
     if (sourceList === destList) {
@@ -227,16 +236,16 @@ export function BoardProvider({ children }) {
       const [movedCard] = newCardIds.splice(source.index, 1);
       newCardIds.splice(destination.index, 0, movedCard);
 
-      setData({
-        ...data,
+      setBoardsData((prevData) => ({
+        ...prevData,
         lists: {
-          ...data.lists,
+          ...prevData.lists,
           [sourceList.id]: {
             ...sourceList,
             cardIds: newCardIds,
           },
         },
-      });
+      }));
     } else {
       // If moving to different list
       const sourceCardIds = Array.from(sourceList.cardIds);
@@ -245,10 +254,10 @@ export function BoardProvider({ children }) {
       const [movedCard] = sourceCardIds.splice(source.index, 1);
       destCardIds.splice(destination.index, 0, movedCard);
 
-      setData({
-        ...data,
+      setBoardsData((prevData) => ({
+        ...prevData,
         lists: {
-          ...data.lists,
+          ...prevData.lists,
           [sourceList.id]: {
             ...sourceList,
             cardIds: sourceCardIds,
@@ -258,7 +267,7 @@ export function BoardProvider({ children }) {
             cardIds: destCardIds,
           },
         },
-      });
+      }));
     }
   }
 
@@ -275,7 +284,7 @@ export function BoardProvider({ children }) {
     addNewCard,
     editCard,
     deleteCard,
-    onDragEnd,
+    handleDragEnd,
   };
 
   return (
