@@ -66,14 +66,14 @@ const Card = forwardRef(function Card(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-white border-box mt-1 mb-1 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm bg-white border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       >
-        <input
-          type="checkbox"
-          checked={card.completed}
-          onChange={handleCheckboxChange}
-          className="mr-2"
-        />
+        {/* <input */}
+        {/*   type="checkbox" */}
+        {/*   checked={card.completed} */}
+        {/*   onChange={handleCheckboxChange} */}
+        {/*   className="mr-2" */}
+        {/* /> */}
         {isEditing ? (
           <form
             onSubmit={handleSubmit}

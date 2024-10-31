@@ -3,7 +3,7 @@ import List from "./List";
 import AddNew from "./AddNew";
 import { useBoardContext } from "./BoardContext";
 
-export default function Board({ boardData }) {
+export default function Board() {
   const { boards, lists, cards, activeBoardId, addNewList, onDragEnd } =
     useBoardContext();
 
@@ -18,7 +18,7 @@ export default function Board({ boardData }) {
             ref={provided.innerRef}
             className="boardContainer flex p-4 overflow-x-scroll"
           >
-            <div className="listContainer flex gap-3">
+            <div className="listContainer flex">
               {activeBoard.listIds.map((listId, index) => {
                 const list = lists[listId];
                 const listCards = list.cardIds.map((cardId) => cards[cardId]);
@@ -29,6 +29,7 @@ export default function Board({ boardData }) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
+                        className="h-min mr-3"
                       >
                         <List
                           list={list}
