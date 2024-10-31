@@ -4,13 +4,21 @@ import {
   FiPlus,
   FiMoreHorizontal,
 } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useBoardContext } from "./BoardContext";
+import BoardCreatorPopover from "./BoardCreatorPopover";
+import Board from "./Board";
 
 const Sidebar = () => {
   const { boards, activeBoardId, switchBoard, addNewBoard, deleteBoard } =
     useBoardContext();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [showBoardCreator, setShowBoardCreator] = useState(false);
+  const addButtonRef = useRef(null);
+
+  const handleCreateBoard = (title, color) => {
+    addNewBoard(title, color);
+  };
 
   return (
     <div
@@ -35,8 +43,9 @@ const Sidebar = () => {
             <div className="flex justify-between items-center px-3 py-2">
               <h6 className="text-sm font-bold">Your boards</h6>
               <button
+                ref={addButtonRef}
                 className="hover:bg-gray-400 p-1 rounded-md"
-                onClick={() => addNewBoard("New board")}
+                onClick={() => setShowBoardCreator(true)}
               >
                 <FiPlus size={18} />
               </button>
@@ -60,6 +69,13 @@ const Sidebar = () => {
               </li>
             ))}
           </ul>
+          {showBoardCreator && (
+            <BoardCreatorPopover
+              onClose={() => setShowBoardCreator(false)}
+              onCreateBoard={handleCreateBoard}
+              buttonRef={addButtonRef}
+            />
+          )}
         </div>
       )}
       {isCollapsed && (
