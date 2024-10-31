@@ -15,7 +15,10 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full flex-shrink-0 transition-all ease-linear duration-100 
-                  ${isCollapsed ? "w-8" : "w-52"} bg-gray-200`}
+                  ${isCollapsed ? "w-8 cursor-pointer hover:bg-gray-300" : "w-52"} bg-gray-200`}
+      onClick={() => {
+        isCollapsed && setIsCollapsed(false);
+      }}
     >
       {!isCollapsed && (
         <div>
@@ -60,7 +63,7 @@ const Sidebar = () => {
         </div>
       )}
       {isCollapsed && (
-        <div className="m-0.5">
+        <div className="m-0.5 mt-3">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="hover:bg-gray-400 p-1 rounded-md"
