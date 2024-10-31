@@ -55,14 +55,18 @@ const Sidebar = () => {
             {Object.values(boards).map((board) => (
               <li
                 key={board.id}
-                className={`flex justify-between px-3 ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
+                className={`flex justify-between px-3 cursor-pointer ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
+                onClick={() => switchBoard(board.id)}
               >
-                <button
-                  onClick={() => switchBoard(board.id)}
-                  className={`py-2 text-sm`}
+                <div
+                  className={`py-2 text-sm flex items-center justify-between gap-2`}
                 >
+                  <div
+                    className="w-3 h-3 bg-red-400 rounded-full"
+                    style={{ backgroundColor: board.color }}
+                  ></div>
                   <span>{board.title}</span>
-                </button>
+                </div>
                 <button onClick={() => deleteBoard(board.id)}>
                   <FiMoreHorizontal />
                 </button>
