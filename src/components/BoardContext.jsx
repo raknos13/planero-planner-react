@@ -13,7 +13,7 @@ export function BoardProvider({ children }) {
   });
 
   // Board management functions
-  const addNewBoard = (title) => {
+  const addNewBoard = (title, color) => {
     const newBoardId = `board-${uuidv4()}`;
 
     setBoardsData((prevData) => ({
@@ -23,6 +23,7 @@ export function BoardProvider({ children }) {
         [newBoardId]: {
           id: newBoardId,
           title: title,
+          color: color,
           listIds: [],
         },
       },
