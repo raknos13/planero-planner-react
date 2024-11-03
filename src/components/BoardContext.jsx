@@ -110,6 +110,19 @@ export function BoardProvider({ children }) {
     }));
   }
 
+  function editList(listId, newTitle) {
+    setBoardsData((prevData) => ({
+      ...prevData,
+      lists: {
+        ...prevData.lists,
+        [listId]: {
+          ...prevData.lists[listId],
+          title: newTitle,
+        },
+      },
+    }));
+  }
+
   function deleteList(listId) {
     const activeBoard = boardsData.boards[boardsData.activeBoardId];
     // fetch the list associated w the listId
