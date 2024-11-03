@@ -80,7 +80,7 @@ const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
           onChange={(e) => setNewTitle(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={handleBlur}
-          className="mb-1 p-2 px-3 w-full rounded-lg text-sm min-h-[60px] resize-none"
+          className="mb-1 p-2 px-4 w-full rounded-lg text-sm min-h-[60px] resize-none"
         />
       ) : (
         <input
