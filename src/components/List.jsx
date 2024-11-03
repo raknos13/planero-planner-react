@@ -21,7 +21,7 @@ export default function List({ list, listCards, dragHandleProps }) {
           <FiMoreHorizontal />
         </button>
       </div>
-      <div className="min-h-1 max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
+      <div className="max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
         <Droppable droppableId={list.id}>
           {(provided) => (
             <ul
@@ -29,7 +29,7 @@ export default function List({ list, listCards, dragHandleProps }) {
               {...provided.droppableProps}
               // bind ref to DOM element
               ref={provided.innerRef}
-              className=""
+              className="min-h-1"
             >
               {listCards.map((card, index) => (
                 <Draggable key={card.id} draggableId={card.id} index={index}>
