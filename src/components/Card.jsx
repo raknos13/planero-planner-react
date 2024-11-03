@@ -1,10 +1,5 @@
 import { useState, forwardRef, useRef, useEffect } from "react";
-import {
-  AiOutlineEdit,
-  AiOutlineDelete,
-  AiOutlineCheck,
-  AiOutlineClose,
-} from "react-icons/ai";
+import { FiX, FiCheck, FiEdit, FiTrash } from "react-icons/fi";
 import { useBoardContext } from "./BoardContext";
 
 const Card = forwardRef(function Card(
@@ -93,18 +88,18 @@ const Card = forwardRef(function Card(
             />
             <button
               type="submit"
-              className="text-green-600 p-1 rounded-md border border-gray-100 hover:bg-green-400 hover:text-white"
+              className="text-green-600 p-1 rounded-md hover:bg-green-400 hover:text-white"
             >
-              <AiOutlineCheck size={20} /> {/* confirm edit */}
+              <FiCheck size={16} /> {/* confirm edit */}
             </button>
             <button
               onClick={() => {
                 setIsEditing(false);
                 setEditedTitle(card.title);
               }}
-              className="text-red-600 p-1 rounded-md border border-gray-100 hover:bg-red-400 hover:text-white"
+              className="text-red-600 p-1 rounded-md hover:bg-red-400 hover:text-white"
             >
-              <AiOutlineClose size={20} /> {/* cancel edit */}
+              <FiX size={16} /> {/* cancel edit */}
             </button>
           </form>
         ) : (
@@ -118,18 +113,18 @@ const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-2 right-2 gap-1 hidden group-hover:flex transition-opacity duration-300 bg-white">
+            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 bg-white">
               <button
                 onClick={() => setIsEditing(true)}
-                className="hover:bg-gray-300 rounded-md p-1 transition-colors duration-200"
+                className="text-gray-400 hover:bg-gray-100 hover:text-gray-700 rounded-md p-1 transition-colors duration-200"
               >
-                <AiOutlineEdit size={20} />
+                <FiEdit size={16} />
               </button>{" "}
               <button
                 onClick={() => deleteCard(listId, card.id)}
-                className="hover:bg-red-600 hover:text-white rounded-md p-1 transition-colors duration-200"
+                className="text-red-400 hover:bg-gray-100 hover:text-red-600 rounded-md p-1 transition-colors duration-200"
               >
-                <AiOutlineDelete size={20} />
+                <FiTrash size={16} />
               </button>
             </div>
           </div>
