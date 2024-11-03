@@ -12,6 +12,7 @@ export default function List({ list, listCards, dragHandleProps }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(list.title);
   const inputRef = useRef(null);
+  const showPopoverRef = useRef(null);
 
   useEffect(() => {
     if (isEditing) {
@@ -66,6 +67,7 @@ export default function List({ list, listCards, dragHandleProps }) {
         <button
           className="p-1 rounded-md hover:bg-gray-400 transition-colors"
           onClick={() => setShowPopover(true)}
+          ref={showPopoverRef}
         >
           <FiMoreHorizontal />
         </button>
@@ -74,6 +76,7 @@ export default function List({ list, listCards, dragHandleProps }) {
           onClose={() => setShowPopover(false)}
           onEdit={handleEdit}
           onDelete={() => deleteList(list.id)}
+          callButtonRef={showPopoverRef}
         />
       </div>
       <div className="max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
