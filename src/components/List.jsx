@@ -1,14 +1,47 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import { FiMoreHorizontal, FiX } from "react-icons/fi";
 import Card from "./Card";
 import AddNew from "./AddNew";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "./BoardContext";
+import ListOptionsPopover from "./ListOptionsPopover";
+import { FiMoreHorizontal } from "react-icons/fi";
 
 export default function List({ list, listCards, dragHandleProps }) {
   const { deleteList, editList, addNewCard } = useBoardContext();
   const [showPopover, setShowPopover] = useState(false);
-  const popoverRef = useRef(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(list.title);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing) {
+      inputRef.current.focus();
+    }
+  }, [isEditing]);
+
+  function handleTitleSubmit() {
+    if (editedTitle.trim() !== "") {
+      editList(list.id, editedTitle.trim());
+      setIsEditing(false);
+    }
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleTitleSubmit();
+    } else if (e.key === "Escape") {
+      setEditedTitle("");
+      setIsEditing(false);
+    }
+  }
+
+  function handleBlur() {
+    handleTitleSubmit();
+  }
+
+  function handleEdit() {
+    setIsEditing(true);
+  }
 
   return (
     <div className="listContainer relative p-2 w-64 bg-gray-200 rounded-lg flex flex-col h-min">
@@ -16,43 +49,32 @@ export default function List({ list, listCards, dragHandleProps }) {
         {...dragHandleProps}
         className="listHeader flex justify-between items-center mb-2 p-1"
       >
-        <span className="text-sm font-bold">{list.title}</span>
+        {isEditing ? (
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Type list title"
+            value={editedTitle}
+            onChange={(e) => setEditedTitle(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={handleBlur}
+            className="rounded-md"
+          />
+        ) : (
+          <span className="text-sm font-bold">{list.title}</span>
+        )}
         <button
           className="p-1 rounded-md hover:bg-gray-400 transition-colors"
           onClick={() => setShowPopover(true)}
         >
           <FiMoreHorizontal />
         </button>
-        {showPopover && (
-          <div
-            ref={popoverRef}
-            className="flex flex-col top-10 left-16 absolute z-50 w-48 h-32 text-sm mb-2 rounded-md shadow-lg border border-gray-300 bg-white"
-          >
-            <div className="flex justify-between p-3">
-              <h2 className="font-semibold">List options</h2>
-              <button
-                onClick={() => setShowPopover(false)}
-                className="rounded-full p-1 hover:bg-gray-300"
-              >
-                <FiX />
-              </button>
-            </div>
-            <div className="flex flex-col items-start">
-              <button
-                onClick={editList}
-                className="w-full h-8 hover:bg-gray-100 px-4"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => deleteList(list.id)}
-                className="w-full h-8 hover:bg-gray-100 px-4"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        )}
+        <ListOptionsPopover
+          isOpen={showPopover}
+          onClose={() => setShowPopover(false)}
+          onEdit={handleEdit}
+          onDelete={() => deleteList(list.id)}
+        />
       </div>
       <div className="max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
         <Droppable droppableId={list.id}>
