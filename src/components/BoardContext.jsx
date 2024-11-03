@@ -293,6 +293,7 @@ export function BoardProvider({ children }) {
     deleteBoard,
     addNewList,
     deleteList,
+    editList,
     addNewCard,
     editCard,
     deleteCard,
