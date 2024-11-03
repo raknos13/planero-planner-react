@@ -31,7 +31,7 @@ export default function List({ list, listCards, dragHandleProps }) {
     if (e.key === "Enter") {
       handleTitleSubmit();
     } else if (e.key === "Escape") {
-      setEditedTitle("");
+      setEditedTitle(list.title);
       setIsEditing(false);
     }
   }
@@ -59,7 +59,7 @@ export default function List({ list, listCards, dragHandleProps }) {
             onChange={(e) => setEditedTitle(e.target.value)}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className="rounded-md"
+            className="px-2 py-1 w-48 text-sm rounded-md"
           />
         ) : (
           <span className="text-sm font-bold">{list.title}</span>
