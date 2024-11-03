@@ -106,7 +106,7 @@ const Card = forwardRef(function Card(
           <div className="flex justify-between items-center w-full max-w-full">
             <div className="w-full max-w-full break-words">
               <span
-                className={`${card.completed ? "line-through text-gray-500" : ""}`}
+                // className={`${card.completed ? "line-through text-gray-500" : ""}`}
                 style={{ wordBreak: "break-word" }}
               >
                 {card.title}
