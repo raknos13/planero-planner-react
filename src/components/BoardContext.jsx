@@ -42,47 +42,36 @@ export function BoardProvider({ children }) {
     // Return if there's one or less boards
     if (Object.keys(boardsData.boards).length <= 1) return;
 
-    const { [boardId]: deletedBoard, ...remainingBoards } = boardsData.boards;
-    const remainingLists = { ...boardsData.lists };
-    const remainingCards = { ...boardsData.cards };
+    setBoardsData((prevData) => {
+      const { [boardId]: deletedBoard, ...remainingBoards } = prevData.boards;
+      const remainingLists = { ...prevData.lists };
+      const remainingCards = { ...prevData.cards };
 
-    // Accumulate all the cardIds from all lists that belong to the deletedBoard
-    const cardIdsToDelete = deletedBoard.listIds.reduce((cardIds, listId) => {
-      const list = remainingLists[listId];
-      if (list) {
-        cardIds.push(...list.cardIds);
-        delete remainingLists[listId];
-      }
-      return cardIds;
-    }, []);
+      deletedBoard.listIds.forEach((listId) => {
+        const list = remainingLists[listId];
+        if (list) {
+          // Delete all cards in the list
+          list.cardIds.forEach((cardId) => {
+            delete remainingCards[cardId];
+          });
+          // Finally delete the list
+          delete remainingLists[listId];
+        }
+      });
 
-    // Delete the cards that correspond to those Ids
-    cardIdsToDelete.forEach((cardId) => {
-      delete remainingCards[cardId];
+      const newActiveBoardId =
+        boardId === prevData.activeBoardId
+          ? Object.keys(remainingBoards)[0]
+          : prevData.activeBoardId;
+
+      return {
+        ...prevData,
+        boards: remainingBoards,
+        lists: remainingLists,
+        cards: remainingCards,
+        activeBoardId: newActiveBoardId,
+      };
     });
-
-    deletedBoard.listIds.forEach((listId) => {
-      const list = remainingLists[listId];
-      if (list) {
-        list.cardIds.forEach((cardId) => {
-          delete remainingCards[cardId];
-        });
-        delete remainingLists[listId];
-      }
-    });
-
-    const newActiveBoardId =
-      boardId === boardsData.activeBoardId
-        ? Object.keys(remainingBoards)[0]
-        : boardsData.activeBoardId;
-
-    setBoardsData((prevData) => ({
-      ...prevData,
-      boards: remainingBoards,
-      lists: remainingLists,
-      cards: remainingCards,
-      activeBoardId: newActiveBoardId,
-    }));
   };
 
   // List management functions

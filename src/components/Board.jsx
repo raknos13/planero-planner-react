@@ -9,6 +9,10 @@ export default function Board() {
 
   const activeBoard = boards[activeBoardId];
 
+  if (!activeBoard) {
+    return <div>Loading board...</div>;
+  }
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="board" type="list" direction="horizontal">

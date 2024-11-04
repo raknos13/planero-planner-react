@@ -67,7 +67,12 @@ const Sidebar = () => {
                   ></div>
                   <span>{board.title}</span>
                 </div>
-                <button onClick={() => deleteBoard(board.id)}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteBoard(board.id);
+                  }}
+                >
                   <FiMoreHorizontal />
                 </button>
               </li>
