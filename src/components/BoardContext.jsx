@@ -40,7 +40,7 @@ export function BoardProvider({ children }) {
 
   const deleteBoard = (boardId) => {
     // Return if there's one or less boards
-    if (Object.keys(boardsData.boards).length <= 1) return;
+    // if (Object.keys(boardsData.boards).length <= 1) return;
 
     setBoardsData((prevData) => {
       const { [boardId]: deletedBoard, ...remainingBoards } = prevData.boards;
