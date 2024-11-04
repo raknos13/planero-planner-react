@@ -74,6 +74,19 @@ export function BoardProvider({ children }) {
     });
   };
 
+  function editBoard(boardId, newBoardTitle) {
+    setBoardsData((prevData) => ({
+      ...prevData,
+      boards: {
+        ...prevData.boards,
+        [boardId]: {
+          ...prevData.boards[boardId],
+          title: newBoardTitle,
+        },
+      },
+    }));
+  }
+
   // List management functions
   function addNewList(title) {
     const newListId = `list-${uuidv4()}`;
@@ -280,6 +293,7 @@ export function BoardProvider({ children }) {
     addNewBoard,
     switchBoard,
     deleteBoard,
+    editBoard,
     addNewList,
     deleteList,
     editList,
