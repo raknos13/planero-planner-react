@@ -72,6 +72,7 @@ export default function List({ list, listCards, dragHandleProps }) {
           <FiMoreHorizontal />
         </button>
         <ListOptionsPopover
+          heading="List"
           isOpen={showPopover}
           onClose={() => setShowPopover(false)}
           onEdit={handleEdit}

@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 const ListOptionsPopover = ({
+  heading = "Options",
   isOpen,
   onClose,
   onEdit,
@@ -36,7 +37,7 @@ const ListOptionsPopover = ({
       className="top-9 left-28 absolute z-50 w-36 h-32 text-sm mb-2 rounded-md shadow-lg border border-gray-300 bg-white"
     >
       <div className="flex justify-between items-center p-3">
-        <h2 className="font-semibold text-gray-700">List options</h2>
+        <h2 className="font-semibold text-gray-700">{heading} options</h2>
         <button
           onClick={onClose}
           className="rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-200"
