@@ -15,8 +15,8 @@ const MoreOptionsPopover = ({
     function handleClickOutside(event) {
       if (
         popoverRef.current &&
-        !popoverRef.current.contains(event.target) &&
-        !callButtonRef.current.contains(event.target)
+        !popoverRef.current?.contains(event.target) &&
+        !callButtonRef.current?.contains(event.target)
       ) {
         onClose();
       }
