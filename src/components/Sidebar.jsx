@@ -4,21 +4,51 @@ import {
   FiPlus,
   FiMoreHorizontal,
 } from "react-icons/fi";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "./BoardContext";
 import BoardCreatorPopover from "./BoardCreatorPopover";
-import Board from "./Board";
+import MoreOptionsPopover from "./MoreOptionsPopover";
 
 const Sidebar = () => {
-  const { boards, activeBoardId, switchBoard, addNewBoard, deleteBoard } =
-    useBoardContext();
+  const {
+    boards,
+    activeBoardId,
+    switchBoard,
+    addNewBoard,
+    deleteBoard,
+    editBoard,
+  } = useBoardContext();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showBoardCreator, setShowBoardCreator] = useState(false);
+  const [activePopoverBoard, setActivePopoverBoard] = useState(null);
+  const [editingBoardId, setEditingBoardId] = useState(null);
+  const [editedTitle, setEditedTitle] = useState(boards[activeBoardId].title);
   const addButtonRef = useRef(null);
+  const moreOptionsButtonRefs = useRef({});
+  const inputRef = useRef(null);
 
   const handleCreateBoard = (title, color) => {
     addNewBoard(title, color);
   };
+
+  useEffect(() => {
+    if (editingBoardId) {
+      inputRef.current?.focus();
+    }
+  }, [editingBoardId]);
+
+  function handleTitleSubmit(boardId) {
+    if (editedTitle.trim() !== "") {
+      editBoard(boardId, editedTitle.trim());
+      setEditingBoardId(null);
+    }
+  }
+
+  function handleEdit(boardId) {
+    setEditedTitle(boards[activeBoardId].title);
+    setEditingBoardId(boardId);
+    setActivePopoverBoard(null);
+  }
 
   return (
     <div
@@ -55,8 +85,10 @@ const Sidebar = () => {
             {Object.values(boards).map((board) => (
               <li
                 key={board.id}
-                className={`flex justify-between px-3 cursor-pointer ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
-                onClick={() => switchBoard(board.id)}
+                className={`relative flex justify-between px-3 cursor-pointer ${board.id === activeBoardId ? "bg-gray-300" : ""}`}
+                onClick={() => {
+                  switchBoard(board.id);
+                }}
               >
                 <div
                   className={`py-2 text-sm flex items-center justify-between gap-2`}
@@ -65,16 +97,50 @@ const Sidebar = () => {
                     className="w-3 h-3 bg-red-400 rounded-full"
                     style={{ backgroundColor: board.color }}
                   ></div>
-                  <span>{board.title}</span>
+                  {editingBoardId !== board.id ? (
+                    <span>{board.title}</span>
+                  ) : (
+                    <input
+                      ref={inputRef}
+                      value={editedTitle}
+                      onChange={(e) => setEditedTitle(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleTitleSubmit(board.id);
+                        } else if (e.key === "Escape") {
+                          setEditingBoardId(null);
+                        }
+                      }}
+                      onBlur={() => handleTitleSubmit(board.id)}
+                      onClick={(e) => e.stopPropagation()}
+                      type="text"
+                      className="w-36 rounded-md p-1"
+                    />
+                  )}
                 </div>
                 <button
+                  ref={(el) => (moreOptionsButtonRefs.current[board.id] = el)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    deleteBoard(board.id);
+                    switchBoard(board.id);
+                    setActivePopoverBoard(board.id);
                   }}
                 >
                   <FiMoreHorizontal />
                 </button>
+                <MoreOptionsPopover
+                  heading="Board"
+                  isOpen={activePopoverBoard === board.id}
+                  onClose={() => setActivePopoverBoard(null)}
+                  onEdit={() => handleEdit(board.id)}
+                  onDelete={(e) => {
+                    e.stopPropagation();
+                    deleteBoard(board.id);
+                  }}
+                  callButtonRef={{
+                    current: moreOptionsButtonRefs.current[board.id],
+                  }}
+                />
               </li>
             ))}
           </ul>
