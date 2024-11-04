@@ -3,7 +3,7 @@ import Card from "./Card";
 import AddNew from "./AddNew";
 import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "./BoardContext";
-import ListOptionsPopover from "./ListOptionsPopover";
+import MoreOptionsPopover from "./ListOptionsPopover";
 import { FiMoreHorizontal } from "react-icons/fi";
 
 export default function List({ list, listCards, dragHandleProps }) {
@@ -71,7 +71,7 @@ export default function List({ list, listCards, dragHandleProps }) {
         >
           <FiMoreHorizontal />
         </button>
-        <ListOptionsPopover
+        <MoreOptionsPopover
           heading="List"
           isOpen={showPopover}
           onClose={() => setShowPopover(false)}

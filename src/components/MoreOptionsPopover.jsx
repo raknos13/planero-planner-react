@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
-const ListOptionsPopover = ({
-  heading = "Options",
+const MoreOptionsPopover = ({
+  heading = "More",
   isOpen,
   onClose,
   onEdit,
@@ -66,4 +66,4 @@ const ListOptionsPopover = ({
   );
 };
 
-export default ListOptionsPopover;
+export default MoreOptionsPopover;
