@@ -30,7 +30,6 @@ const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
         onClose();
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose, buttonRef]);
@@ -77,6 +76,7 @@ const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
             {BOARD_COLORS.map((color) => (
               <button
                 key={color.value}
+                type="button"
                 onClick={() => setSelectedColor(color.value)}
                 title={color.name}
                 className={`w-8 h-8 rounded-full border-2 ${selectedColor === color.value ? "border-blue-500" : "border-transparent hover:scale-105"}`}
