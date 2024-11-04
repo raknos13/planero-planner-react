@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { FiX } from "react-icons/fi";
+import { FiX, FiEdit3, FiTrash2 } from "react-icons/fi";
 
 const MoreOptionsPopover = ({
   heading = "More",
@@ -34,7 +34,7 @@ const MoreOptionsPopover = ({
   return (
     <div
       ref={popoverRef}
-      className="top-9 left-28 absolute z-50 w-36 h-32 text-sm mb-2 rounded-md shadow-lg border border-gray-300 bg-white"
+      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-gray-300 bg-white"
     >
       <div className="flex justify-between items-center p-3">
         <h2 className="font-semibold text-gray-700">{heading} options</h2>
@@ -51,14 +51,21 @@ const MoreOptionsPopover = ({
             onEdit();
             onClose();
           }}
-          className="w-full h-8 hover:bg-gray-100 px-4 text-left"
+          className="flex justify-start items-center gap-1 w-full h-8 hover:bg-gray-100 px-4 text-left"
         >
+          <FiEdit3 />
           Edit
         </button>
         <button
-          onClick={onDelete}
-          className="w-full h-8 hover:bg-gray-100 px-4 text-left"
+          onClick={(e) => {
+            confirm(
+              `${heading} will be permanently deleted! Do you want to proceed?`,
+            ) && onDelete(e);
+            onClose();
+          }}
+          className="flex justify-start items-center gap-1 w-full h-8 hover:text-red-400 hover:bg-gray-100 px-4 text-left"
         >
+          <FiTrash2 />
           Delete
         </button>
       </div>
