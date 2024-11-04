@@ -3,7 +3,7 @@ import Card from "./Card";
 import AddNew from "./AddNew";
 import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "./BoardContext";
-import MoreOptionsPopover from "./ListOptionsPopover";
+import MoreOptionsPopover from "./MoreOptionsPopover";
 import { FiMoreHorizontal } from "react-icons/fi";
 
 export default function List({ list, listCards, dragHandleProps }) {
