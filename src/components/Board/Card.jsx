@@ -1,8 +1,8 @@
 import { useState, forwardRef, useRef, useEffect } from "react";
 import { FiX, FiCheck, FiEdit, FiTrash } from "react-icons/fi";
-import { useBoardContext } from "./BoardContext";
+import { useBoardContext } from "./";
 
-const Card = forwardRef(function Card(
+export const Card = forwardRef(function Card(
   { listId, card, draggableProps, dragHandleProps },
   ref,
 ) {
@@ -133,5 +133,3 @@ const Card = forwardRef(function Card(
     </div>
   );
 });
-
-export default Card;

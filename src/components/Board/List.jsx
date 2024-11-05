@@ -1,12 +1,10 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
-import Card from "./Card";
-import AddNew from "./AddNew";
-import { useState, useRef, useEffect } from "react";
-import { useBoardContext } from "./BoardContext";
-import MoreOptionsPopover from "./MoreOptionsPopover";
 import { FiMoreHorizontal } from "react-icons/fi";
+import { useState, useRef, useEffect } from "react";
+import { Card, AddNew, useBoardContext } from "./";
+import { MoreOptionsPopover } from "../shared";
 
-export default function List({ list, listCards, dragHandleProps }) {
+export function List({ list, listCards, dragHandleProps }) {
   const { deleteList, editList, addNewCard } = useBoardContext();
   const [showPopover, setShowPopover] = useState(false);
   const [isEditing, setIsEditing] = useState(false);

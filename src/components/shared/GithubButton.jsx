@@ -1,5 +1,5 @@
 import { FiGithub } from "react-icons/fi";
-const GithubButton = ({ link }) => {
+export const GithubButton = ({ link }) => {
   return (
     <a href={link} target="_blank">
       <div className="flex justify-center items-center gap-1 bg-gray-300 p-2 hover:bg-gray-700 hover:text-white transition-all duration-200 ease-linear">
@@ -11,5 +11,3 @@ const GithubButton = ({ link }) => {
     </a>
   );
 };
-
-export default GithubButton;

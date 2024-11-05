@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 
-const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
+export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   const [isAddingNew, setIsAddingNew] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const inputRef = useRef(null);
@@ -111,5 +111,3 @@ const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     </div>
   );
 };
-
-export default AddNew;

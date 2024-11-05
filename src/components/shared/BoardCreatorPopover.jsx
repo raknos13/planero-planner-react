@@ -10,7 +10,7 @@ const BOARD_COLORS = [
   { name: "Red", value: "#EF4444" },
 ];
 
-const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
+export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
   const [boardName, setBoardName] = useState("");
   const [selectedColor, setSelectedColor] = useState(BOARD_COLORS[0].value);
   const popoverRef = useRef(null);
@@ -96,5 +96,3 @@ const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
     </div>
   );
 };
-
-export default BoardCreatorPopover;

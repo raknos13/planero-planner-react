@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { FiX, FiEdit3, FiTrash2 } from "react-icons/fi";
 
-const MoreOptionsPopover = ({
+export const MoreOptionsPopover = ({
   heading = "More",
   isOpen,
   onClose,
@@ -72,5 +72,3 @@ const MoreOptionsPopover = ({
     </div>
   );
 };
-
-export default MoreOptionsPopover;

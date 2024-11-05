@@ -1,7 +1,6 @@
-import Board from "./Board.jsx";
-import Sidebar from "./Sidebar.jsx";
-import Header from "./Header.jsx";
-import { BoardProvider } from "./BoardContext";
+import { Board, BoardProvider } from "./Board";
+import { Sidebar, SidebarProvider } from "./Sidebar";
+import Header from "./Header";
 
 export default function Main() {
   return (
@@ -9,7 +8,9 @@ export default function Main() {
       <div className="h-screen w-screen overflow-hidden flex flex-col">
         <Header />
         <div className="flex flex-grow">
-          <Sidebar />
+          <SidebarProvider>
+            <Sidebar />
+          </SidebarProvider>
           <Board />
         </div>
       </div>

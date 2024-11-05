@@ -1,4 +1,4 @@
-import { initialData } from "../initialData";
+import { initialData } from "../../../initialData";
 import { useState, createContext, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -61,7 +61,9 @@ export function BoardProvider({ children }) {
 
       const newActiveBoardId =
         boardId === prevData.activeBoardId
-          ? Object.keys(remainingBoards)[0]
+          ? Object.keys(remainingBoards).length > 0
+            ? Object.keys(remainingBoards)[0]
+            : null
           : prevData.activeBoardId;
 
       return {
