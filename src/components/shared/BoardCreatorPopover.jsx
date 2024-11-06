@@ -64,6 +64,11 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
             type="text"
             value={boardName}
             onChange={(e) => setBoardName(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                onClose();
+              }
+            }}
             placeholder="Enter board name"
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
