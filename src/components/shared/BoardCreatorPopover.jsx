@@ -43,7 +43,7 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
   return (
     <div
       ref={popoverRef}
-      className="absolute top-32 left-6 mt-2 p-2 z-50 w-64 bg-white rounded-lg shadow-lg border border-gray-200"
+      className="absolute top-0 left-0 mt-2 p-2 z-50 w-64 bg-white rounded-lg shadow-lg border border-gray-200"
     >
       <div className="flex justify-between items-center mb-2">
         <h3 className="font-semibold text-gray-700">Create board</h3>
