@@ -1,10 +1,11 @@
 import { FiPlus } from "react-icons/fi";
-import { useState, useRef, useEffect, forwardRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "../Board";
-import { GithubButton } from "../shared";
+import { BoardCreatorPopover, GithubButton } from "../shared";
 import { SidebarCollapsed, SidebarHeader, BoardList, useSidebar } from "./";
 
-const BoardListHeader = ({ setShowBoardCreator }, addButtonRef) => {
+const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
+  const { showBoardCreator, setShowBoardCreator } = useSidebar();
   return (
     <div className="flex justify-between items-center px-3 py-2">
       <h6 className="text-sm font-bold">Your boards</h6>
@@ -15,6 +16,14 @@ const BoardListHeader = ({ setShowBoardCreator }, addButtonRef) => {
       >
         <FiPlus size={18} />
       </button>
+
+      {showBoardCreator && (
+        <BoardCreatorPopover
+          onClose={() => setShowBoardCreator(false)}
+          onCreateBoard={handleCreateBoard}
+          buttonRef={addButtonRef}
+        />
+      )}
     </div>
   );
 };
@@ -79,7 +88,7 @@ export const Sidebar = () => {
 
         <BoardListHeader
           addButtonRef={addButtonRef}
-          setShowBoardCreator={setShowBoardCreator}
+          handleCreateBoard={handleCreateBoard}
         />
 
         {activeBoardId ? (

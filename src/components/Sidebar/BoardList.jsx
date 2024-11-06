@@ -1,8 +1,4 @@
-import {
-  AutoResizeTextarea,
-  BoardCreatorPopover,
-  MoreOptionsPopover,
-} from "../shared";
+import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
 import { useBoardContext } from "../Board";
 import { useSidebar } from "./context/SidebarContext";
 import { useRef } from "react";
@@ -14,11 +10,7 @@ export const BoardList = ({
   setEditedTitle,
   handleTitleSubmit,
   inputRef,
-  showBoardCreator,
-  setShowBoardCreator,
-  handleCreateBoard,
   handleEdit,
-  addButtonRef,
 }) => {
   return (
     <>
@@ -35,13 +27,6 @@ export const BoardList = ({
           />
         ))}
       </ul>
-      {showBoardCreator && (
-        <BoardCreatorPopover
-          onClose={() => setShowBoardCreator(false)}
-          onCreateBoard={handleCreateBoard}
-          buttonRef={addButtonRef}
-        />
-      )}
     </>
   );
 };
