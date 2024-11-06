@@ -123,7 +123,7 @@ The project's codebase is organized as follows:
 │   │   │   ├── BoardCreatorPopover.jsx
 │   │   │   ├── ConfirmPopover.jsx
 │   │   │   ├── GithubButton.jsx
-│   │   │   ├── index.js
+T│   │   │   ├── index.js
 │   │   │   └── MoreOptionsPopover.jsx
 │   │   ├── Header.jsx
 │   │   ├── index.js
@@ -144,15 +144,16 @@ The project's codebase is organized as follows:
 ```
 
 The `components` directory contains the main UI components of the application, such as the Board, List, and Card components. The `context` directory houses the state management logic, and the `shared` directory holds reusable UI components and utilities.
+Each directory has an `index.js` barrel file to simplify imports in the project.
 
 ## Future Enhancements
 
-Here are some potential future enhancements for the Planero project:
+These are the TODOS for the project as of now. Not in any priority order.
 
+- Implement dark theme and theme switching
 - Implement user authentication and authorization
-- Add the ability to assign team members to cards
-- Incorporate a calendar view for visualizing due dates
-- Implement a comments and activity feed for each card
+- Implement a landing page
+- Add the ability to assign labels to cards
 - Integrate with third-party services (e.g., Google Calendar, Slack)
 - Develop a mobile-optimized version of the application
 
