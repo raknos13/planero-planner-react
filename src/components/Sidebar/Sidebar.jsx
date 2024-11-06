@@ -7,7 +7,7 @@ import { SidebarCollapsed, SidebarHeader, BoardList, useSidebar } from "./";
 const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
   const { showBoardCreator, setShowBoardCreator } = useSidebar();
   return (
-    <div className="flex justify-between items-center px-3 py-2">
+    <div className="relative flex justify-between items-center px-3 py-2">
       <h6 className="text-sm font-bold">Your boards</h6>
       <button
         ref={addButtonRef}
@@ -16,14 +16,15 @@ const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
       >
         <FiPlus size={18} />
       </button>
-
-      {showBoardCreator && (
-        <BoardCreatorPopover
-          onClose={() => setShowBoardCreator(false)}
-          onCreateBoard={handleCreateBoard}
-          buttonRef={addButtonRef}
-        />
-      )}
+      <div className="absolute top-8 left-12 right-0">
+        {showBoardCreator && (
+          <BoardCreatorPopover
+            onClose={() => setShowBoardCreator(false)}
+            onCreateBoard={handleCreateBoard}
+            buttonRef={addButtonRef}
+          />
+        )}
+      </div>
     </div>
   );
 };
