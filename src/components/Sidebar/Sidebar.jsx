@@ -1,10 +1,10 @@
-import { FiChevronRight, FiPlus } from "react-icons/fi";
-import { useState, useRef, useEffect } from "react";
+import { FiPlus } from "react-icons/fi";
+import { useState, useRef, useEffect, forwardRef } from "react";
 import { useBoardContext } from "../Board";
 import { GithubButton } from "../shared";
-import { SidebarHeader, BoardList, useSidebar } from "./";
+import { SidebarCollapsed, SidebarHeader, BoardList, useSidebar } from "./";
 
-const BoardListHeader = ({ addButtonRef, setShowBoardCreator }) => {
+const BoardListHeader = ({ setShowBoardCreator }, addButtonRef) => {
   return (
     <div className="flex justify-between items-center px-3 py-2">
       <h6 className="text-sm font-bold">Your boards</h6>
@@ -15,24 +15,6 @@ const BoardListHeader = ({ addButtonRef, setShowBoardCreator }) => {
       >
         <FiPlus size={18} />
       </button>
-    </div>
-  );
-};
-
-const CollapsedSidebar = ({ isCollapsed, setIsCollapsed }) => {
-  return (
-    <div
-      className="h-full flex-shrink-0 w-8 cursor-pointer hover:bg-gray-300 bg-gray-200"
-      onClick={() => setIsCollapsed(false)}
-    >
-      <div className="m-0.5 mt-3">
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="hover:bg-gray-400 p-1 rounded-md"
-        >
-          <FiChevronRight size={18} />
-        </button>
-      </div>
     </div>
   );
 };
@@ -80,7 +62,7 @@ export const Sidebar = () => {
 
   if (isCollapsed) {
     return (
-      <CollapsedSidebar
+      <SidebarCollapsed
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
       />
