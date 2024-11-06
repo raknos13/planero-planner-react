@@ -89,7 +89,7 @@ Each list can contain multiple cards. You can add new cards, edit their titles, 
 
 ### Drag and Drop Functionality
 
-The app utilizes the Hello Pangea DnD library to provide seamless drag and drop functionality. Users can rearrange lists and cards by clicking and dragging them to the desired position.
+The app utilizes the [hello-Pangea/DnD](https://github.com/hello-pangea/dnd) library to provide seamless drag and drop functionality. Users can rearrange lists and cards by clicking and dragging them to the desired position.
 
 ## Project Structure
 
