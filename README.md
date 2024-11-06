@@ -96,22 +96,51 @@ The app utilizes the Hello Pangea DnD library to provide seamless drag and drop 
 The project's codebase is organized as follows:
 
 ```
-src/
-├── components/
-│   ├── Board.jsx
-│   ├── List.jsx
-│   ├── Card.jsx
-│   ├── AddNew.jsx
-│   └── ...
-├── context/
-│   ├── BoardContext.jsx
-│   └── SidebarContext.jsx
-├── shared/
-│   ├── MoreOptionsPopover.jsx
-│   ├── AutoResizeTextarea.jsx
-│   └── ...
-├── initialData.js
-└── App.jsx
+├── src
+│   ├── assets
+│   │   ├── not-found-alt.svg
+│   │   └── not-found.svg
+│   ├── components
+│   │   ├── Board
+│   │   │   ├── context
+│   │   │   │   └── BoardContext.jsx
+│   │   │   ├── AddNew.jsx
+│   │   │   ├── Board.jsx
+│   │   │   ├── Card.jsx
+│   │   │   ├── EmptyBoard.jsx
+│   │   │   ├── index.js
+│   │   │   └── List.jsx
+│   │   ├── Sidebar
+│   │   │   ├── context
+│   │   │   │   └── SidebarContext.jsx
+│   │   │   ├── BoardList.jsx
+│   │   │   ├── index.js
+│   │   │   ├── SidebarCollapsed.jsx
+│   │   │   ├── SidebarHeader.jsx
+│   │   │   └── Sidebar.jsx
+│   │   ├── shared
+│   │   │   ├── AutoResizeTextarea.jsx
+│   │   │   ├── BoardCreatorPopover.jsx
+│   │   │   ├── ConfirmPopover.jsx
+│   │   │   ├── GithubButton.jsx
+│   │   │   ├── index.js
+│   │   │   └── MoreOptionsPopover.jsx
+│   │   ├── Header.jsx
+│   │   ├── index.js
+│   │   └── Main.jsx
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   ├── initialData.js
+│   ├── main.jsx
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js
+└── vite.config.js
 ```
 
 The `components` directory contains the main UI components of the application, such as the Board, List, and Card components. The `context` directory houses the state management logic, and the `shared` directory holds reusable UI components and utilities.
