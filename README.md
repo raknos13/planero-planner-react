@@ -123,7 +123,7 @@ The project's codebase is organized as follows:
 │   │   │   ├── BoardCreatorPopover.jsx
 │   │   │   ├── ConfirmPopover.jsx
 │   │   │   ├── GithubButton.jsx
-T│   │   │   ├── index.js
+│   │   │   ├── index.js
 │   │   │   └── MoreOptionsPopover.jsx
 │   │   ├── Header.jsx
 │   │   ├── index.js
