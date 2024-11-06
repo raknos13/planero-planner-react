@@ -1,7 +1,4 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-// import List from "./List";
-// import AddNew from "./AddNew";
-// import { useBoardContext } from "./BoardContext";
 import { List, AddNew, useBoardContext } from "./";
 
 export function Board() {
