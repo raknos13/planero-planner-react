@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import { AutoResizeTextarea } from "../shared";
 
 export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   const [isAddingNew, setIsAddingNew] = useState(false);
@@ -73,7 +74,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   return (
     <div className="bg-gray-200 h-min rounded-lg w-full space-y-1">
       {type === "card" ? (
-        <textarea
+        <AutoResizeTextarea
           placeholder="Enter a title..."
           value={newTitle}
           ref={inputRef}

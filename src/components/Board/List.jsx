@@ -2,7 +2,7 @@ import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
 import { Card, AddNew, useBoardContext } from "./";
-import { MoreOptionsPopover } from "../shared";
+import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
 
 export function List({ list, listCards, dragHandleProps }) {
   const { deleteList, editList, addNewCard } = useBoardContext();
@@ -14,7 +14,8 @@ export function List({ list, listCards, dragHandleProps }) {
 
   useEffect(() => {
     if (isEditing) {
-      inputRef.current.focus();
+      inputRef.current?.focus();
+      inputRef.current?.select();
     }
   }, [isEditing]);
 
@@ -46,9 +47,8 @@ export function List({ list, listCards, dragHandleProps }) {
     <div className="listContainer relative p-2 w-64 bg-gray-200 rounded-lg flex flex-col h-min">
       <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
         {isEditing ? (
-          <textarea
+          <AutoResizeTextarea
             ref={inputRef}
-            type="text"
             placeholder="Type list title"
             value={editedTitle}
             onChange={(e) => setEditedTitle(e.target.value)}

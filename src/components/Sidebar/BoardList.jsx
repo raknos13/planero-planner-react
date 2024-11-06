@@ -1,4 +1,8 @@
-import { BoardCreatorPopover, MoreOptionsPopover } from "../shared";
+import {
+  AutoResizeTextarea,
+  BoardCreatorPopover,
+  MoreOptionsPopover,
+} from "../shared";
 import { useBoardContext } from "../Board";
 import { useSidebar } from "./context/SidebarContext";
 import { useRef } from "react";
@@ -68,7 +72,7 @@ const BoardListItem = ({
         style={{ backgroundColor: board.color }}
       />
       {editingBoardId === board.id ? (
-        <input
+        <AutoResizeTextarea
           ref={inputRef}
           value={editedTitle}
           onChange={(e) => setEditedTitle(e.target.value)}
@@ -82,7 +86,6 @@ const BoardListItem = ({
           }}
           onBlur={() => handleTitleSubmit(board.id)}
           onClick={(e) => e.stopPropagation()}
-          type="text"
           className="w-full rounded-md p-1"
         />
       ) : (
