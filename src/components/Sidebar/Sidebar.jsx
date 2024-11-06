@@ -80,7 +80,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className="h-full flex-shrink-0 w-52 bg-gray-200 border-t border-gray-400">
+    <div className="h-full flex-shrink-0 w-52 bg-gray-200">
       <div className="flex flex-col justify-between h-full">
         <SidebarHeader
           isCollapsed={isCollapsed}
