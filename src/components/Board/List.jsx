@@ -44,12 +44,9 @@ export function List({ list, listCards, dragHandleProps }) {
 
   return (
     <div className="listContainer relative p-2 w-64 bg-gray-200 rounded-lg flex flex-col h-min">
-      <div
-        {...dragHandleProps}
-        className="listHeader flex justify-between items-center mb-2 p-1"
-      >
+      <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
         {isEditing ? (
-          <input
+          <textarea
             ref={inputRef}
             type="text"
             placeholder="Type list title"
@@ -57,18 +54,22 @@ export function List({ list, listCards, dragHandleProps }) {
             onChange={(e) => setEditedTitle(e.target.value)}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className="px-2 py-1 w-48 text-sm rounded-md"
+            className="px-2 py-1 w-full text-sm rounded-md"
           />
         ) : (
-          <span className="text-sm font-bold">{list.title}</span>
+          <div className="relative flex w-full">
+            <span className="pr-4 break-words text-sm font-bold min-w-0 flex-1">
+              {list.title}
+            </span>
+            <button
+              className="absolute top-0 right-0 p-1 rounded-md hover:bg-gray-400 transition-colors"
+              onClick={() => setShowPopover(true)}
+              ref={showPopoverRef}
+            >
+              <FiMoreHorizontal />
+            </button>
+          </div>
         )}
-        <button
-          className="p-1 rounded-md hover:bg-gray-400 transition-colors"
-          onClick={() => setShowPopover(true)}
-          ref={showPopoverRef}
-        >
-          <FiMoreHorizontal />
-        </button>
         <MoreOptionsPopover
           heading="List"
           isOpen={showPopover}
