@@ -3,7 +3,7 @@ import { FaGithub } from "react-icons/fa6";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center px-3 py-2 bg-gray-200 shadow-md z-30">
+    <div className="flex justify-between items-center px-3 py-1 bg-gray-200 shadow-md z-30">
       <h1 className="text-md font-bold text-center">Planero project manager</h1>
       <section className="flex gap-4">
         <a
