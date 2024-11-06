@@ -57,6 +57,7 @@ export const Sidebar = () => {
   useEffect(() => {
     if (editingBoardId) {
       inputRef.current?.focus();
+      inputRef.current?.select();
     }
   }, [editingBoardId]);
 
