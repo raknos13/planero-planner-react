@@ -5,12 +5,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "rgba(var(--color-bg))",
-        primary: "rgba(var(--color-primary))",
-        secondary: "rgba(var(--color-secondary))",
-        text: "rgba(var(--color-text))",
-        hover: "rgba(var(--color-hover))",
+        "bg-primary": "rgba(var(--color-bg-primary))",
+        "bg-secondary": "rgba(var(--color-bg-secondary))",
+        "bg-card": "rgba(var(--color-bg-card))",
+        "text-primary": "rgba(var(--color-text-primary))",
+        "text-secondary": "rgba(var(--color-text-secondary))",
         border: "rgba(var(--color-border))",
+        accent: "rgba(var(--color-accent))",
       },
     },
   },

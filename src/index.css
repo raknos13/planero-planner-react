@@ -2,11 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+/* .light { */
+/*   --color-bg-primary: rgba(248, 248, 248, 1); */
+/*   --color-bg-secondary: rgba(255, 255, 255, 1); */
+/*   --color-text-primary: rgba(51, 51, 51, 1); */
+/*   --color-text-secondary: rgba(102, 102, 102, 1); */
+/*   --color-border: rgba(224, 224, 224, 1); */
+/*   --color-accent: rgba(0, 123, 255, 1); */
+/* } */
+/* .dark { */
+/*   --color-bg-primary-dark: rgba(31, 31, 31, 1); */
+/*   --color-bg-secondary-dark: rgba(43, 43, 43, 1); */
+/*   --color-text-primary-dark: rgba(240, 240, 240, 1); */
+/*   --color-text-secondary-dark: rgba(179, 179, 179, 1); */
+/*   --color-border-dark: rgba(68, 68, 68, 1); */
+/*   --color-accent-dark: rgba(77, 166, 255, 1); */
+/* } */
 .light {
+  --color-bg-primary: 248 249 250;
+  --color-bg-secondary: 233 236 239;
+  --color-bg-card: 255 255 255;
+  --color-text-primary: 73 80 87;
+  --color-text-secondary: 108 117 125;
+  --color-border: 222 226 230;
+  --color-accent: 0 123 255;
+}
+.dark {
+  --color-bg-primary: 31 31 31;
+  --color-bg-secondary: 40 40 40;
+  --color-bg-card: 51 51 51;
+  --color-text-primary: 240 240 240;
+  --color-text-secondary: 179 179 179;
+  --color-border: 68 68 68;
+  --color-accent: 77 166 255;
+}
+
+.light2 {
   /* rgb(255, 255, 255) */
   /* --color-bg: 249 249 249; */
   --color-bg: 245 245 245;
-  --color-primary: 240 240 240;
+  --color-primary: 245 247 250;
   /* rgb(240,243,243) */
   --color-secondary: 255 255 255;
   /* rgb(10,10,10) */
@@ -14,10 +49,9 @@
   /* rgba(209, 213, 219, 1) */
   --color-border: 209 213 219;
   --color-hover: 213 213 213;
-  background: rgba(var(--background));
 }
 
-.dark {
+.dark2 {
   --color-bg: 41 41 41;
   /* rgb(26, 26, 26);  */
   /* rgba(38, 38, 37, 1) */
@@ -29,6 +63,4 @@
   /* rgb(255, 255, 255); */
   --color-text: 255 255 255;
   --color-text-dim: 163 163 163;
-
-  background: rgba(var(--background));
 }
