@@ -45,10 +45,10 @@ export function List({ list, listCards, dragHandleProps }) {
 
   return (
     <div
-      className="listContainer relative p-2 w-64 rounded-lg flex flex-col h-min 
+      className="listContainer relative p-2 w-64 max-h-[calc(100vh-5rem)] rounded-lg flex flex-col
       border-1 border-border hover:border-border-hover text-text-primary bg-bg-primary"
     >
-      <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
+      <div {...dragHandleProps} className="listHeader w-full gap-1 mb-2 p-1">
         {isEditing ? (
           <AutoResizeTextarea
             ref={inputRef}
@@ -82,42 +82,46 @@ export function List({ list, listCards, dragHandleProps }) {
           callButtonRef={showPopoverRef}
         />
       </div>
-      <div className="max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
-        <Droppable droppableId={list.id}>
-          {(provided, snapshot) => (
-            <ul
-              // pass necessary props to make the list droppable
-              {...provided.droppableProps}
-              // bind ref to DOM element
-              ref={provided.innerRef}
-              className={`min-h-1 ${snapshot.isDraggingOver ? "bg-bg-primary rounded-lg" : ""}`}
-              // style={{
-              //   backgroundColor: snapshot.isDraggingOver ? "darkgray" : "",
-              // }}
-            >
-              {listCards.map((card, index) => (
-                <Draggable key={card.id} draggableId={card.id} index={index}>
-                  {(provided) => (
-                    <Card
-                      ref={provided.innerRef}
-                      draggableProps={provided.draggableProps}
-                      dragHandleProps={provided.dragHandleProps}
-                      listId={list.id}
-                      card={card}
-                    />
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </ul>
-          )}
-        </Droppable>
-        <AddNew
-          type="card"
-          multiAddMode={true}
-          id={list.id}
-          handleAddNew={addNewCard}
-        />
+      <div className="flex flex-col flex-1 min-h-0">
+        <div className="flex-1 overflow-y-auto">
+          <Droppable droppableId={list.id}>
+            {(provided, snapshot) => (
+              <ul
+                // pass necessary props to make the list droppable
+                {...provided.droppableProps}
+                // bind ref to DOM element
+                ref={provided.innerRef}
+                className={`min-h-1 ${snapshot.isDraggingOver ? "bg-bg-primary rounded-lg" : ""}`}
+                // style={{
+                //   backgroundColor: snapshot.isDraggingOver ? "darkgray" : "",
+                // }}
+              >
+                {listCards.map((card, index) => (
+                  <Draggable key={card.id} draggableId={card.id} index={index}>
+                    {(provided) => (
+                      <Card
+                        ref={provided.innerRef}
+                        draggableProps={provided.draggableProps}
+                        dragHandleProps={provided.dragHandleProps}
+                        listId={list.id}
+                        card={card}
+                      />
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </div>
+        <div className="flex-shrink-0 mt-2">
+          <AddNew
+            type="card"
+            multiAddMode={true}
+            id={list.id}
+            handleAddNew={addNewCard}
+          />
+        </div>
       </div>
     </div>
   );

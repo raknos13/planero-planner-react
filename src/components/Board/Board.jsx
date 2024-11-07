@@ -28,13 +28,13 @@ export function Board() {
             }}
           >
             <div
-              className={`boardContainer flex w-full h-full p-4 overflow-x-scroll bg-bg-primary text-text-primary`}
+              className={`boardContainer flex w-full h-full p-4 overflow-x-auto overflow-y-hidden bg-bg-primary text-text-primary`}
               style={{
                 background:
                   theme === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0, 0, 0, 0.2)",
               }}
             >
-              <div className="listContainer flex">
+              <div className="listContainer flex h-full">
                 {activeBoard.listIds.map((listId, index) => {
                   const list = lists[listId];
                   const listCards = list.cardIds.map((cardId) => cards[cardId]);
