@@ -4,7 +4,7 @@ export const initialData = {
     "board-1": {
       id: "board-1",
       title: "Sample board",
-      color: " #FF5733",
+      color: "rgb(255, 87, 51)",
       listIds: ["list-1", "list-2", "list-3"],
     },
   },
