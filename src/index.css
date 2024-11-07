@@ -29,13 +29,13 @@
 /*   --color-accent-dark: rgba(77, 166, 255, 1); */
 /* } */
 .light {
-  --color-bg-primary: 220 220 220;
-  --color-bg-secondary: 233 236 239;
+  --color-bg-primary: 252 250 250;
+  --color-bg-secondary: 240 240 240;
   --color-hover: 206 212 218;
-  --color-bg-card: 255 255 255;
-  --color-bg-card-hover: 245 245 245;
-  --color-text-primary: 73 80 87;
-  --color-text-secondary: 108 117 125;
+  --color-bg-card: 225 225 225;
+  --color-bg-card-hover: 235 235 235;
+  --color-text-primary: 61 61 61;
+  --color-text-secondary: 100 100 100;
   --color-border: 222 226 230;
   --color-border-hover: 210 215 220;
   --color-accent: 0 123 255;

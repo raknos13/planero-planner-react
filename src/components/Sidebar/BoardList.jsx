@@ -77,7 +77,7 @@ const BoardListItem = ({
     <li
       key={board.id}
       className={`relative flex items-center w-full gap-2 py-2 px-3 text-sm cursor-pointer hover:bg-bg-secondary
-                  ${board.id === activeBoardId && "bg-bg-secondary text-text-primary"}`}
+                  ${board.id === activeBoardId && "bg-bg-secondary font-medium text-text-primary"}`}
       onClick={() => {
         switchBoard(board.id);
       }}
