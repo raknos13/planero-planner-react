@@ -80,7 +80,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
         onChange={(e) => setNewTitle(e.target.value)}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className="mb-1 p-2 rounded-lg text-sm min-h-[60px] resize-none bg-secondary text-text"
+        className="mb-1 p-2 rounded-md text-sm resize-none bg-secondary text-text focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       {/* {type === "card" ? ( */}
       {/*   <AutoResizeTextarea */}
@@ -107,7 +107,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-blue-500 text-text rounded hover:bg-blue-600 text-sm"
+          className="flex-grow px-3 py-1.5 bg-blue-500 text-text rounded-md hover:bg-blue-600 text-sm"
         >
           Add {type}
         </button>
