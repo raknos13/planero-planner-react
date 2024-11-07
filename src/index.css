@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.light {
+  /* rgb(255, 255, 255) */
+  --color-bg: 249 249 249;
+  /* rgb(250,250,250); */
+  --color-primary: 236 236 236;
+  /* rgb(240,243,243) */
+  --color-secondary: 255 255 255;
+  /* rgb(10,10,10) */
+  --color-text: 10 10 10;
+  /* rgba(209, 213, 219, 1) */
+  --color-border: 209 213 219;
+  --color-hover: 213 213 213;
+  background: rgba(var(--background));
+}
+
+.dark {
+  /* rgb(13, 13, 13); */
+  --color-bg: 22 22 22;
+  /* rgb(26, 26, 26);  */
+  /* rgba(38, 38, 37, 1) */
+  --color-primary: 38 38 37 / 1;
+  /* rgb(50, 50, 50); */
+  /* rgba(89, 88, 86, 1) */
+  --color-secondary: 89 88 86 / 1;
+  /* rgb(90, 90, 90) */
+  /* rgba(140, 137, 132, 1) */
+  --color-hover: 140 137 132 / 1;
+  --color-border: 50 50 50;
+  /* rgb(255, 255, 255); */
+  --color-text: 255 255 255;
+
+  background: rgba(var(--background));
+}
