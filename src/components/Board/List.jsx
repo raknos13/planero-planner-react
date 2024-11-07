@@ -84,13 +84,16 @@ export function List({ list, listCards, dragHandleProps }) {
       </div>
       <div className="max-h-[calc(100vh-9rem)] overflow-y-scroll flex flex-col">
         <Droppable droppableId={list.id}>
-          {(provided) => (
+          {(provided, snapshot) => (
             <ul
               // pass necessary props to make the list droppable
               {...provided.droppableProps}
               // bind ref to DOM element
               ref={provided.innerRef}
-              className="min-h-1"
+              className={`min-h-1 ${snapshot.isDraggingOver ? "bg-bg-primary rounded-lg" : ""}`}
+              // style={{
+              //   backgroundColor: snapshot.isDraggingOver ? "darkgray" : "",
+              // }}
             >
               {listCards.map((card, index) => (
                 <Draggable key={card.id} draggableId={card.id} index={index}>
