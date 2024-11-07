@@ -114,7 +114,7 @@ export function List({ list, listCards, dragHandleProps }) {
             )}
           </Droppable>
         </div>
-        <div className="flex-shrink-0 mt-2">
+        <div className="flex-shrink-0">
           <AddNew
             type="card"
             multiAddMode={true}
