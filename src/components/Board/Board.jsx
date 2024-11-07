@@ -1,9 +1,12 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { EmptyBoard, List, AddNew, useBoardContext } from "./";
+import { EmptyBoard, List, AddNew } from "./";
+import { useBoardContext, useTheme } from "../../contexts/";
 
 export function Board() {
   const { boards, lists, cards, activeBoardId, addNewList, onDragEnd } =
     useBoardContext();
+
+  const { theme } = useTheme();
 
   const activeBoard = boards[activeBoardId];
 
@@ -27,7 +30,11 @@ export function Board() {
           >
             <div
               className={`boardContainer flex w-full h-full p-4 overflow-x-scroll bg-bg-primary text-text-primary`}
-              style={{ background: "rgba(0,0,0, 0.1)" }}
+              style={
+                theme === "dark"
+                  ? { background: "rgba(0,0,0, 0.4)" }
+                  : { background: "rgba(0, 0, 0, 0.2)" }
+              }
             >
               <div className="listContainer flex">
                 {activeBoard.listIds.map((listId, index) => {
