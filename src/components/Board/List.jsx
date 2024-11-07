@@ -61,7 +61,7 @@ export function List({ list, listCards, dragHandleProps }) {
           />
         ) : (
           <div className="relative flex w-full">
-            <span className="pr-4 break-words text-sm font-bold min-w-0 flex-1">
+            <span className="pr-8 break-words text-sm font-bold min-w-0 flex-1">
               {list.title}
             </span>
             <button

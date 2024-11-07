@@ -45,7 +45,7 @@ export const AutoResizeTextarea = forwardRef(function AutoResizeTextarea(
       onKeyDown={onKeyDown}
       rows={1}
       {...props}
-      className={`overflow-hidden resize-none ${className}`}
+      className={`overflow-hidden resize-none bg-bg-secondary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent ${className}`}
     />
   );
 });
