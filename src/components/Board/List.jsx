@@ -44,7 +44,7 @@ export function List({ list, listCards, dragHandleProps }) {
   }
 
   return (
-    <div className="listContainer relative p-2 w-64 bg-gray-200 rounded-lg flex flex-col h-min">
+    <div className="listContainer relative p-2 w-64 bg-primary text-text rounded-lg flex flex-col h-min">
       <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
         {isEditing ? (
           <AutoResizeTextarea

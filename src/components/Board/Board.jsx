@@ -18,7 +18,12 @@ export function Board() {
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="boardContainer flex p-4 overflow-x-scroll"
+            className={`boardContainer flex w-full p-4 overflow-x-scroll backdrop-blur-sm`}
+            style={{
+              background: `linear-gradient(135deg, ${activeBoard.color} , rgba(255, 255, 39, 0.5)`,
+              // background: activeBoard.color + "4D",
+              // backdropFilter: "blur(12px)",
+            }}
           >
             <div className="listContainer flex">
               {activeBoard.listIds.map((listId, index) => {
@@ -44,7 +49,7 @@ export function Board() {
                 );
               })}
               {provided.placeholder}
-              <div className="min-w-64 bg-gray-200 h-min rounded-lg p-2">
+              <div className="min-w-64 bg-primary h-min rounded-lg p-2">
                 <AddNew
                   type="list"
                   multiAddMode={false}

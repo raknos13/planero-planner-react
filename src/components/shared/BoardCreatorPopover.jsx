@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 const BOARD_COLORS = [
-  { name: "Sky", value: "#0EA5E9" },
-  { name: "Purple", value: "#A855F7" },
-  { name: "Pink", value: "#EC4899" },
-  { name: "Green", value: "#22C55E" },
-  { name: "Yellow", value: "#EAB308" },
-  { name: "Red", value: "#EF4444" },
+  { name: "Sky", value: "rgb(14, 165, 233)" },
+  { name: "Purple", value: "rgb(168, 85, 247)" },
+  { name: "Pink", value: "rgb(236, 72, 153)" },
+  { name: "Green", value: "rgb(34, 197, 94)" },
+  { name: "Yellow", value: "rgb(234, 179, 8)" },
+  { name: "Red", value: "rgb(239, 68, 68)" },
 ];
 
 export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
@@ -43,22 +43,20 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
   return (
     <div
       ref={popoverRef}
-      className="absolute top-0 left-0 mt-2 p-2 z-50 w-64 bg-white rounded-lg shadow-lg border border-gray-200"
+      className="absolute top-0 left-0 mt-0 py-3 px-3 z-50 w-64 bg-primary text-text rounded-lg shadow-lg border border-border"
     >
       <div className="flex justify-between items-center mb-2">
-        <h3 className="font-semibold text-gray-700">Create board</h3>
+        <h3 className="font-semibold">Create board</h3>
         <button
           onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-gray-200"
+          className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-secondary hover:text-text"
         >
           <FiX size={16} />
         </button>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-2">
+      <form onSubmit={handleSubmit} className="space-y-2 flex flex-col">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Board Name
-          </label>
+          <label className="block text-sm font-medium mb-1">Board Name</label>
           <input
             ref={inputRef}
             type="text"
@@ -70,21 +68,20 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
               }
             }}
             placeholder="Enter board name"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 bg-secondary border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Background
-          </label>
-          <div className="grid grid-cols-6 gap-2">
+          <label className="block text-sm font-medium mb-2">Background</label>
+          <div className="grid grid-cols-6 gap-2 mb-2">
             {BOARD_COLORS.map((color) => (
               <button
                 key={color.value}
                 type="button"
                 onClick={() => setSelectedColor(color.value)}
                 title={color.name}
-                className={`w-8 h-8 rounded-full border-2 ${selectedColor === color.value ? "border-blue-500" : "border-transparent hover:scale-105"}`}
+                className={`w-8 h-8 rounded-full border-2 
+                    ${selectedColor === color.value ? "border-yellow-500" : "border-transparent hover:border-yellow-500 hover:scale-105"}`}
                 style={{ backgroundColor: color.value }}
               />
             ))}
@@ -93,7 +90,7 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
         <button
           type="submit"
           disabled={!boardName.trim()}
-          className="w-full bg-blue-500 rounded-md py-2 px-4 hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-blue-500 rounded-md py-2 px-4 hover:bg-blue-600 disabled:bg-secondary disabled:cursor-not-allowed transition-colors"
         >
           Create board
         </button>

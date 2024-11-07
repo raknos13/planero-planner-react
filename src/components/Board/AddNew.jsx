@@ -63,7 +63,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     return (
       <button
         onClick={() => setIsAddingNew(true)}
-        className="flex items-center gap-2 p-2 bg-gray-200 rounded-md w-full text-sm hover:bg-gray-400"
+        className="flex items-center gap-2 p-2 bg-primary text-text rounded-md w-full text-sm hover:bg-hover"
       >
         <AiOutlinePlus />
         <span>Add new {type}</span>
@@ -72,39 +72,48 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   }
 
   return (
-    <div className="bg-gray-200 h-min rounded-lg w-full space-y-1">
-      {type === "card" ? (
-        <AutoResizeTextarea
-          placeholder="Enter a title..."
-          value={newTitle}
-          ref={inputRef}
-          onChange={(e) => setNewTitle(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
-          className="mb-1 p-2 px-4 w-full rounded-lg text-sm min-h-[60px] resize-none"
-        />
-      ) : (
-        <input
-          placeholder="Enter a title..."
-          value={newTitle}
-          ref={inputRef}
-          onChange={(e) => setNewTitle(e.target.value)}
-          onKeyDown={handleKeyDown}
-          onBlur={handleBlur}
-          className="mb-1 p-2 px-3 w-full rounded-lg text-sm"
-        />
-      )}
+    <div className="flex flex-col p-1 bg-primary text-text h-min rounded-lg w-full space-y-1">
+      <AutoResizeTextarea
+        placeholder="Enter a title..."
+        value={newTitle}
+        ref={inputRef}
+        onChange={(e) => setNewTitle(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
+        className="mb-1 p-2 rounded-lg text-sm min-h-[60px] resize-none bg-secondary text-text"
+      />
+      {/* {type === "card" ? ( */}
+      {/*   <AutoResizeTextarea */}
+      {/*     placeholder="Enter a title..." */}
+      {/*     value={newTitle} */}
+      {/*     ref={inputRef} */}
+      {/*     onChange={(e) => setNewTitle(e.target.value)} */}
+      {/*     onKeyDown={handleKeyDown} */}
+      {/*     onBlur={handleBlur} */}
+      {/*     className="mb-1 p-2 px-4 rounded-lg text-sm min-h-[60px] resize-none bg-secondary text-text" */}
+      {/*   /> */}
+      {/* ) : ( */}
+      {/*   <input */}
+      {/*     placeholder="Enter a title..." */}
+      {/*     value={newTitle} */}
+      {/*     ref={inputRef} */}
+      {/*     onChange={(e) => setNewTitle(e.target.value)} */}
+      {/*     onKeyDown={handleKeyDown} */}
+      {/*     onBlur={handleBlur} */}
+      {/*     className="mb-1 p-2 px-3 w-full rounded-lg text-sm" */}
+      {/*   /> */}
+      {/* )} */}
 
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
+          className="flex-grow px-3 py-1.5 bg-blue-500 text-text rounded hover:bg-blue-600 text-sm"
         >
           Add {type}
         </button>
         <button
           onClick={handleCancel}
-          className="px-3 py-1.5 bg-gray-300 rounded hover:bg-gray-400 text-sm"
+          className="px-3 py-1.5 bg-secondary rounded hover:bg-red-400 text-sm"
         >
           <AiOutlineClose />
         </button>

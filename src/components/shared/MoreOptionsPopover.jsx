@@ -34,13 +34,13 @@ export const MoreOptionsPopover = ({
   return (
     <div
       ref={popoverRef}
-      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-gray-300 bg-white"
+      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-gray-300 bg-primary"
     >
       <div className="flex justify-between items-center p-3">
-        <h2 className="font-semibold text-gray-700">{heading} options</h2>
+        <h2 className="font-semibold">{heading} options</h2>
         <button
           onClick={onClose}
-          className="rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-200"
+          className="rounded-full p-1 text-gray-400 hover:text-text hover:bg-hover"
         >
           <FiX />
         </button>
@@ -51,7 +51,7 @@ export const MoreOptionsPopover = ({
             onEdit();
             onClose();
           }}
-          className="flex justify-start items-center gap-1 w-full h-8 hover:bg-gray-100 px-4 text-left"
+          className="flex justify-start items-center gap-1 w-full h-8 hover:bg-hover px-4 text-left"
         >
           <FiEdit3 />
           Edit
@@ -63,7 +63,7 @@ export const MoreOptionsPopover = ({
             ) && onDelete(e);
             onClose();
           }}
-          className="flex justify-start items-center gap-1 w-full h-8 hover:text-red-400 hover:bg-gray-100 px-4 text-left"
+          className="flex justify-start items-center gap-1 w-full h-8 hover:bg-red-400 px-4 text-left"
         >
           <FiTrash2 />
           Delete

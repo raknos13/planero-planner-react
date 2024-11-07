@@ -46,7 +46,7 @@ const BoardListItem = ({
     <li
       key={board.id}
       className={`relative flex items-center w-full gap-2 py-2 px-3 text-sm cursor-pointer 
-                  ${board.id === activeBoardId && "bg-gray-300"}`}
+                  ${board.id === activeBoardId && "bg-secondary"}`}
       onClick={() => {
         switchBoard(board.id);
       }}
@@ -102,7 +102,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
           switchBoard(board.id);
           setActivePopoverBoard(board.id);
         }}
-        className="hover:bg-gray-400 p-1 rounded-md transition-colors"
+        className="hover:bg-hover p-1 rounded-md transition-colors"
       >
         <FiMoreHorizontal />
       </button>

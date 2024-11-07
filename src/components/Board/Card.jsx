@@ -39,9 +39,9 @@ export const Card = forwardRef(function Card(
     }
   }
 
-  function handleCheckboxChange() {
-    editCard(card.id, { ...card, completed: !card.completed });
-  }
+  // function handleCheckboxChange() {
+  //   editCard(card.id, { ...card, completed: !card.completed });
+  // }
 
   function handleKeyDown(e) {
     // Submit the edit, when enter is pressed.
@@ -61,7 +61,7 @@ export const Card = forwardRef(function Card(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-white border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm bg-secondary border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
       >
         {/* <input */}
         {/*   type="checkbox" */}
@@ -113,7 +113,7 @@ export const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 bg-white">
+            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 bg-secondary">
               <button
                 onClick={() => setIsEditing(true)}
                 className="text-gray-400 hover:bg-gray-100 hover:text-gray-700 rounded-md p-1 transition-colors duration-200"
