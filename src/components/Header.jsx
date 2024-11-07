@@ -4,7 +4,7 @@ import { DarkModeToggle } from "./shared/DarkModeToggle";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center px-3 py-0.5 bg-background text-text border-b border-border z-30">
+    <div className="flex justify-between items-center px-3 py-0.5 bg-bg-secondary text-text-primary border-b border-border z-30">
       <div className="flex items-center gap-2">
         <FaTrello size={20} />
         <h1 className="text-md font-bold text-center">

@@ -63,7 +63,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     return (
       <button
         onClick={() => setIsAddingNew(true)}
-        className="flex items-center gap-2 p-2 bg-primary text-text rounded-md w-full text-sm hover:bg-hover"
+        className="flex items-center gap-2 p-2 bg-bg-secondary text-text-primary rounded-md w-full text-sm hover:bg-bg-primary"
       >
         <AiOutlinePlus />
         <span>Add new {type}</span>
@@ -72,7 +72,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   }
 
   return (
-    <div className="flex flex-col p-1 bg-primary text-text h-min rounded-lg w-full space-y-1">
+    <div className="flex flex-col p-1 text-text-primary h-min rounded-lg w-full space-y-1">
       <AutoResizeTextarea
         placeholder="Enter a title..."
         value={newTitle}
@@ -80,7 +80,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
         onChange={(e) => setNewTitle(e.target.value)}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className="mb-1 p-2 rounded-md text-sm resize-none bg-secondary text-text focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="mb-1 p-2 rounded-md text-sm resize-none border-border bg-bg-card focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       {/* {type === "card" ? ( */}
       {/*   <AutoResizeTextarea */}
@@ -107,13 +107,13 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-blue-500 text-text rounded-md hover:bg-blue-600 text-sm"
+          className="flex-grow px-3 py-1.5 bg-accent text-bg-primary rounded-md hover:bg-blue-600 text-sm"
         >
           Add {type}
         </button>
         <button
           onClick={handleCancel}
-          className="px-3 py-1.5 bg-secondary rounded hover:bg-red-400 text-sm"
+          className="px-3 py-1.5 bg-secondary rounded-md hover:bg-red-400 text-sm"
         >
           <AiOutlineClose />
         </button>

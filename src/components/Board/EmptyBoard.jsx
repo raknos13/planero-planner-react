@@ -14,7 +14,7 @@ export const EmptyBoard = () => {
   }
 
   return (
-    <div className="relative flex flex-col justify-start items-center w-svw space-y-4 px-4 overflow-x-auto bg-primary">
+    <div className="relative flex flex-col justify-start items-center w-svw space-y-4 px-4 overflow-x-auto bg-bg-primary text-text-primary">
       <figure>
         <img src={notFound} alt="Not found svg" className="h-64 mt-10" />
       </figure>
@@ -27,7 +27,7 @@ export const EmptyBoard = () => {
           />
         )}
       </div>
-      <div className="flex flex-col items-center text-text text-lg">
+      <div className="flex flex-col items-center text-lg">
         <p>Uh-uh! No boards present</p>
         <p> Click to add a new board</p>
       </div>

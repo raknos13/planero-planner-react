@@ -83,7 +83,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className="h-full flex-shrink-0 w-52 bg-background text-textdim border-r border-border shadow-md">
+    <div className="h-full flex-shrink-0 w-52 bg-bg-primary text-text-primary border-r border-border shadow-md">
       <div className="flex flex-col justify-between h-full">
         <SidebarHeader
           isCollapsed={isCollapsed}
@@ -121,7 +121,7 @@ export const Sidebar = () => {
 
 const EmptyBoardMessage = () => {
   return (
-    <span className="p-3 text-xs text-gray-600">
+    <span className="p-3 text-xs text-text-secondary ml-5">
       {/* If no boards exist show this message */}
       Click{" "}
       <span className="inline-block">
