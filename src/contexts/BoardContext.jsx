@@ -1,4 +1,4 @@
-import { initialData } from "../../../initialData";
+import { initialData } from "../initialData";
 import { useState, createContext, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 

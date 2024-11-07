@@ -1,13 +1,12 @@
 import { FiPlus } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
-import { useBoardContext } from "../Board";
+import { useBoardContext, useSidebar } from "../../contexts/";
 import { GithubButton } from "../shared";
 import {
   SidebarCollapsed,
   SidebarHeader,
   BoardList,
   BoardListHeader,
-  useSidebar,
 } from "./";
 
 export const Sidebar = () => {

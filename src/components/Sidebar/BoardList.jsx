@@ -3,8 +3,7 @@ import {
   MoreOptionsPopover,
   BoardCreatorPopover,
 } from "../shared";
-import { useBoardContext } from "../Board";
-import { useSidebar } from "./context/SidebarContext";
+import { useSidebar, useBoardContext } from "../../contexts";
 import { useRef } from "react";
 import { FiTrello, FiPlus, FiMoreHorizontal } from "react-icons/fi";
 
@@ -121,7 +120,7 @@ const BoardListItem = ({
 };
 
 const BoardListItemActions = ({ board, handleEdit }) => {
-  const { switchBoard, deleteBoard, activeBoardId } = useBoardContext();
+  const { switchBoard, deleteBoard } = useBoardContext();
   const { activePopoverBoard, setActivePopoverBoard } = useSidebar();
   const buttonRef = useRef(null);
 
