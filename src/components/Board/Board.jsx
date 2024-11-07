@@ -17,24 +17,22 @@ export function Board() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="board" type="list" direction="horizontal">
-        {(provided) => (
+        {(provided, snapshot) => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            className="w-full h-svh"
+            className={`w-full h-svh`}
             style={{
               // background: `linear-gradient(135deg, ${activeBoard.color} , rgba(255, 255, 39, 0.5)`,
               background: activeBoard.color,
-              // backdropFilter: "blur(12px)",
             }}
           >
             <div
               className={`boardContainer flex w-full h-full p-4 overflow-x-scroll bg-bg-primary text-text-primary`}
-              style={
-                theme === "dark"
-                  ? { background: "rgba(0,0,0, 0.4)" }
-                  : { background: "rgba(0, 0, 0, 0.2)" }
-              }
+              style={{
+                background:
+                  theme === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0, 0, 0, 0.2)",
+              }}
             >
               <div className="listContainer flex">
                 {activeBoard.listIds.map((listId, index) => {
@@ -64,7 +62,7 @@ export function Board() {
                   );
                 })}
                 {provided.placeholder}
-                <div className="min-w-64 bg-bg-secondary h-min rounded-lg p-2">
+                <div className="min-w-64 bg-bg-primary h-min rounded-lg p-2">
                   <AddNew
                     type="list"
                     multiAddMode={false}
