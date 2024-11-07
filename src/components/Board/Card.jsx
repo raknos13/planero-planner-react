@@ -1,6 +1,7 @@
 import { useState, forwardRef, useRef, useEffect } from "react";
 import { FiX, FiCheck, FiEdit, FiTrash } from "react-icons/fi";
 import { useBoardContext } from "./";
+import { AutoResizeTextarea } from "../shared";
 
 export const Card = forwardRef(function Card(
   { listId, card, draggableProps, dragHandleProps },
@@ -17,19 +18,8 @@ export const Card = forwardRef(function Card(
     if (isEditing && textareaRef.current) {
       textareaRef.current.focus();
       textareaRef.current.select();
-      autoResizeTextArea();
     }
   }, [isEditing]);
-
-  // automatically resize textarea
-  // based on the lines of text
-  function autoResizeTextArea() {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight + 1}px`;
-    }
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -61,7 +51,8 @@ export const Card = forwardRef(function Card(
         ref={ref}
         {...draggableProps}
         {...dragHandleProps}
-        className="text-sm bg-secondary border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between border-2 border-transparent hover:border-2 hover:border-blue-500"
+        className="text-sm border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between 
+                  bg-bg-card border-1 border-border text-text-primary hover:border-blue-500"
       >
         {/* <input */}
         {/*   type="checkbox" */}
@@ -74,18 +65,27 @@ export const Card = forwardRef(function Card(
             onSubmit={handleSubmit}
             className="flex gap-2 items-center w-full"
           >
-            <textarea
+            <AutoResizeTextarea
               value={editedTitle}
               ref={textareaRef}
-              // wrap="soft"
-              rows={1}
               onChange={(e) => {
                 setEditedTitle(e.target.value);
-                autoResizeTextArea();
               }}
               onKeyDown={handleKeyDown}
-              className="resize-none w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+              className="resize-none w-full p-2 border-border rounded-md bg-bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+            {/* <textarea */}
+            {/*   value={editedTitle} */}
+            {/*   ref={textareaRef} */}
+            {/*   // wrap="soft" */}
+            {/*   rows={1} */}
+            {/*   onChange={(e) => { */}
+            {/*     setEditedTitle(e.target.value); */}
+            {/*     autoResizeTextArea(); */}
+            {/*   }} */}
+            {/*   onKeyDown={handleKeyDown} */}
+            {/*   className="resize-none w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500" */}
+            {/* /> */}
             <button
               type="submit"
               className="text-green-600 p-1 rounded-md hover:bg-green-400 hover:text-white"
