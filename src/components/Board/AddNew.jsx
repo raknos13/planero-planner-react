@@ -107,13 +107,13 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-accent text-bg-primary rounded-md hover:bg-blue-600 text-sm"
+          className="flex-grow px-3 py-1.5 bg-accent hover:bg-accent-hover text-bg-primary rounded-md text-sm"
         >
           Add {type}
         </button>
         <button
           onClick={handleCancel}
-          className="px-3 py-1.5 bg-secondary rounded-md hover:bg-red-400 text-sm"
+          className="px-3 py-1.5 bg-bg-secondary rounded-md hover:bg-bg-primary text-sm"
         >
           <AiOutlineClose />
         </button>

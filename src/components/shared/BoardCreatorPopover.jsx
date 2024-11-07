@@ -43,13 +43,13 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
   return (
     <div
       ref={popoverRef}
-      className="absolute top-0 left-0 mt-0 py-3 px-3 z-50 w-64 bg-primary text-text rounded-lg shadow-lg border border-text"
+      className="absolute top-0 left-0 mt-0 py-3 px-3 z-50 w-64 bg-bg-primary text-text-primary rounded-lg shadow-lg border border-border"
     >
       <div className="flex justify-between items-center mb-2">
         <h3 className="font-semibold">Create board</h3>
         <button
           onClick={onClose}
-          className="text-gray-400 hover:text-gray-600 p-2 rounded-full hover:bg-secondary hover:text-text"
+          className="text-text-secondary hover:text-text-primary p-2 rounded-full hover:bg-bg-secondary"
         >
           <FiX size={16} />
         </button>
@@ -68,7 +68,7 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
               }
             }}
             placeholder="Enter board name"
-            className="w-full px-3 py-2 bg-secondary border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="w-full px-3 py-2 bg-bg-secondary border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
         <div>
@@ -81,7 +81,7 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
                 onClick={() => setSelectedColor(color.value)}
                 title={color.name}
                 className={`w-8 h-8 rounded-full border-2 
-                    ${selectedColor === color.value ? "border-yellow-500" : "border-transparent hover:border-yellow-500 hover:scale-105"}`}
+                    ${selectedColor === color.value ? "border-accent" : "border-transparent hover:border-accent-hover hover:scale-105"}`}
                 style={{ backgroundColor: color.value }}
               />
             ))}
@@ -90,7 +90,7 @@ export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
         <button
           type="submit"
           disabled={!boardName.trim()}
-          className="w-full bg-blue-500 rounded-md py-2 px-4 hover:bg-blue-600 disabled:bg-secondary disabled:cursor-not-allowed transition-colors"
+          className="w-full rounded-md py-2 px-4 text-bg-primary bg-accent hover:bg-accent-hover disabled:bg-secondary disabled:cursor-not-allowed transition-colors"
         >
           Create board
         </button>

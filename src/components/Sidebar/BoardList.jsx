@@ -1,8 +1,40 @@
-import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
+import {
+  AutoResizeTextarea,
+  MoreOptionsPopover,
+  BoardCreatorPopover,
+} from "../shared";
 import { useBoardContext } from "../Board";
 import { useSidebar } from "./context/SidebarContext";
 import { useRef } from "react";
-import { FiMoreHorizontal } from "react-icons/fi";
+import { FiTrello, FiPlus, FiMoreHorizontal } from "react-icons/fi";
+
+export const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
+  const { showBoardCreator, setShowBoardCreator } = useSidebar();
+  return (
+    <div className="relative flex justify-between items-center px-3 py-2">
+      <div className="flex items-center gap-2">
+        <FiTrello size={15} />
+        <h6 className="text-sm font-bold">Your boards</h6>
+      </div>
+      <button
+        ref={addButtonRef}
+        className="hover:bg-bg-secondary p-1 rounded-md"
+        onClick={() => setShowBoardCreator(true)}
+      >
+        <FiPlus size={18} />
+      </button>
+      <div className="absolute top-8 left-12 right-0">
+        {showBoardCreator && (
+          <BoardCreatorPopover
+            onClose={() => setShowBoardCreator(false)}
+            onCreateBoard={handleCreateBoard}
+            buttonRef={addButtonRef}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 
 export const BoardList = ({
   boards,
@@ -45,8 +77,8 @@ const BoardListItem = ({
   return (
     <li
       key={board.id}
-      className={`relative flex items-center w-full gap-2 py-2 px-3 text-sm cursor-pointer 
-                  ${board.id === activeBoardId && "bg-primary text-text"}`}
+      className={`relative flex items-center w-full gap-2 py-2 px-3 text-sm cursor-pointer hover:bg-bg-secondary
+                  ${board.id === activeBoardId && "bg-bg-secondary text-text-primary"}`}
       onClick={() => {
         switchBoard(board.id);
       }}
@@ -89,7 +121,7 @@ const BoardListItem = ({
 };
 
 const BoardListItemActions = ({ board, handleEdit }) => {
-  const { switchBoard, deleteBoard } = useBoardContext();
+  const { switchBoard, deleteBoard, activeBoardId } = useBoardContext();
   const { activePopoverBoard, setActivePopoverBoard } = useSidebar();
   const buttonRef = useRef(null);
 
@@ -102,7 +134,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
           switchBoard(board.id);
           setActivePopoverBoard(board.id);
         }}
-        className="hover:bg-hover p-1 rounded-md transition-colors"
+        className={`hover:bg-bg-primary p-1 rounded-md transition-colors`}
       >
         <FiMoreHorizontal />
       </button>

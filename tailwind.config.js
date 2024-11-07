@@ -11,6 +11,7 @@ export default {
         "bg-card-hover": "rgba(var(--color-bg-card-hover))",
         "text-primary": "rgba(var(--color-text-primary))",
         "text-secondary": "rgba(var(--color-text-secondary))",
+        "bg-hover": "rgba(var(--color-hover))",
         border: "rgba(var(--color-border))",
         "border-hover": "rgba(var(--color-border-hover))",
         accent: "rgba(var(--color-accent))",

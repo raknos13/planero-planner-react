@@ -44,7 +44,10 @@ export function List({ list, listCards, dragHandleProps }) {
   }
 
   return (
-    <div className="listContainer relative p-2 w-64 rounded-lg flex flex-col h-min border-1 border-border text-text-primary bg-bg-secondary">
+    <div
+      className="listContainer relative p-2 w-64 rounded-lg flex flex-col h-min 
+      border-1 border-border hover:border-border-hover text-text-primary bg-bg-secondary"
+    >
       <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
         {isEditing ? (
           <AutoResizeTextarea
@@ -62,7 +65,7 @@ export function List({ list, listCards, dragHandleProps }) {
               {list.title}
             </span>
             <button
-              className="absolute top-0 right-0 p-1 rounded-md hover:bg-gray-400 transition-colors"
+              className="absolute top-0 right-0 p-1 rounded-md hover:bg-bg-card-hover transition-colors"
               onClick={() => setShowPopover(true)}
               ref={showPopoverRef}
             >

@@ -1,36 +1,14 @@
-import { FiPlus, FiTrello } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
 import { useBoardContext } from "../Board";
-import { BoardCreatorPopover, GithubButton } from "../shared";
-import { SidebarCollapsed, SidebarHeader, BoardList, useSidebar } from "./";
-
-const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
-  const { showBoardCreator, setShowBoardCreator } = useSidebar();
-  return (
-    <div className="relative flex justify-between items-center px-3 py-2">
-      <div className="flex items-center gap-2">
-        <FiTrello size={15} />
-        <h6 className="text-sm font-bold">Your boards</h6>
-      </div>
-      <button
-        ref={addButtonRef}
-        className="hover:bg-secondary p-1 rounded-md"
-        onClick={() => setShowBoardCreator(true)}
-      >
-        <FiPlus size={18} />
-      </button>
-      <div className="absolute top-8 left-12 right-0">
-        {showBoardCreator && (
-          <BoardCreatorPopover
-            onClose={() => setShowBoardCreator(false)}
-            onCreateBoard={handleCreateBoard}
-            buttonRef={addButtonRef}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
+import { GithubButton } from "../shared";
+import {
+  SidebarCollapsed,
+  SidebarHeader,
+  BoardList,
+  BoardListHeader,
+  useSidebar,
+} from "./";
 
 export const Sidebar = () => {
   const { boards, activeBoardId, addNewBoard, editBoard } = useBoardContext();
@@ -83,7 +61,7 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className="h-full flex-shrink-0 w-52 bg-bg-primary text-text-primary border-r border-border shadow-md">
+    <div className="h-full flex-shrink-0 w-52 bg-bg-primary text-text-secondary border-r border-border shadow-md">
       <div className="flex flex-col justify-between h-full">
         <SidebarHeader
           isCollapsed={isCollapsed}

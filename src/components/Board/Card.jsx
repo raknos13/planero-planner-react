@@ -52,7 +52,7 @@ export const Card = forwardRef(function Card(
         {...draggableProps}
         {...dragHandleProps}
         className="text-sm border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between 
-                  bg-bg-card border-1 border-border text-text-primary hover:border-blue-500"
+                  bg-bg-card border-1 border-border hover:border-border-hover text-text-primary hover:bg-bg-card-hover hover:border-blue-500"
       >
         {/* <input */}
         {/*   type="checkbox" */}
@@ -113,18 +113,21 @@ export const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 text-text-secondary bg-bg-card">
+            <div
+              className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 
+                  text-text-secondary bg-bg-card-hover rounded-md"
+            >
               <button
                 onClick={() => setIsEditing(true)}
-                className="hover:bg-bg-primary rounded-md p-1 transition-colors duration-200"
+                className="hover:bg-bg-card rounded-md p-1 transition-colors duration-200"
               >
-                <FiEdit size={16} />
+                <FiEdit size={15} />
               </button>{" "}
               <button
                 onClick={() => deleteCard(listId, card.id)}
-                className="hover:bg-bg-primary hover:text-red-500 rounded-md p-1 transition-colors duration-200"
+                className="hover:bg-bg-card hover:text-red-500 rounded-md p-1 transition-colors duration-200"
               >
-                <FiTrash size={16} />
+                <FiTrash size={15} />
               </button>
             </div>
           </div>

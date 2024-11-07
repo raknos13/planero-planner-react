@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { FiSun, FiMoon } from "react-icons/fi";
+// import { FiSun, FiMoon } from "react-icons/fi";
+import { LuMoonStar, LuSun } from "react-icons/lu";
 
 export const DarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -20,10 +21,10 @@ export const DarkModeToggle = () => {
 
   return (
     <button
-      className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+      className="rounded-full p-1 hover:bg-bg-hover transition-colors"
       onClick={toggleDarkMode}
     >
-      {isDarkMode ? <FiMoon size={26} /> : <FiSun size={26} />}
+      {isDarkMode ? <LuMoonStar size={26} /> : <LuSun size={26} />}
     </button>
   );
 };

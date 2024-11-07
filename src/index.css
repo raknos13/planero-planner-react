@@ -7,6 +7,9 @@
 
 * {
   font-family: "Roboto", serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* .light { */
@@ -28,6 +31,7 @@
 .light {
   --color-bg-primary: 248 249 250;
   --color-bg-secondary: 233 236 239;
+  --color-hover: 206 212 218;
   --color-bg-card: 255 255 255;
   --color-bg-card-hover: 245 245 245;
   --color-text-primary: 73 80 87;
@@ -35,11 +39,14 @@
   --color-border: 222 226 230;
   --color-border-hover: 210 215 220;
   --color-accent: 0 123 255;
-  --color-accent-hover: 5 107 235;
+  --color-accent-hover: 0 100 255;
 }
 .dark {
+  /* --color-bg-primary: 31 31 31; */
   --color-bg-primary: 31 31 31;
+  /* --color-bg-secondary: 40 40 40; */
   --color-bg-secondary: 40 40 40;
+  --color-hover: 70 80 87;
   --color-bg-card: 51 51 51;
   --color-bg-card-hover: 61 61 61;
   --color-text-primary: 240 240 240;
@@ -47,7 +54,7 @@
   --color-border: 68 68 68;
   --color-border-hover: 88 88 88;
   --color-accent: 77 166 255;
-  --color-accent-hover: 87 176 265;
+  --color-accent-hover: 67 156 245;
 }
 
 .light2 {
