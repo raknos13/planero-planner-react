@@ -1,22 +1,23 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 // import { FiSun, FiMoon } from "react-icons/fi";
 import { LuMoonStar, LuSun } from "react-icons/lu";
+import { useTheme } from "../../contexts";
 
 export const DarkModeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
-    if (isDarkMode) {
+    if (theme === "dark") {
       document.documentElement.classList.remove("light");
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
       document.documentElement.classList.add("light");
     }
-  }, [isDarkMode]);
+  }, [theme]);
 
   const toggleDarkMode = () => {
-    setIsDarkMode((prevState) => !prevState);
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
@@ -24,7 +25,7 @@ export const DarkModeToggle = () => {
       className="rounded-full p-1 hover:bg-bg-hover transition-colors"
       onClick={toggleDarkMode}
     >
-      {isDarkMode ? <LuMoonStar size={26} /> : <LuSun size={26} />}
+      {theme === "dark" ? <LuMoonStar size={26} /> : <LuSun size={26} />}
     </button>
   );
 };
