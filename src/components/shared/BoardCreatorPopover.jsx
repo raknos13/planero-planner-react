@@ -5,7 +5,7 @@ const BOARD_COLORS = [
   { name: "Sky", value: "rgb(14, 165, 233)" },
   { name: "Purple", value: "rgb(168, 85, 247)" },
   { name: "Pink", value: "rgb(236, 72, 153)" },
-  { name: "Green", value: "rgb(34, 197, 94)" },
+  { name: "Green", value: "rgb(24, 218, 126)" },
   { name: "Yellow", value: "rgb(234, 179, 8)" },
   { name: "Red", value: "rgb(239, 68, 68)" },
 ];
