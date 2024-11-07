@@ -6,7 +6,7 @@ export const SidebarCollapsed = ({ isCollapsed, setIsCollapsed }) => {
       className="h-full flex-shrink-0 w-6 cursor-pointer hover:bg-bg-primary bg-bg-secondary border-r border-border"
       onClick={() => setIsCollapsed(false)}
     >
-      <div className="m-0.5 mt-1">
+      <div className="ml-0.5 mt-2">
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="absolute bg-bg-secondary hover:bg-bg-secondary text-text-primary border-2
