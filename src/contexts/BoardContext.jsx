@@ -1,11 +1,12 @@
 import { initialData } from "../initialData";
-import { useState, createContext, useContext } from "react";
+import { createContext, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const BoardContext = createContext();
 
 export function BoardProvider({ children }) {
-  const [boardsData, setBoardsData] = useState({
+  const [boardsData, setBoardsData] = useLocalStorage("boardsData", {
     boards: initialData.boards,
     lists: initialData.lists,
     cards: initialData.cards,
