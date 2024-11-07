@@ -12,7 +12,7 @@ export const Header = () => {
           Planero project manager
         </h1>
       </div>
-      <section className="flex justify-evenly items-center gap-4">
+      <section className="flex justify-evenly items-center gap-3">
         <DarkModeToggle />
         <button
           className="rounded-full trasnsition-colors duration-200 p-1
