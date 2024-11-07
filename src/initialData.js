@@ -12,12 +12,12 @@ export const initialData = {
     "list-1": {
       id: "list-1",
       title: "To Do",
-      cardIds: ["card-3", "card-1", "card-2", "card-4"],
+      cardIds: ["card-1", "card-5", "card-2", "card-6"],
     },
     "list-2": {
       id: "list-2",
       title: "In Progress",
-      cardIds: ["card-5", "card-6"],
+      cardIds: ["card-3", "card-4"],
     },
     "list-3": {
       id: "list-3",
@@ -28,15 +28,16 @@ export const initialData = {
   cards: {
     "card-1": {
       id: "card-1",
-      title: "Implement list drag and drop",
-      description: "Start from a todo list and build up",
+      title: "Implement drag and drop for list and cards",
+      description: "",
       labels: ["project"],
       completed: true,
     },
     "card-2": {
       id: "card-2",
-      title: "Learn State management in React",
-      description: "Learn state management",
+      title:
+        "Implement context API for centralized state management and to avoid prop drilling",
+      description: "",
       labels: ["learning"],
       completed: true,
     },
@@ -56,14 +57,14 @@ export const initialData = {
     },
     "card-5": {
       id: "card-5",
-      title: "Normalize the data structure",
+      title: "Normalize the data structure to improve performance",
       description: "Normalize to improve performance",
       labels: ["todo"],
       completed: true,
     },
     "card-6": {
       id: "card-6",
-      title: "Implement AddNewList component",
+      title: "Implement Local Storage for app data",
       description: "",
       labels: ["todo"],
       completed: false,
