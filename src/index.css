@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Roboto font */
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  font-family: "Roboto", serif;
+}
+
 /* .light { */
 /*   --color-bg-primary: rgba(248, 248, 248, 1); */
 /*   --color-bg-secondary: rgba(255, 255, 255, 1); */
@@ -22,19 +29,25 @@
   --color-bg-primary: 248 249 250;
   --color-bg-secondary: 233 236 239;
   --color-bg-card: 255 255 255;
+  --color-bg-card-hover: 245 245 245;
   --color-text-primary: 73 80 87;
   --color-text-secondary: 108 117 125;
   --color-border: 222 226 230;
+  --color-border-hover: 210 215 220;
   --color-accent: 0 123 255;
+  --color-accent-hover: 5 107 235;
 }
 .dark {
   --color-bg-primary: 31 31 31;
   --color-bg-secondary: 40 40 40;
   --color-bg-card: 51 51 51;
+  --color-bg-card-hover: 61 61 61;
   --color-text-primary: 240 240 240;
   --color-text-secondary: 179 179 179;
   --color-border: 68 68 68;
+  --color-border-hover: 88 88 88;
   --color-accent: 77 166 255;
+  --color-accent-hover: 87 176 265;
 }
 
 .light2 {

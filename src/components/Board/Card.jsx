@@ -113,16 +113,16 @@ export const Card = forwardRef(function Card(
               </span>
             </div>
             {/* Hide buttons by default, show on hover */}
-            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 bg-secondary">
+            <div className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 text-text-secondary bg-bg-card">
               <button
                 onClick={() => setIsEditing(true)}
-                className="text-gray-400 hover:bg-gray-100 hover:text-gray-700 rounded-md p-1 transition-colors duration-200"
+                className="hover:bg-bg-primary rounded-md p-1 transition-colors duration-200"
               >
                 <FiEdit size={16} />
               </button>{" "}
               <button
                 onClick={() => deleteCard(listId, card.id)}
-                className="text-red-400 hover:bg-gray-100 hover:text-red-600 rounded-md p-1 transition-colors duration-200"
+                className="hover:bg-bg-primary hover:text-red-500 rounded-md p-1 transition-colors duration-200"
               >
                 <FiTrash size={16} />
               </button>
