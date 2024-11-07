@@ -46,7 +46,7 @@ export function List({ list, listCards, dragHandleProps }) {
   return (
     <div
       className="listContainer relative p-2 w-64 rounded-lg flex flex-col h-min 
-      border-1 border-border hover:border-border-hover text-text-primary bg-bg-secondary"
+      border-1 border-border hover:border-border-hover text-text-primary bg-bg-primary"
     >
       <div {...dragHandleProps} className="listHeader  w-full gap-1 mb-2 p-1">
         {isEditing ? (

@@ -29,7 +29,7 @@
 /*   --color-accent-dark: rgba(77, 166, 255, 1); */
 /* } */
 .light {
-  --color-bg-primary: 248 249 250;
+  --color-bg-primary: 220 220 220;
   --color-bg-secondary: 233 236 239;
   --color-hover: 206 212 218;
   --color-bg-card: 255 255 255;
