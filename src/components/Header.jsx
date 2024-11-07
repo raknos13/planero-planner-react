@@ -3,7 +3,7 @@ import { FaTrello } from "react-icons/fa";
 import { LuGithub, LuUser } from "react-icons/lu";
 import { DarkModeToggle } from "./shared/DarkModeToggle";
 
-const Header = () => {
+export const Header = () => {
   return (
     <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30">
       <div className="flex items-center gap-2">
@@ -35,5 +35,3 @@ const Header = () => {
     </div>
   );
 };
-
-export default Header;

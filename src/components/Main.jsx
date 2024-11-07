@@ -1,7 +1,5 @@
 import { BoardProvider, SidebarProvider } from "../contexts";
-import { Sidebar } from "../components/Sidebar";
-import { Board } from "../components/Board";
-import Header from "./Header";
+import { Header, Board, Sidebar } from "./";
 
 export default function Main() {
   return (
