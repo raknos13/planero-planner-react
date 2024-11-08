@@ -1,20 +1,27 @@
-import { BoardProvider, SidebarProvider, ThemeProvider } from "../contexts";
+import {
+  AuthProvider,
+  BoardProvider,
+  SidebarProvider,
+  ThemeProvider,
+} from "../contexts";
 import { Navbar, Board, Sidebar } from "./";
 
 export default function Main() {
   return (
-    <BoardProvider>
-      <ThemeProvider>
-        <div className="h-screen w-screen overflow-hidden flex flex-col">
-          <Navbar />
-          <div className="flex flex-grow">
-            <SidebarProvider>
-              <Sidebar />
-            </SidebarProvider>
-            <Board />
+    <AuthProvider>
+      <BoardProvider>
+        <ThemeProvider>
+          <div className="h-screen w-screen overflow-hidden flex flex-col">
+            <Navbar />
+            <div className="flex flex-grow">
+              <SidebarProvider>
+                <Sidebar />
+              </SidebarProvider>
+              <Board />
+            </div>
           </div>
-        </div>
-      </ThemeProvider>
-    </BoardProvider>
+        </ThemeProvider>
+      </BoardProvider>
+    </AuthProvider>
   );
 }
