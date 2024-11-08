@@ -62,7 +62,8 @@ export const Sidebar = () => {
 
   return (
     <div
-      className="h-full flex-shrink-0 w-52 backdrop-blur-md text-text-secondary border-r border-border shadow-md"
+      className="z-10 h-full flex-shrink-0 w-52 backdrop-blur-md text-text-secondary border-r border-border shadow-md"
+      // Glassy look for sidebar, gradient with board color
       style={{
         backgroundColor: `var(--bg-sidebar-overlay)`,
         backgroundImage: boards[activeBoardId]?.color
