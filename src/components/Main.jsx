@@ -1,12 +1,12 @@
 import { BoardProvider, SidebarProvider, ThemeProvider } from "../contexts";
-import { Header, Board, Sidebar } from "./";
+import { Navbar, Board, Sidebar } from "./";
 
 export default function Main() {
   return (
     <BoardProvider>
       <ThemeProvider>
         <div className="h-screen w-screen overflow-hidden flex flex-col">
-          <Header />
+          <Navbar />
           <div className="flex flex-grow">
             <SidebarProvider>
               <Sidebar />
