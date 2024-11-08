@@ -2,7 +2,7 @@ import notFound from "../../assets/not-found.svg";
 import { FiPlus } from "react-icons/fi";
 import { BoardCreatorPopover } from "../shared";
 import { useState, useRef } from "react";
-import { useBoardContext } from "./";
+import { useBoardContext } from "../../contexts";
 
 export const EmptyBoard = () => {
   const { addNewBoard } = useBoardContext();

@@ -1,8 +1,9 @@
 import { Draggable, Droppable } from "@hello-pangea/dnd";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
-import { Card, AddNew, useBoardContext } from "./";
+import { Card, AddNew } from "./";
 import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
+import { useBoardContext } from "../../contexts";
 
 export function List({ list, listCards, dragHandleProps }) {
   const { deleteList, editList, addNewCard } = useBoardContext();
