@@ -1,6 +1,6 @@
 import { FiPlus } from "react-icons/fi";
 import { useState, useRef, useEffect } from "react";
-import { useBoardContext, useSidebar } from "../../contexts/";
+import { useBoardContext, useSidebar, useTheme } from "../../contexts/";
 import { GithubButton } from "../shared";
 import {
   SidebarCollapsed,
@@ -11,6 +11,7 @@ import {
 
 export const Sidebar = () => {
   const { boards, activeBoardId, addNewBoard, editBoard } = useBoardContext();
+  const { theme } = useTheme();
 
   const {
     isCollapsed,
@@ -60,7 +61,15 @@ export const Sidebar = () => {
   }
 
   return (
-    <div className="h-full flex-shrink-0 w-52 bg-bg-primary text-text-secondary border-r border-border shadow-md">
+    <div
+      className="h-full flex-shrink-0 w-52 backdrop-blur-md text-text-secondary border-r border-border shadow-md"
+      style={{
+        backgroundColor: `var(--bg-sidebar-overlay)`,
+        backgroundImage: boards[activeBoardId]?.color
+          ? `linear-gradient(90deg, ${boards[activeBoardId].color.replace(", 1)", ", 0.2)")} 100%, var(--bg-sidebar-overlay) 0%, rgba(0, 0, 0, 0))`
+          : undefined,
+      }}
+    >
       <div className="flex flex-col justify-between h-full">
         <SidebarHeader
           isCollapsed={isCollapsed}
