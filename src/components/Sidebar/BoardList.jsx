@@ -76,7 +76,7 @@ const BoardListItem = ({
   return (
     <li
       key={board.id}
-      className={`relative flex items-center w-full gap-2 py-2 px-3 text-xs cursor-pointer hover:bg-bg-secondary
+      className={`relative flex items-center w-full gap-2 py-2 px-3 cursor-pointer hover:bg-bg-secondary
                   ${board.id === activeBoardId && "bg-bg-secondary font-medium text-text-primary"}`}
       onClick={() => {
         switchBoard(board.id);
@@ -102,7 +102,7 @@ const BoardListItem = ({
           }}
           onBlur={() => handleTitleSubmit(board.id)}
           onClick={(e) => e.stopPropagation()}
-          className="w-full rounded-md p-1"
+          className="w-full rounded-md p-1 font-normal text-sm"
         />
       ) : (
         <div className="flex w-full min-w-0">
