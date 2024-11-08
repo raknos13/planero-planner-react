@@ -6,12 +6,16 @@ import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
 import { useBoardContext } from "../../contexts";
 
 export function List({ list, listCards, dragHandleProps }) {
-  const { deleteList, editList, addNewCard } = useBoardContext();
+  const { deleteList, editList, addNewCard, boards, activeBoardId } =
+    useBoardContext();
   const [showPopover, setShowPopover] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(list.title);
   const inputRef = useRef(null);
   const showPopoverRef = useRef(null);
+
+  const activeBoard = boards[activeBoardId];
+  const boardColor = activeBoard.color;
 
   useEffect(() => {
     if (isEditing) {
@@ -92,10 +96,12 @@ export function List({ list, listCards, dragHandleProps }) {
                 {...provided.droppableProps}
                 // bind ref to DOM element
                 ref={provided.innerRef}
-                className={`min-h-1 ${snapshot.isDraggingOver ? "bg-bg-primary rounded-lg" : ""}`}
-                // style={{
-                //   backgroundColor: snapshot.isDraggingOver ? "darkgray" : "",
-                // }}
+                className={`min-h-1 rounded-lg`}
+                style={{
+                  backgroundColor: snapshot.isDraggingOver
+                    ? boardColor.replace("1)", "0.1)")
+                    : "",
+                }}
               >
                 {listCards.map((card, index) => (
                   <Draggable key={card.id} draggableId={card.id} index={index}>
