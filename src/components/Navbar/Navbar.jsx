@@ -1,9 +1,8 @@
 import { FaTrello } from "react-icons/fa";
-// import { FiUser, FiGithub } from "react-icons/fi";
 import { LuGithub, LuUser } from "react-icons/lu";
-import { DarkModeToggle } from "./shared/DarkModeToggle";
+import { DarkModeToggle } from "../shared/DarkModeToggle";
 
-export const Header = () => {
+export const Navbar = () => {
   return (
     <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30">
       <div className="flex items-center gap-2">
