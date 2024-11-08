@@ -12,22 +12,6 @@
   box-sizing: border-box;
 }
 
-/* .light { */
-/*   --color-bg-primary: rgba(248, 248, 248, 1); */
-/*   --color-bg-secondary: rgba(255, 255, 255, 1); */
-/*   --color-text-primary: rgba(51, 51, 51, 1); */
-/*   --color-text-secondary: rgba(102, 102, 102, 1); */
-/*   --color-border: rgba(224, 224, 224, 1); */
-/*   --color-accent: rgba(0, 123, 255, 1); */
-/* } */
-/* .dark { */
-/*   --color-bg-primary-dark: rgba(31, 31, 31, 1); */
-/*   --color-bg-secondary-dark: rgba(43, 43, 43, 1); */
-/*   --color-text-primary-dark: rgba(240, 240, 240, 1); */
-/*   --color-text-secondary-dark: rgba(179, 179, 179, 1); */
-/*   --color-border-dark: rgba(68, 68, 68, 1); */
-/*   --color-accent-dark: rgba(77, 166, 255, 1); */
-/* } */
 .light {
   --color-bg-primary: 252 250 250;
   --color-bg-secondary: 240 240 240;
@@ -57,30 +41,67 @@
   --bg-sidebar-overlay: rgba(0, 0, 0, 0.95); /* Dark mode glass effect */
 }
 
-.light2 {
-  /* rgb(255, 255, 255) */
-  /* --color-bg: 249 249 249; */
-  --color-bg: 245 245 245;
-  --color-primary: 245 247 250;
-  /* rgb(240,243,243) */
-  --color-secondary: 255 255 255;
-  /* rgb(10,10,10) */
-  --color-text: 10 10 10;
-  /* rgba(209, 213, 219, 1) */
-  --color-border: 209 213 219;
-  --color-hover: 213 213 213;
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
 }
 
-.dark2 {
-  --color-bg: 41 41 41;
-  /* rgb(26, 26, 26);  */
-  /* rgba(38, 38, 37, 1) */
-  --color-primary: 56 56 56;
-  --color-secondary: 36 36 36;
-  /* rgba(140, 137, 132, 1) */
-  --color-hover: 140 137 132 / 1;
-  --color-border: 50 50 50;
-  /* rgb(255, 255, 255); */
-  --color-text: 255 255 255;
-  --color-text-dim: 163 163 163;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

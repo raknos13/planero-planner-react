@@ -1,6 +1,7 @@
 import { FaTrello } from "react-icons/fa";
-import { LuGithub, LuUser } from "react-icons/lu";
+import { LuGithub } from "react-icons/lu";
 import { DarkModeToggle } from "../shared/DarkModeToggle";
+import { UserIcon } from "./";
 
 export const Navbar = () => {
   return (
@@ -24,12 +25,7 @@ export const Navbar = () => {
             <LuGithub size={26} />
           </a>
         </button>
-        <button
-          className="rounded-full trasnsition-colors duration-200 p-1
-             hover:shadow-lg hover:bg-bg-hover transition-all"
-        >
-          <LuUser size={26} />
-        </button>
+        <UserIcon />
       </section>
     </div>
   );
