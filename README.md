@@ -93,8 +93,10 @@ The app utilizes the [hello-Pangea/DnD](https://github.com/hello-pangea/dnd) lib
 
 ## Project Structure
 
+<details>
+  <summary>
 The project's codebase is organized as follows:
-
+  </summary>
 ```
 ├── src
 │   ├── assets
@@ -142,6 +144,7 @@ The project's codebase is organized as follows:
 ├── tailwind.config.js
 └── vite.config.js
 ```
+</details>
 
 The `components` directory contains the main UI components of the application, such as the Board, List, and Card components. The `context` directory houses the state management logic, and the `shared` directory holds reusable UI components and utilities.
 Each directory has an `index.js` barrel file to simplify imports in the project.
