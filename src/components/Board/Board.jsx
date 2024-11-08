@@ -23,13 +23,13 @@ export function Board() {
             ref={provided.innerRef}
             className={`w-full h-svh`}
             style={{
-              // background: `linear-gradient(135deg, ${activeBoard.color} , rgba(255, 255, 39, 0.5)`,
               background: activeBoard.color,
             }}
           >
             <div
               className={`boardContainer flex w-full h-full p-4 overflow-x-auto overflow-y-hidden bg-bg-primary text-text-primary`}
               style={{
+                // Dim the board background color for light and dark modes
                 background:
                   theme === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0, 0, 0, 0.2)",
               }}
