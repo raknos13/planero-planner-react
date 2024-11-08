@@ -77,14 +77,14 @@ const BoardListItem = ({
     <li
       key={board.id}
       className={`relative flex items-center w-full gap-2 py-2 px-3 text-xs cursor-pointer hover:bg-bg-secondary
-                  ${board.id === activeBoardId && "bg-bg-secondary font-medium text-text-primary"}`}
+                  ${board.id === activeBoardId && "bg-bg-card font-medium text-text-primary"}`}
       onClick={() => {
         switchBoard(board.id);
       }}
     >
       {/* <div className={`py-2 text-sm flex items-center justify-between gap-2`}> */}
       <div
-        className="w-3 h-3 flex-shrink-0 bg-red-400 rounded-full"
+        className="w-3 h-3 flex-shrink-0 rounded-full"
         style={{ backgroundColor: board.color }}
       />
       {editingBoardId === board.id ? (
