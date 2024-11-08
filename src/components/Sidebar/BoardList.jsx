@@ -105,7 +105,7 @@ const BoardListItem = ({
           className="w-full rounded-md p-1 font-normal text-sm"
         />
       ) : (
-        <div className="flex w-full min-w-0">
+        <div className="flex items-center w-full min-w-0">
           <span className="pr-1 w-full flex-1 break-words text-sm min-w-0">
             {board.title}
           </span>
