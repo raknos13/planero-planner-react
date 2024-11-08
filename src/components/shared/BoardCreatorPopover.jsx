@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 
 const BOARD_COLORS = [
-  { name: "Sky", value: "rgb(14, 165, 233)" },
-  { name: "Purple", value: "rgb(168, 85, 247)" },
-  { name: "Pink", value: "rgb(236, 72, 153)" },
-  { name: "Green", value: "rgb(24, 218, 126)" },
-  { name: "Yellow", value: "rgb(234, 179, 8)" },
-  { name: "Red", value: "rgb(239, 68, 68)" },
+  { name: "Sky", value: "rgba(14, 165, 233, 1)" },
+  { name: "Purple", value: "rgba(168, 85, 247, 1)" },
+  { name: "Pink", value: "rgba(236, 72, 153, 1)" },
+  { name: "Green", value: "rgba(24, 218, 126, 1)" },
+  { name: "Yellow", value: "rgba(234, 179, 8, 1)" },
+  { name: "Red", value: "rgba(239, 68, 68, 1)" },
 ];
 
 export const BoardCreatorPopover = ({ onClose, onCreateBoard, buttonRef }) => {
