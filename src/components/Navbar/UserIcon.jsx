@@ -9,24 +9,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function UserIcon() {
+export function UserIcon({ onLogout }) {
   return (
     <>
-      <DropdownMenu clas>
-        <DropdownMenuTrigger>
-          <button
-            className="rounded-full trasnsition-colors duration-200 p-1
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          className="rounded-full trasnsition-colors duration-200 p-1
              hover:shadow-lg hover:bg-bg-hover transition-all"
-            onClick={(prev) => setShowPopover(!prev)}
-          >
-            <LuUser size={26} />
-          </button>
+        >
+          <LuUser size={26} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Log out</DropdownMenuItem>
+          <DropdownMenuItem onClick={onLogout}>Log out</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
