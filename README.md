@@ -28,6 +28,7 @@ Planero is a Trello-inspired project management application built using React an
 - Add, reorder, and delete lists within a board
 - Create, edit, and delete cards within a list
 - Drag and drop functionality to rearrange lists and cards
+- Persistent data with localStorage
 - Responsive design for seamless usage across devices
 
 ## Technologies Used
@@ -40,6 +41,8 @@ Planero is a Trello-inspired project management application built using React an
 
 ## Getting Started
 
+<details>
+  <summary>Steps to replicate project locally:</summary>
 ### Prerequisites
 
 - Node.js (version 14 or higher)
@@ -50,13 +53,13 @@ Planero is a Trello-inspired project management application built using React an
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/raknos13/planero-planner-react.git
+git clone https://github.com/raknos13/planero-trello-clone-react.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd planero-planner-react
+cd planero-trello-clone-react
 ```
 
 3. Install the dependencies:
@@ -68,10 +71,12 @@ npm install
 4. Start the development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
-The app will be available at `http://localhost:3000`.
+The app will be available at `http://localhost:3001`
+
+</details>
 
 ## Usage
 
