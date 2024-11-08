@@ -97,6 +97,7 @@ The app utilizes the [hello-Pangea/DnD](https://github.com/hello-pangea/dnd) lib
   <summary>
 The project's codebase is organized as follows:
   </summary>
+
 ```
 ├── src
 │   ├── assets
@@ -104,37 +105,43 @@ The project's codebase is organized as follows:
 │   │   └── not-found.svg
 │   ├── components
 │   │   ├── Board
-│   │   │   ├── context
-│   │   │   │   └── BoardContext.jsx
 │   │   │   ├── AddNew.jsx
 │   │   │   ├── Board.jsx
 │   │   │   ├── Card.jsx
 │   │   │   ├── EmptyBoard.jsx
 │   │   │   ├── index.js
 │   │   │   └── List.jsx
+│   │   ├── shared
+│   │   │   ├── AutoResizeTextarea.jsx
+│   │   │   ├── BoardCreatorPopover.jsx
+│   │   │   ├── ConfirmPopover.jsx
+│   │   │   ├── DarkModeToggle.jsx
+│   │   │   ├── GithubButton.jsx
+│   │   │   ├── index.js
+│   │   │   └── MoreOptionsPopover.jsx
 │   │   ├── Sidebar
-│   │   │   ├── context
-│   │   │   │   └── SidebarContext.jsx
 │   │   │   ├── BoardList.jsx
 │   │   │   ├── index.js
 │   │   │   ├── SidebarCollapsed.jsx
 │   │   │   ├── SidebarHeader.jsx
 │   │   │   └── Sidebar.jsx
-│   │   ├── shared
-│   │   │   ├── AutoResizeTextarea.jsx
-│   │   │   ├── BoardCreatorPopover.jsx
-│   │   │   ├── ConfirmPopover.jsx
-│   │   │   ├── GithubButton.jsx
-│   │   │   ├── index.js
-│   │   │   └── MoreOptionsPopover.jsx
 │   │   ├── Header.jsx
 │   │   ├── index.js
 │   │   └── Main.jsx
+│   ├── contexts
+│   │   ├── BoardContext.jsx
+│   │   ├── index.js
+│   │   ├── SidebarContext.jsx
+│   │   └── ThemeContext.jsx
+│   ├── hooks
+│   │   ├── useLocalStorage.js
+│   │   └── useTasks.js
 │   ├── App.css
 │   ├── App.jsx
 │   ├── index.css
 │   ├── initialData.js
 │   ├── main.jsx
+│   └── TODOS_FOR_PROJECT.md
 ├── eslint.config.js
 ├── index.html
 ├── package.json
@@ -144,21 +151,25 @@ The project's codebase is organized as follows:
 ├── tailwind.config.js
 └── vite.config.js
 ```
+
 </details>
 
-The `components` directory contains the main UI components of the application, such as the Board, List, and Card components. The `context` directory houses the state management logic, and the `shared` directory holds reusable UI components and utilities.
+The `components` directory contains the main UI components of the application, such as the Board, List, and Card components and the `shared` directory inside `components` holds reusable UI components and utilities. The `contexts` directory houses all state management logic,
 Each directory has an `index.js` barrel file to simplify imports in the project.
 
 ## Future Enhancements
 
 These are the TODOS for the project as of now. Not in any priority order.
 
-- Implement dark theme and theme switching
-- Implement user authentication and authorization
-- Implement a landing page
-- Add the ability to assign labels to cards
-- Integrate with third-party services (e.g., Google Calendar, Slack)
-- Develop a mobile-optimized version of the application
+> See the issues section to see features I'm working on currently
+
+- [x] Implement dark theme and theme switching
+- [x] Add local storage for persistent data
+- [] Implement user authentication and authorization
+- [] Implement a landing page
+- [] Add the ability to assign labels to cards
+- [] Integrate with third-party services (e.g., Google Calendar, Slack)
+- [] Develop a mobile-optimized version of the application
 
 ## Contributing
 
