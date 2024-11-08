@@ -163,13 +163,13 @@ These are the TODOS for the project as of now. Not in any priority order.
 
 > See the issues section to see features I'm working on currently
 
-- [x] Implement dark theme and theme switching
-- [x] Add local storage for persistent data
-- [] Implement user authentication and authorization
-- [] Implement a landing page
-- [] Add the ability to assign labels to cards
-- [] Integrate with third-party services (e.g., Google Calendar, Slack)
-- [] Develop a mobile-optimized version of the application
+[x] Implement dark theme and theme switching
+[x] Add local storage for persistent data
+[] Implement user authentication and authorization
+[] Implement a landing page
+[] Add the ability to assign labels to cards
+[] Integrate with third-party services (e.g., Google Calendar, Slack)
+[] Develop a mobile-optimized version of the application
 
 ## Contributing
 
