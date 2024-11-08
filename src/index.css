@@ -40,11 +40,10 @@
   --color-border-hover: 210 215 220;
   --color-accent: 0 123 255;
   --color-accent-hover: 0 100 255;
+  --bg-sidebar-overlay: rgba(255, 255, 255, 0.15); /* Light mode glass effect */
 }
 .dark {
-  /* --color-bg-primary: 31 31 31; */
   --color-bg-primary: 31 31 31;
-  /* --color-bg-secondary: 40 40 40; */
   --color-bg-secondary: 40 40 40;
   --color-hover: 70 80 87;
   --color-bg-card: 53 53 53;
@@ -55,6 +54,7 @@
   --color-border-hover: 88 88 88;
   --color-accent: 77 166 255;
   --color-accent-hover: 67 156 245;
+  --bg-sidebar-overlay: rgba(0, 0, 0, 0.95); /* Dark mode glass effect */
 }
 
 .light2 {
