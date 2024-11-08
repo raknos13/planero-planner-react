@@ -31,7 +31,7 @@ export function Board() {
               style={{
                 // Dim the board background color for light and dark modes
                 background:
-                  theme === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0, 0, 0, 0.2)",
+                  theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0, 0, 0, 0.2)",
               }}
             >
               <div className="listContainer flex h-full">
