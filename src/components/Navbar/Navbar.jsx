@@ -5,7 +5,7 @@ import { UserIcon } from "./";
 import { useAuth } from "../../contexts";
 
 export const Navbar = () => {
-  const { handleLogout } = useAuth();
+  const { isLoggedIn, handleLogout } = useAuth();
   return (
     <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30">
       <div className="flex items-center gap-2">
@@ -27,7 +27,11 @@ export const Navbar = () => {
             <LuGithub size={26} />
           </a>
         </button>
-        <UserIcon onLogout={handleLogout} />
+        {isLoggedIn ? (
+          <UserIcon onLogout={handleLogout} />
+        ) : (
+          <button>Log in</button>
+        )}
       </section>
     </div>
   );
