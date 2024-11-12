@@ -1,50 +1,94 @@
-import { createContext, useContext, useState } from "react";
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { createContext, useContext, useState, useEffect } from "react";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../services/firebase.config.js";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Add listener for the onAuthStateChanged event
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setIsLoggedIn(!!user);
+      setIsLoading(false);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleEmailSignUp = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      setCurrentUser(userCredential.user);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error("Error signing up with email and password", error);
+      console.error("code:", error.code);
+      console.error("message:", error.message);
+      if (error.code === "auth/email-already-in-use") {
+        handleEmailSignIn(email, password);
+      }
+    }
+  };
+
+  const handleEmailSignIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      setCurrentUser(userCredential.user);
+      setIsLoggedIn(true);
+    } catch (error) {
+      console.error("Error signing up with email and password", error);
+    }
+  };
 
   const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-
-        // The signed-in user info.
-        setUser(result.user);
-        setLoggedIn(true);
-        console.log("signin successful");
-        console.log(user.displayName, user.email);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.error(
-          "Error signing in with Google",
-          errorCode,
-          errorMessage,
-          email,
-          credential,
-        );
-      });
+    try {
+      const googleProvider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, googleProvider);
+      setCurrentUser(result.user);
+      setIsLoggedIn(true);
+    } catch (error) {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error(
+        "Error signing in with Google",
+        errorCode,
+        errorMessage,
+        email,
+        credential,
+      );
+    }
   };
 
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
-        setLoggedIn(false);
+        setIsLoggedIn(false);
+        setCurrentUser(null);
       })
       .catch((error) => {
         // An error happened.
@@ -54,7 +98,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loggedIn, handleGoogleSignIn, handleLogout }}
+      value={{
+        currentUser,
+        isLoggedIn,
+        isLoading,
+        handleEmailSignUp,
+        handleEmailSignIn,
+        handleGoogleSignIn,
+        handleLogout,
+      }}
     >
       {children}
     </AuthContext.Provider>
