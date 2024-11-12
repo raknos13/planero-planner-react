@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen overflow-y-scroll bg-gradient-to-b from-accent to-bg-primary">
       {/* Hero Section */}
@@ -26,7 +30,10 @@ export default function HomePage() {
               Collaborate with your team, track tasks, and achieve your goals.
             </p>
             <div className="mt-10 flex justify-center gap-4">
-              <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <button
+                onClick={() => navigate("/signup")}
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
                 Get Started - It's Free
               </button>
               <button className="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
