@@ -1,5 +1,5 @@
 import Main from "./components/Main";
-import { BoardProvider, ThemeProvider, useAuth } from "./contexts";
+import { BoardProvider, ThemeProvider, AuthProvider } from "./contexts";
 
 export default function App() {
   return (
