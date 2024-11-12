@@ -1,20 +1,4 @@
-import Planner from "../assets/planner.png";
-import { Navbar } from "./Navbar";
-
 export default function HomePage() {
-  // return (
-  //   <div
-  //     className="flex-1 flex flex-col gap-3 items-start ml-8 mt-20 w-100"
-  //     style={{ backgroundImage: 'url("../assets/planner.svg")' }}
-  //   >
-  //     <h1 className="scroll-m-20 text-6xl font-extrabold tracking-tight">
-  //       Planero
-  //     </h1>
-  //     <p className="leading-7">The ultimate project management tool</p>
-  //     <button className="bg-blue-500 p-2 w-32 rounded-md">Get started</button>
-  //     {/* <img src={Planner} /> */}
-  //   </div>
-  // );
   return (
     <div className="min-h-screen overflow-y-scroll bg-gradient-to-b from-accent to-bg-primary">
       {/* Hero Section */}
