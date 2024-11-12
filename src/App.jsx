@@ -1,7 +1,14 @@
 import Main from "./components/Main";
-import Login from "./components/Login";
+import { BoardProvider, ThemeProvider, useAuth } from "./contexts";
 
 export default function App() {
-  return <Main />;
-  // return <Login />;
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <BoardProvider>
+          <Main />;
+        </BoardProvider>
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
