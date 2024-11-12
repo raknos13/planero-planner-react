@@ -1,41 +1,46 @@
-import { auth } from "../services/firebase.config.js";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useAuth } from "@/contexts";
+import { useState } from "react";
 
 const Login = () => {
-  const handleGoogleSignIn = async () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
+  const { handleGoogleSignIn, handleGithubSignIn, handleEmailSignUp } =
+    useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-        // The signed-in user info.
-        const user = result.user;
-        console.log("signin successful");
-        console.log(user.displayName, user.email);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.error(
-          "Error signing in with Google",
-          errorCode,
-          errorMessage,
-          email,
-          credential,
-        );
-      });
-  };
+  function handleSubmit(e) {
+    e.preventDefault();
+    handleEmailSignUp(email, password);
+  }
+
   return (
-    <>
-      <button onClick={handleGoogleSignIn}>Sign in with Google</button>
-    </>
+    <div className="flex justify-center items-center h-svh">
+      <form
+        className="flex flex-col gap-2 p-8 bg-gray-200"
+        onSubmit={handleSubmit}
+      >
+        <label>Email:</label>
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit" className="bg-orange-400 mt-3">
+          Login
+        </button>
+        <button onClick={handleGoogleSignIn} className="bg-blue-400">
+          Sign in with Google
+        </button>
+        <button onClick={handleGithubSignIn} className="bg-gray-400">
+          Sign in with Github
+        </button>
+      </form>
+    </div>
   );
 };
 
