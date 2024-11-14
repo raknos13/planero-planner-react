@@ -9,7 +9,7 @@ export const SidebarHeader = ({ isCollapsed, setIsCollapsed }) => {
       <div className="flex gap-2 items-center">
         <FiHome size={15} />
         <h1 className="font-bold text-xs">
-          {currentUser.displayName || User} &apos;s workspace
+          {currentUser.displayName || "User"} &apos;s workspace
         </h1>
       </div>
       <button
