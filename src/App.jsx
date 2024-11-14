@@ -6,7 +6,7 @@ export default function App() {
     <ThemeProvider>
       <AuthProvider>
         <BoardProvider>
-          <Main />;
+          <Main />
         </BoardProvider>
       </AuthProvider>
     </ThemeProvider>
