@@ -34,7 +34,7 @@ export const MoreOptionsPopover = ({
   return (
     <div
       ref={popoverRef}
-      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-border bg-bg-primary text-text-primary"
+      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-border bg-bg-card text-text-primary"
     >
       <div className="flex justify-between items-center p-3">
         <h2 className="font-semibold">{heading} options</h2>
