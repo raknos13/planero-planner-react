@@ -17,7 +17,7 @@ export const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
       </div>
       <button
         ref={addButtonRef}
-        className="hover:bg-bg-secondary p-1 rounded-md"
+        className="hover:bg-white/30 p-1 rounded-md"
         onClick={() => setShowBoardCreator(true)}
       >
         <FiPlus size={18} />
@@ -141,7 +141,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
           switchBoard(board.id);
           setActivePopoverBoard(board.id);
         }}
-        className={`z-0 relative hover:bg-bg-primary p-1 rounded-md transition-colors`}
+        className={`z-0 relative hover:bg-white/30 p-1 rounded-md transition-colors`}
       >
         <FiMoreHorizontal />
       </button>

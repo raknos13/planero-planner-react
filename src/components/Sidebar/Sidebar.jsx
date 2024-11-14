@@ -63,7 +63,6 @@ export const Sidebar = () => {
   return (
     <div
       className="z-20 flex-shrink-0 w-52 bg-black/50 backdrop-blur-sm text-white border-r border-border shadow-md"
-      // Glassy look for sidebar, gradient with board color
       style={{
         backgroundColor:
           theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.5)",

@@ -14,7 +14,7 @@ export const SidebarHeader = ({ isCollapsed, setIsCollapsed }) => {
       </div>
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="hover:bg-bg-secondary p-1 rounded-md"
+        className="hover:bg-white/30 p-1 rounded-md"
       >
         <FiChevronLeft size={18} />
       </button>
