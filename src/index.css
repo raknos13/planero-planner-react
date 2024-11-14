@@ -13,30 +13,37 @@
 }
 
 .light {
-  --color-bg-primary: 252 250 250;
-  --color-bg-secondary: 240 240 240;
-  --color-hover: 206 212 218;
-  --color-bg-card: 225 225 225;
-  --color-bg-card-hover: 235 235 235;
-  --color-text-primary: 61 61 61;
-  --color-text-secondary: 100 100 100;
-  --color-border: 222 226 230;
-  --color-border-hover: 210 215 220;
-  --color-accent: 0 123 255;
-  --color-accent-hover: 0 100 255;
-  --bg-sidebar-overlay: rgba(255, 255, 255, 0.15); /* Light mode glass effect */
+  --color-bg-primary: 0 8% 98%;
+  --color-bg-secondary: 0 0% 94%;
+  --color-hover: 210 12% 83%;
+  --color-bg-card: 0 0% 88%;
+  --color-bg-card-hover: 0 0% 92%;
+  --color-text-primary: 0 0% 24%;
+  --color-text-secondary: 0 0% 39%;
+  --color-border: 0 0% 27%;
+  --color-border-hover: 0 0% 35%;
+  --color-accent: 211 100% 50%;
+  --color-accent-hover: 213 100% 50%;
+  --bg-sidebar-overlay: rgba(255, 255, 255, 0.15);
+  /* --color-border: 222 226 230; */
+  /* --color-border-hover: 210 215 220; */
 }
 .dark {
-  --color-bg-primary: 31 31 31;
-  --color-bg-secondary: 40 40 40;
-  --color-hover: 70 80 87;
-  --color-bg-card: 53 53 53;
-  --color-bg-card-hover: 41 41 41;
-  --color-text-primary: 224 224 224;
-  --color-text-secondary: 179 179 179;
-  --color-border: 68 68 68;
-  --color-border-hover: 88 88 88;
-  --color-accent: 77 166 255;
-  --color-accent-hover: 67 156 245;
-  --bg-sidebar-overlay: rgba(0, 0, 0, 0.95); /* Dark mode glass effect */
+  --color-bg-primary: 0 0% 12%;
+  --color-bg-secondary: 0 0% 16%;
+  --color-hover: 204 11% 31%;
+  --color-bg-card: 0 0% 21%;
+  --color-bg-card-hover: 0 0% 16%;
+  --color-text-primary: 0 0% 88%;
+  --color-text-secondary: 0 0% 70%;
+  --color-border: 0 0% 27%;
+  --color-border-hover: 0 0% 35%;
+  --color-accent: 210 100% 65%;
+  --color-accent-hover: 210 90% 61%;
+  --bg-sidebar-overlay: rgba(
+    0,
+    0,
+    0,
+    0.95
+  ); /* Kept as is since it's using rgba */
 }
