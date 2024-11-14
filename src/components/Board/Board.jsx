@@ -22,12 +22,14 @@ export function Board() {
             {...provided.droppableProps}
             ref={provided.innerRef}
             className={`flex-grow overflow-x-hidden overflow-y-hidden`}
-            style={{
-              background: activeBoard.color,
-            }}
+            style={
+              {
+                // background: activeBoard.color,
+              }
+            }
           >
             <div
-              className={`boardContainer flex flex-nowrap p-4 h-full w-full overflow-x-scroll overflow-y-hidden bg-bg-primary text-text-primary`}
+              className={`boardContainer snap-x snap-always snap-mandatory scroll-pl-4 flex flex-nowrap p-4 h-full w-full overflow-x-scroll overflow-y-hidden bg-bg-primary text-text-primary`}
               style={{
                 // Dim the board background color for light and dark modes
                 background:
@@ -44,7 +46,7 @@ export function Board() {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className="h-min mr-3 w-64"
+                        className="snap-start h-min mr-3 w-64 opacity-90"
                       >
                         <List
                           list={list}
