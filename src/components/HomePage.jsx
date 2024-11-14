@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import ssNewBoard from "../assets/ss-new-board.png";
+import ssNewList from "../assets/ss-new-list.png";
+import ssDragDrop from "../assets/ss-drag-drop.png";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -49,18 +52,18 @@ export default function HomePage() {
                 title: "Flexible Boards",
                 description:
                   "Create and customize boards to match your workflow",
-                image: "https://placehold.co/600x400/",
+                image: ssNewBoard,
               },
               {
                 title: "Create lists to manage different tasks",
                 description:
                   "Make multiple lists for different tasks within a board",
-                image: "https://placehold.co/600x400/",
+                image: ssNewList,
               },
               {
                 title: "Drag and drop lists and cards around",
                 description: "Arrange lists and cards to your liking",
-                image: "https://placehold.co/600x400/",
+                image: ssDragDrop,
               },
             ].map((feature, index) => (
               <div
@@ -76,7 +79,12 @@ export default function HomePage() {
                   </h3>
                   <p className="text-text-secondary">{feature.description}</p>
                 </div>
-                <img src={feature.image} />
+                <img
+                  src={feature.image}
+                  alt="feature image"
+                  height={400}
+                  width={600}
+                />
               </div>
             ))}
           </div>
