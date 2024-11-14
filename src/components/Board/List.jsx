@@ -70,7 +70,7 @@ export function List({ list, listCards, dragHandleProps }) {
               {list.title}
             </span>
             <button
-              className="absolute top-0 right-0 p-1 rounded-md hover:bg-bg-card-hover transition-colors"
+              className="absolute top-0 right-0 p-1 rounded-md hover:bg-text-secondary hover:text-bg-primary hover:opacity-50 transition-colors"
               onClick={() => setShowPopover(true)}
               ref={showPopoverRef}
             >
