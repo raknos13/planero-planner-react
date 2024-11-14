@@ -1,6 +1,7 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { EmptyBoard, List, AddNew } from "./";
 import { useBoardContext, useTheme } from "../../contexts/";
+import { FiStar } from "react-icons/fi";
 
 export function Board() {
   const { boards, lists, cards, activeBoardId, addNewList, onDragEnd } =
@@ -22,19 +23,20 @@ export function Board() {
             {...provided.droppableProps}
             ref={provided.innerRef}
             className={`flex-grow overflow-x-hidden overflow-y-hidden`}
-            style={
-              {
-                // background: activeBoard.color,
-              }
-            }
+            style={{
+              // Dim the board background color for light and dark modes
+              background:
+                theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0, 0, 0, 0.2)",
+            }}
           >
+            <div className="h-10 flex gap-4 pl-6 bg-black/20 text-white font-bold text-xl py-6 justify-start items-center">
+              {activeBoard.title}
+              <button className="hover:text-yellow-300">
+                <FiStar />
+              </button>
+            </div>
             <div
-              className={`boardContainer snap-x snap-always snap-mandatory scroll-pl-4 flex flex-nowrap p-4 h-full w-full overflow-x-scroll overflow-y-hidden bg-bg-primary text-text-primary`}
-              style={{
-                // Dim the board background color for light and dark modes
-                background:
-                  theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0, 0, 0, 0.2)",
-              }}
+              className={`boardContainer snap-x snap-always snap-mandatory scroll-pl-4 flex flex-nowrap p-4 h-full w-full overflow-x-scroll overflow-y-hidden text-text-primary`}
             >
               {activeBoard.listIds.map((listId, index) => {
                 const list = lists[listId];
