@@ -2,21 +2,28 @@ import { FaTrello } from "react-icons/fa";
 import { LuGithub } from "react-icons/lu";
 import { DarkModeToggle } from "../shared/DarkModeToggle";
 import { DropDownMenu } from "./";
-import { useAuth } from "../../contexts";
+import { useAuth, useTheme } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const { isLoggedIn, handleLogout } = useAuth();
+  const { theme } = useTheme();
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30 shadow-md">
+    <div
+      className="flex justify-between items-center max-h-12 px-3 py-2 backdrop-blur-sm text-white border-b border-border z-30 shadow-md"
+      style={{
+        backgroundColor:
+          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.6)",
+      }}
+    >
       <div
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center gap-1 cursor-pointer"
         onClick={() => navigate("/")}
       >
         <FaTrello size={20} />
-        <h1 className="text-md font-bold text-center">Planero</h1>
+        <h1 className="text-lg font-bold text-center">Planero</h1>
       </div>
       <section className="flex justify-evenly items-center gap-3">
         <DarkModeToggle />

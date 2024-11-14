@@ -3,7 +3,7 @@ import {
   MoreOptionsPopover,
   BoardCreatorPopover,
 } from "../shared";
-import { useSidebar, useBoardContext } from "../../contexts";
+import { useSidebar, useBoardContext, useTheme } from "../../contexts";
 import { useRef } from "react";
 import { FiTrello, FiPlus, FiMoreHorizontal } from "react-icons/fi";
 
@@ -72,19 +72,27 @@ const BoardListItem = ({
 }) => {
   const { activeBoardId, switchBoard } = useBoardContext();
   const { editingBoardId, setEditingBoardId } = useSidebar();
+  const { theme } = useTheme();
 
   return (
     <li
       key={board.id}
-      className={`relative flex items-center w-full gap-2 py-2 px-3 cursor-pointer hover:bg-bg-secondary
-                  ${board.id === activeBoardId && "bg-bg-secondary font-medium text-text-primary"}`}
+      className={`flex items-center w-full gap-2 py-1 px-3 cursor-pointer hover:bg-white/20
+                  ${board.id === activeBoardId && "font-medium text-white backdrop-blur-sm"}`}
+      style={{
+        backgroundColor:
+          board.id === activeBoardId &&
+          (theme === "dark"
+            ? "hsla(0, 0%, 50%, 0.7)"
+            : "hsla(0, 0%, 70%, 0.6)"),
+      }}
       onClick={() => {
         switchBoard(board.id);
       }}
     >
       {/* <div className={`py-2 text-sm flex items-center justify-between gap-2`}> */}
       <div
-        className="w-3 h-3 flex-shrink-0 rounded-full"
+        className="w-3.5 h-3.5 flex-shrink-0 rounded-full"
         style={{ backgroundColor: board.color }}
       />
       {editingBoardId === board.id ? (
@@ -109,7 +117,7 @@ const BoardListItem = ({
           <span className="pr-1 w-full flex-1 break-words text-sm min-w-0">
             {board.title}
           </span>
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 opacity-100">
             <BoardListItemActions board={board} handleEdit={handleEdit} />
           </div>
         </div>
@@ -133,7 +141,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
           switchBoard(board.id);
           setActivePopoverBoard(board.id);
         }}
-        className={`hover:bg-bg-primary p-1 rounded-md transition-colors`}
+        className={`z-0 relative hover:bg-bg-primary p-1 rounded-md transition-colors`}
       >
         <FiMoreHorizontal />
       </button>

@@ -62,13 +62,11 @@ export const Sidebar = () => {
 
   return (
     <div
-      className="z-10 flex-shrink-0 w-52 backdrop-blur-md text-text-secondary border-r border-border shadow-md"
+      className="z-20 flex-shrink-0 w-52 bg-black/50 backdrop-blur-sm text-white border-r border-border shadow-md"
       // Glassy look for sidebar, gradient with board color
       style={{
-        backgroundColor: `var(--bg-sidebar-overlay)`,
-        backgroundImage: boards[activeBoardId]?.color
-          ? `linear-gradient(90deg, ${boards[activeBoardId].color.replace(", 1)", ", 0.2)")} 100%, var(--bg-sidebar-overlay) 0%, rgba(0, 0, 0, 0))`
-          : undefined,
+        backgroundColor:
+          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.5)",
       }}
     >
       <div className="flex flex-col justify-between h-full">
