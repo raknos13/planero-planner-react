@@ -48,11 +48,10 @@ export const Sidebar = () => {
 
   return (
     <div
-      // className="z-20 flex-shrink-0 w-52 backdrop-blur-sm text-white border-r border-border shadow-md"
       className={`z-20 flex-shrink-0 ${isCollapsed ? "w-4" : "w-52"} text-white/70 backdrop-blur-sm border-r border-border shadow-md transition-width duration-300 ease-in-out`}
       style={{
         backgroundColor:
-          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.5)",
+          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.6)",
       }}
     >
       {isCollapsed ? (
