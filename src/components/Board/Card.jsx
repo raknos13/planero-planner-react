@@ -1,6 +1,6 @@
 import { useState, forwardRef, useRef, useEffect } from "react";
 import { FiX, FiCheck, FiEdit, FiTrash } from "react-icons/fi";
-import { useBoardContext } from "./";
+import { useBoardContext } from "../../contexts";
 import { AutoResizeTextarea } from "../shared";
 
 export const Card = forwardRef(function Card(
