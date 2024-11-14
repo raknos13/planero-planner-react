@@ -63,7 +63,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     return (
       <button
         onClick={() => setIsAddingNew(true)}
-        className="flex items-center gap-2 p-2 bg-bg-primary text-text-primary rounded-md w-full text-sm hover:bg-bg-secondary"
+        className="flex items-center gap-2 p-2 bg-bg-primary text-text-primary rounded-md w-full text-sm hover:bg-bg-card"
       >
         <AiOutlinePlus />
         <span>Add new {type}</span>
