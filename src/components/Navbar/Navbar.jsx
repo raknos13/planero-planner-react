@@ -25,7 +25,7 @@ export const Navbar = () => {
              hover:shadow-lg hover:bg-bg-hover transition-all"
         >
           <a
-            href="https://github.com/raknos13/planero-trello-clone-react"
+            href="https://github.com/mksonkar/planero-trello-clone-react"
             target="_blank"
           >
             <LuGithub size={26} />

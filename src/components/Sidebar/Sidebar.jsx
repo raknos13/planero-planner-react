@@ -99,7 +99,7 @@ export const Sidebar = () => {
           <EmptyBoardMessage />
         )}
         <div className="mt-auto">
-          <GithubButton link="https://github.com/raknos13/planero-planner-react" />
+          <GithubButton link="https://github.com/mksonkar/planero-planner-react" />
         </div>
       </div>
     </div>
