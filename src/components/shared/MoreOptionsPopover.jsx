@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { FiX, FiEdit3, FiTrash2 } from "react-icons/fi";
 
 export const MoreOptionsPopover = ({
@@ -10,6 +11,7 @@ export const MoreOptionsPopover = ({
   callButtonRef,
 }) => {
   const popoverRef = useRef(null);
+  const buttonRect = callButtonRef.current?.getBoundingClientRect();
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -29,12 +31,22 @@ export const MoreOptionsPopover = ({
     }
   }, [isOpen, onClose, callButtonRef]);
 
-  if (!isOpen) return null;
+  // Calculate position based on button position
+  const getPopoverPosition = () => {
+    if (!buttonRect) return {};
 
-  return (
+    return {
+      position: "fixed",
+      top: `${buttonRect.bottom + window.scrollY}px`,
+      left: `${buttonRect.left + window.scrollX}px`,
+    };
+  };
+
+  const popoverContent = (
     <div
       ref={popoverRef}
-      className="top-9 left-28 absolute z-50 w-40 h-32 text-sm rounded-md shadow-lg border border-border bg-bg-card text-text-primary"
+      className="z-50 opacity-100 w-40 h-32 text-sm rounded-md shadow-lg border border-border bg-bg-card text-text-primary"
+      style={getPopoverPosition()}
     >
       <div className="flex justify-between items-center p-3">
         <h2 className="font-semibold">{heading} options</h2>
@@ -59,7 +71,7 @@ export const MoreOptionsPopover = ({
         <button
           onClick={(e) => {
             confirm(
-              `${heading} will be permanently deleted! Do you want to proceed?`,
+              `${heading} will be permanently deleted! (There is no undo) \nDo you want to proceed?`,
             ) && onDelete(e);
             onClose();
           }}
@@ -71,4 +83,6 @@ export const MoreOptionsPopover = ({
       </div>
     </div>
   );
+  if (!isOpen) return null;
+  return createPortal(popoverContent, document.body);
 };
