@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
+import { MdExpandMore } from "react-icons/md";
 import ssNewBoard from "../assets/ss-new-board.png";
 import ssNewList from "../assets/ss-new-list.png";
 import ssDragDrop from "../assets/ss-drag-drop.png";
+import ssEditBoard from "../assets/ss-edit-board.png";
+import ssSignin from "../assets/ss-signin.png";
+import ssThemeToggle from "../assets/ss-theme-toggle.png";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -23,7 +27,7 @@ export default function HomePage() {
 
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-          <div className="text-center">
+          <div className="text-center space-y-10 my-16">
             <h1 className="text-4xl tracking-tight font-extrabold text-text-primary sm:text-5xl md:text-6xl">
               <span className="block">Organize your ideas with</span>
               <span className="block text-blue-600">Planero</span>
@@ -44,9 +48,12 @@ export default function HomePage() {
               </button>
             </div>
           </div>
+          <div className="text-text-secondary flex items-center justify-center">
+            <MdExpandMore size={48} />
+          </div>
 
           {/* Feature Cards */}
-          <div className="px-6 py-12 space-y-12" id="more-section">
+          <div className="px-6 py-12 space-y-4" id="more-section">
             {[
               {
                 title: "Flexible Boards",
@@ -65,6 +72,24 @@ export default function HomePage() {
                 description: "Arrange lists and cards to your liking",
                 image: ssDragDrop,
               },
+              {
+                title: "Edit and Delete board, list, and cards",
+                description:
+                  "Option to edit and delete board, list and card names",
+                image: ssEditBoard,
+              },
+              {
+                title: "Login to save your data",
+                description:
+                  "Signup and login with email or your Google account to saveguard your data",
+                image: ssSignin,
+              },
+              {
+                title: "Toggle light/dark theme with a click",
+                description:
+                  "Change entire app's theme to light/dark to your liking with just a single click",
+                image: ssThemeToggle,
+              },
             ].map((feature, index) => (
               <div
                 key={index}
@@ -74,10 +99,12 @@ export default function HomePage() {
                   className={`p-6 flex-1 md:order-1`}
                   style={{ order: index % 2 === 0 ? 1 : 2 }}
                 >
-                  <h3 className="text-lg font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-text-secondary">{feature.description}</p>
+                  <p className="text-text-secondary text-lg">
+                    {feature.description}
+                  </p>
                 </div>
                 <img
                   src={feature.image}
