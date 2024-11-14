@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { MdExpandMore } from "react-icons/md";
+import { useRef } from "react";
 import ssNewBoard from "../assets/ss-new-board.png";
 import ssNewList from "../assets/ss-new-list.png";
 import ssDragDrop from "../assets/ss-drag-drop.png";
@@ -9,6 +10,11 @@ import ssThemeToggle from "../assets/ss-theme-toggle.png";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const featureSection = useRef(null);
+
+  const scrollToSection = (targetRef) => {
+    targetRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen overflow-y-scroll bg-gradient-to-b from-bg-secondary to-bg-primary">
@@ -44,7 +50,9 @@ export default function HomePage() {
                 Get Started - It's Free
               </button>
               <button className="inline-flex items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <a href="#more-section">Learn More</a>
+                <a onClick={() => scrollToSection(featureSection)}>
+                  Learn More
+                </a>
               </button>
             </div>
           </div>
@@ -53,7 +61,11 @@ export default function HomePage() {
           </div>
 
           {/* Feature Cards */}
-          <div className="px-6 py-12 space-y-4" id="more-section">
+          <div
+            ref={featureSection}
+            className="px-6 py-12 space-y-4"
+            id="more-section"
+          >
             {[
               {
                 title: "Flexible Boards",
@@ -73,6 +85,12 @@ export default function HomePage() {
                 image: ssDragDrop,
               },
               {
+                title: "Toggle light/dark theme with a click",
+                description:
+                  "Change entire app's theme to light/dark to your liking with just a single click",
+                image: ssThemeToggle,
+              },
+              {
                 title: "Edit and Delete board, list, and cards",
                 description:
                   "Option to edit and delete board, list and card names",
@@ -83,12 +101,6 @@ export default function HomePage() {
                 description:
                   "Signup and login with email or your Google account to saveguard your data",
                 image: ssSignin,
-              },
-              {
-                title: "Toggle light/dark theme with a click",
-                description:
-                  "Change entire app's theme to light/dark to your liking with just a single click",
-                image: ssThemeToggle,
               },
             ].map((feature, index) => (
               <div
