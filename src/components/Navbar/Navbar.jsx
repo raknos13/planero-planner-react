@@ -16,9 +16,7 @@ export const Navbar = () => {
         onClick={() => navigate("/")}
       >
         <FaTrello size={20} />
-        <h1 className="text-md font-bold text-center">
-          Planero project manager
-        </h1>
+        <h1 className="text-md font-bold text-center">Planero</h1>
       </div>
       <section className="flex justify-evenly items-center gap-3">
         <DarkModeToggle />
@@ -41,7 +39,12 @@ export const Navbar = () => {
             }}
           />
         ) : (
-          <button onClick={() => navigate("/auth")}>Log in</button>
+          <button
+            className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-base font-medium rounded-md text-bg-primary bg-text-primary hover:bg-text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            onClick={() => navigate("/auth")}
+          >
+            Log in
+          </button>
         )}
       </section>
     </div>
