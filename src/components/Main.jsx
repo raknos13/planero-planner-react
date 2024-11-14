@@ -8,12 +8,16 @@ export default function Main() {
   const { isLoading, isLoggedIn } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center bg-black text-white h-screen w-screen">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <BrowserRouter>
-      <div className="h-svh w-svh overflow-hidden flex flex-col">
+    <div className="h-screen w-screen flex flex-col">
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
@@ -21,7 +25,7 @@ export default function Main() {
               isLoggedIn ? (
                 <>
                   <Navbar />
-                  <div className="flex flex-grow">
+                  <div className="flex h-full w-full">
                     <SidebarProvider>
                       <Sidebar />
                     </SidebarProvider>
@@ -43,7 +47,7 @@ export default function Main() {
           {/* Catch-all route for 404 */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 }
