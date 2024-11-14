@@ -84,7 +84,7 @@ const BoardListItem = ({
     >
       {/* <div className={`py-2 text-sm flex items-center justify-between gap-2`}> */}
       <div
-        className="w-3 h-3 flex-shrink-0 bg-red-400 rounded-full"
+        className="w-3 h-3 flex-shrink-0 rounded-full"
         style={{ backgroundColor: board.color }}
       />
       {editingBoardId === board.id ? (

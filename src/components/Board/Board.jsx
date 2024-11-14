@@ -29,8 +29,9 @@ export function Board() {
             <div
               className={`boardContainer flex flex-nowrap p-4 h-full w-full overflow-x-scroll overflow-y-hidden bg-bg-primary text-text-primary`}
               style={{
+                // Dim the board background color for light and dark modes
                 background:
-                  theme === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0, 0, 0, 0.2)",
+                  theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0, 0, 0, 0.2)",
               }}
             >
               {activeBoard.listIds.map((listId, index) => {
