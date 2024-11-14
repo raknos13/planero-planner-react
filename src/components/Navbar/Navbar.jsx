@@ -1,17 +1,16 @@
 import { FaTrello } from "react-icons/fa";
 import { LuGithub } from "react-icons/lu";
 import { DarkModeToggle } from "../shared/DarkModeToggle";
-import { UserIcon } from "./";
+import { DropDownMenu } from "./";
 import { useAuth } from "../../contexts";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
 
 export const Navbar = () => {
   const { isLoggedIn, handleLogout } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30">
+    <div className="flex justify-between items-center px-3 py-2 bg-bg-secondary text-text-primary border-b border-border z-30 shadow-md">
       <div
         className="flex items-center gap-2 cursor-pointer"
         onClick={() => navigate("/")}
@@ -35,14 +34,14 @@ export const Navbar = () => {
           </a>
         </button>
         {isLoggedIn ? (
-          <UserIcon
+          <DropDownMenu
             onLogout={() => {
               handleLogout();
               navigate("/");
             }}
           />
         ) : (
-          <Button onClick={() => navigate("/login")}>Log in</Button>
+          <button onClick={() => navigate("/auth")}>Log in</button>
         )}
       </section>
     </div>
