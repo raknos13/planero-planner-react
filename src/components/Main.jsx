@@ -1,8 +1,7 @@
 import { SidebarProvider, useAuth } from "../contexts";
 import { Navbar, Board, Sidebar } from "./";
 import HomePage from "./HomePage";
-import LoginPage from "./LoginPage";
-import SignupPage from "./SignupPage";
+import AuthPage from "./AuthPage";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export default function Main() {
@@ -13,37 +12,38 @@ export default function Main() {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex flex-col">
-      <BrowserRouter>
-        <Navbar />
+    <BrowserRouter>
+      <div className="h-svh w-svh overflow-hidden flex flex-col">
         <Routes>
           <Route
             path="/"
             element={
               isLoggedIn ? (
-                <div className="flex flex-grow">
-                  <SidebarProvider>
-                    <Sidebar />
-                  </SidebarProvider>
-                  <Board />
-                </div>
+                <>
+                  <Navbar />
+                  <div className="flex flex-grow">
+                    <SidebarProvider>
+                      <Sidebar />
+                    </SidebarProvider>
+                    <Board />
+                  </div>
+                </>
               ) : (
-                <HomePage />
+                <>
+                  <Navbar />
+                  <HomePage />
+                </>
               )
             }
           />
           <Route
-            path="/login"
-            element={isLoggedIn ? <Navigate to="/" /> : <LoginPage />}
-          />
-          <Route
-            path="/signup"
-            element={isLoggedIn ? <Navigate to="/" /> : <SignupPage />}
+            path="/auth"
+            element={isLoggedIn ? <Navigate to="/" /> : <AuthPage />}
           />
           {/* Catch-all route for 404 */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
