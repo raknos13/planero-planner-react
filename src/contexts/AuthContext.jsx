@@ -91,9 +91,9 @@ export const AuthProvider = ({ children }) => {
       const googleProvider = new GoogleAuthProvider();
       const result = await signInWithPopup(auth, googleProvider);
       setCurrentUser(result.user);
-      console.log(result.user);
-      console.log(Object.keys(result.user));
-      console.log(result.user.photoURL);
+      // console.log(result.user);
+      // console.log(Object.keys(result.user));
+      // console.log(result.user.photoURL);
       setIsLoggedIn(true);
 
       async function storeProfilePhoto(user) {
