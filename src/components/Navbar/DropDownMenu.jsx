@@ -37,20 +37,21 @@ export const DropDownMenu = ({ onLogout }) => {
         <span className="text-black flex-1">{currentUser.displayName[0]}</span>
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 bg-bg-card rounded-md shadow-lg z-10">
+        <div className="absolute right-0 mt-2 w-60 bg-bg-card rounded-md shadow-lg z-10">
           <div className="flex items-center gap-2 p-4">
             <div className="w-8 h-8 rounded-full shrink-0 bg-yellow-300 text-black flex items-center justify-center">
               {currentUser.displayName[0]}
             </div>
-            <div className="text-sm font-bold">
+            <div className="text-sm font-bold text-wrap break-words">
               <div>{currentUser.displayName}</div>
               <div>{currentUser.email}</div>
             </div>
           </div>
-          <div className="border-t border-border text-md mb-2">
+          <div className="border-t border-border text-sm mb-2">
             <button
-              className="block w-full text-left px-4 py-2 hover:bg-bg-hover transition-colors"
+              className="text-gray-400 cursor-not-allowed block w-full text-left px-4 py-2 hover:bg-bg-hover transition-colors"
               onClick={() => console.log("Profile")}
+              disabled
             >
               Profile
             </button>
