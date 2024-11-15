@@ -23,9 +23,7 @@ export default function Main() {
     <div
       className={`h-screen w-screen flex flex-col bg-bg-primary`}
       style={{
-        background: activeBoardId
-          ? activeBoard.color
-          : "hsla(--var(--color-bg-secondary))",
+        background: activeBoardId && activeBoard.color,
       }}
     >
       <BrowserRouter>
