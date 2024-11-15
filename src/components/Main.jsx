@@ -9,6 +9,7 @@ export default function Main() {
   const { boards, activeBoardId } = useBoardContext();
 
   const activeBoard = boards[activeBoardId];
+  console.log(activeBoardId);
 
   if (isLoading) {
     return (
@@ -20,9 +21,11 @@ export default function Main() {
 
   return (
     <div
-      className="h-screen w-screen flex flex-col"
+      className={`h-screen w-screen flex flex-col bg-bg-primary`}
       style={{
-        background: activeBoard.color,
+        background: activeBoardId
+          ? activeBoard.color
+          : "hsla(--var(--color-bg-secondary))",
       }}
     >
       <BrowserRouter>
