@@ -55,7 +55,6 @@ export function Board() {
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          {...provided.dragHandleProps}
                           className="snap-start h-min mr-3 w-64"
                         >
                           <List

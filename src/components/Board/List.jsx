@@ -53,7 +53,7 @@ export function List({ list, listCards, dragHandleProps }) {
       className="listContainer relative p-2 w-64 max-h-[calc(100vh-8rem)] rounded-lg flex flex-col
       border-1 border-border hover:border-border-hover text-text-primary bg-bg-primary"
     >
-      <div {...dragHandleProps} className="listHeader w-full gap-1 mb-2 p-1">
+      <div className="listHeader w-full gap-1 mb-2 p-1">
         {isEditing ? (
           <AutoResizeTextarea
             ref={inputRef}
@@ -65,7 +65,7 @@ export function List({ list, listCards, dragHandleProps }) {
             className="px-2 py-1 w-full text-sm rounded-md"
           />
         ) : (
-          <div className="relative flex w-full">
+          <div {...dragHandleProps} className="relative flex w-full">
             <span className="pr-8 break-words text-sm font-bold min-w-0 flex-1">
               {list.title}
             </span>
