@@ -2,20 +2,26 @@ import { FaTrello } from "react-icons/fa";
 import { LuGithub } from "react-icons/lu";
 import { DarkModeToggle } from "../shared/DarkModeToggle";
 import { DropDownMenu } from "./";
-import { useAuth, useTheme } from "../../contexts";
+import { useAuth, useBoardContext, useTheme } from "../../contexts";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const { isLoggedIn, handleLogout } = useAuth();
+  const { activeBoardId } = useBoardContext();
   const { theme } = useTheme();
   const navigate = useNavigate();
 
   return (
     <div
-      className="flex justify-between items-center max-h-12 px-3 py-2 backdrop-blur-sm text-white border-b border-border z-30 shadow-md"
+      className={`flex justify-between items-center max-h-12 px-3 py-2 backdrop-blur-sm opacity-100 border-b border-border z-30 shadow-sm
+        ${theme === "dark" ? "text-white" : activeBoardId ? "text-white" : "text-black"} `}
       style={{
         backgroundColor:
-          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.6)",
+          activeBoardId !== null
+            ? theme === "dark"
+              ? "hsla(0, 0%, 0%, 0.8)"
+              : "hsla(0, 0%, 0%, 0.6)"
+            : "",
       }}
     >
       <div
