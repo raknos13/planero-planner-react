@@ -50,7 +50,7 @@ export function List({ list, listCards, dragHandleProps }) {
 
   return (
     <div
-      className="listContainer relative p-2 w-64 max-h-[calc(100vh-5rem)] rounded-lg flex flex-col
+      className="listContainer relative p-2 w-64 max-h-[calc(100vh-8rem)] rounded-lg flex flex-col
       border-1 border-border hover:border-border-hover text-text-primary bg-bg-primary"
     >
       <div {...dragHandleProps} className="listHeader w-full gap-1 mb-2 p-1">
@@ -88,7 +88,7 @@ export function List({ list, listCards, dragHandleProps }) {
         />
       </div>
       <div className="flex flex-col flex-1 min-h-0">
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 overflow-y-auto scroll-smooth">
           <Droppable droppableId={list.id}>
             {(provided, snapshot) => (
               <ul
@@ -96,7 +96,7 @@ export function List({ list, listCards, dragHandleProps }) {
                 {...provided.droppableProps}
                 // bind ref to DOM element
                 ref={provided.innerRef}
-                className={`min-h-1 rounded-lg`}
+                className={`min-h-1 rounded-lg scroll-smooth`}
                 style={{
                   backgroundColor: snapshot.isDraggingOver
                     ? boardColor.replace("1)", "0.1)")
