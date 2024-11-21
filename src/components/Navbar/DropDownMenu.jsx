@@ -30,33 +30,52 @@ export const DropDownMenu = ({ onLogout }) => {
 
   return (
     <div className="relative" ref={dropdownRef}>
-      <button
-        className="flex items-center justify-center rounded-full h-8 w-8 bg-yellow-300 transition-colors duration-200 hover:shadow-lg hover:bg-bg-hover"
-        onClick={toggleDropdown}
-      >
-        <span className="text-black flex-1">{currentUser.displayName[0]}</span>
-      </button>
+      {currentUser.photoURL ? (
+        <img
+          src={currentUser.photoURL}
+          alt="profile image"
+          referrerPolicy="no-referrer"
+          className="h-8 w-8 cursor-pointer rounded-full hover:shadow-lg"
+          onClick={toggleDropdown}
+        />
+      ) : (
+        <button
+          className="flex h-7 w-7 items-center justify-center rounded-full bg-yellow-300 transition-colors duration-200 hover:bg-bg-hover hover:shadow-lg"
+          onClick={toggleDropdown}
+        >
+          <span className="flex-1 text-black">
+            {currentUser.displayName[0]}
+          </span>
+        </button>
+      )}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-60 bg-bg-card rounded-md shadow-lg z-10">
-          <div className="flex items-center gap-2 p-4">
-            <div className="w-8 h-8 rounded-full shrink-0 bg-yellow-300 text-black flex items-center justify-center">
-              {currentUser.displayName[0]}
-            </div>
-            <div className="text-sm font-bold text-wrap break-words">
+        <div className="absolute right-0 z-10 mt-2 w-60 rounded-md bg-bg-card shadow-lg">
+          <div className="flex items-center gap-3 p-4">
+            <img
+              src={currentUser.photoURL}
+              alt="profile image"
+              referrerPolicy="no-referrer"
+              className="h-7 w-7 rounded-full"
+              onClick={toggleDropdown}
+            />
+            {/* <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-300 text-black"> */}
+            {/*   {currentUser.displayName[0]} */}
+            {/* </div> */}
+            <div className="text-wrap break-words text-sm font-bold">
               <div>{currentUser.displayName}</div>
               <div>{currentUser.email}</div>
             </div>
           </div>
-          <div className="border-t border-border text-sm mb-2">
+          <div className="mb-2 border-t border-border text-sm">
             <button
-              className="text-gray-400 cursor-not-allowed block w-full text-left px-4 py-2 hover:bg-bg-hover transition-colors"
+              className="block w-full cursor-not-allowed px-4 py-2 text-left text-gray-400 transition-colors hover:bg-bg-hover"
               onClick={() => console.log("Profile")}
               disabled
             >
               Profile
             </button>
             <button
-              className="block w-full text-left px-4 py-2 hover:bg-bg-hover transition-colors"
+              className="block w-full px-4 py-2 text-left transition-colors hover:bg-bg-hover"
               onClick={handleLogout}
             >
               Log out
