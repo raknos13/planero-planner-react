@@ -83,7 +83,6 @@ export function List({ list, listCards, dragHandleProps }) {
           onEdit={handleEdit}
           onDelete={() => {
             deleteList(list.id);
-            toast.error("List deleted successfully 🗑️", { autoClose: 2000 });
           }}
           callButtonRef={showPopoverRef}
         />
