@@ -10,19 +10,19 @@ import { FiTrello, FiPlus, FiMoreHorizontal } from "react-icons/fi";
 export const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
   const { showBoardCreator, setShowBoardCreator } = useSidebar();
   return (
-    <div className="relative flex justify-between items-center px-3 py-2">
+    <div className="relative flex items-center justify-between px-3 py-2">
       <div className="flex items-center gap-2">
         <FiTrello size={15} />
         <h6 className="text-sm font-bold">Your boards</h6>
       </div>
       <button
         ref={addButtonRef}
-        className="hover:bg-white/30 p-1 rounded-md"
+        className="rounded-md p-1 hover:bg-white/30"
         onClick={() => setShowBoardCreator(true)}
       >
         <FiPlus size={18} />
       </button>
-      <div className="absolute top-8 left-12 right-0">
+      <div className="absolute left-12 right-0 top-8">
         {showBoardCreator && (
           <BoardCreatorPopover
             onClose={() => setShowBoardCreator(false)}
@@ -77,7 +77,7 @@ const BoardListItem = ({
   return (
     <li
       key={board.id}
-      className={`flex items-center w-full gap-2 py-1 px-3 cursor-pointer hover:bg-white/20
+      className={`flex w-full cursor-pointer items-center gap-2 px-3 py-1 hover:bg-white/20
                   ${board.id === activeBoardId && "font-medium text-white backdrop-blur-sm"}`}
       style={{
         backgroundColor:
@@ -92,7 +92,7 @@ const BoardListItem = ({
     >
       {/* <div className={`py-2 text-sm flex items-center justify-between gap-2`}> */}
       <div
-        className="w-3.5 h-3.5 flex-shrink-0 rounded-full"
+        className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
         style={{ backgroundColor: board.color }}
       />
       {editingBoardId === board.id ? (
@@ -110,11 +110,11 @@ const BoardListItem = ({
           }}
           onBlur={() => handleTitleSubmit(board.id)}
           onClick={(e) => e.stopPropagation()}
-          className="w-full rounded-md p-1 font-normal text-sm"
+          className="w-full rounded-md p-1 text-sm font-normal"
         />
       ) : (
-        <div className="flex items-center w-full min-w-0">
-          <span className="pr-1 w-full flex-1 break-words text-sm min-w-0">
+        <div className="flex w-full min-w-0 items-center">
+          <span className="w-full min-w-0 flex-1 break-words pr-1 text-sm">
             {board.title}
           </span>
           <div className="flex-shrink-0 opacity-100">
@@ -141,7 +141,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
           switchBoard(board.id);
           setActivePopoverBoard(board.id);
         }}
-        className={`z-0 relative hover:bg-white/30 p-1 rounded-md transition-colors`}
+        className={`relative z-0 rounded-md p-1 transition-colors hover:bg-white/30`}
       >
         <FiMoreHorizontal />
       </button>
