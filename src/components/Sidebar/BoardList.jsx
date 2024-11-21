@@ -6,6 +6,7 @@ import {
 import { useSidebar, useBoardContext, useTheme } from "../../contexts";
 import { useRef } from "react";
 import { FiTrello, FiPlus, FiMoreHorizontal } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 export const BoardListHeader = ({ handleCreateBoard, addButtonRef }) => {
   const { showBoardCreator, setShowBoardCreator } = useSidebar();
@@ -153,6 +154,7 @@ const BoardListItemActions = ({ board, handleEdit }) => {
         onDelete={(e) => {
           e.stopPropagation();
           deleteBoard(board.id);
+          toast.error("Board deleted successfully 🗑️", { autoClose: 2000 });
         }}
         callButtonRef={buttonRef}
       />

@@ -1,24 +1,33 @@
 import notFound from "../../assets/not-found.svg";
 import { FiPlus } from "react-icons/fi";
 import { BoardCreatorPopover } from "../shared";
-import { useState, useRef } from "react";
-import { useBoardContext } from "../../contexts";
+import { useState, useRef, useEffect } from "react";
+import { useBoardContext, useTheme } from "../../contexts";
+import { toast, ToastContainer } from "react-toastify";
 
 export const EmptyBoard = () => {
   const { addNewBoard } = useBoardContext();
+  const { theme } = useTheme();
   const [showBoardCreator, setShowBoardCreator] = useState(false);
   const buttonRef = useRef(null);
+
+  useEffect(() => {
+    toast.info(
+      `Oops! You deleted all boards 😢\nClick + to create a new board`,
+    );
+  }, []);
 
   function handleCreateBoard(title, color) {
     addNewBoard(title, color);
   }
 
   return (
-    <div className="relative flex flex-col justify-start items-center w-svw space-y-4 px-4 overflow-x-auto bg-primary text-text-primary">
+    <div className="w-svw relative flex flex-col items-center justify-start space-y-4 overflow-x-auto bg-primary px-4 text-text-primary">
+      <ToastContainer className="mt-10" theme={theme} />
       <figure>
-        <img src={notFound} alt="Not found svg" className="h-64 mt-10" />
+        <img src={notFound} alt="Not found svg" className="mt-10 h-64" />
       </figure>
-      <div className="relative right-32 bottom-44">
+      <div className="relative bottom-44 right-32">
         {showBoardCreator && (
           <BoardCreatorPopover
             onClose={() => setShowBoardCreator(false)}
@@ -33,9 +42,9 @@ export const EmptyBoard = () => {
       </div>
       <div className="relative w-44">
         <button
-          className="flex items-center cursor-pointer transition-all bg-blue-500 text-white px-6 py-2 rounded-lg
-                     border-blue-600 border-b-[4px] hover:brightness-110 hover:-translate-y-[1px] hover:border-b-[6px]
-                     active:border-b-[2px] active:brightness-90 active:translate-y-[2px]"
+          className="flex cursor-pointer items-center rounded-lg border-b-[4px] border-blue-600 bg-blue-500 px-6 py-2
+                     text-white transition-all hover:-translate-y-[1px] hover:border-b-[6px] hover:brightness-110
+                     active:translate-y-[2px] active:border-b-[2px] active:brightness-90"
           style={{ position: "absolute", top: 0 }}
           onClick={() => setShowBoardCreator(true)}
           ref={buttonRef}
