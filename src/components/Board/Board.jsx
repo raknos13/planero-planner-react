@@ -13,11 +13,24 @@ export function Board() {
   const { theme } = useTheme();
 
   useEffect(() => {
-    toast.dismiss();
-    toast.info(`Welcome ${currentUser.displayName}! 😊`, { autoClose: 5000 });
-    setTimeout(() => {
-      toast.info("Take your time and explore around.. ✨");
-    }, 5000);
+    // Check if welcome toasts have been shown
+    const hasShownWelcomeToast = localStorage.getItem("hasShownWelcomeToast");
+
+    if (currentUser && !hasShownWelcomeToast) {
+      toast.dismiss();
+      toast.success(`Welcome ${currentUser.displayName}! 😊`, {
+        autoClose: 3000,
+        onClose: () => {
+          toast.info("Take your time and explore around.. ✨", {
+            autoClose: 3000,
+            onClose: () => {
+              // Mark that welcome toasts have been shown
+              localStorage.setItem("hasShownWelcomeToast", "true");
+            },
+          });
+        },
+      });
+    }
   }, [currentUser]);
 
   const activeBoard = boards[activeBoardId];
@@ -28,6 +41,7 @@ export function Board() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
+      <ToastContainer theme={theme} closeOnClick className="mt-10" />
       <div className="boardContainer flex w-full flex-col overflow-y-hidden">
         <div
           className={`boardHeader flex h-10 items-center justify-start gap-4 py-6 pl-6 text-xl font-bold text-white 
@@ -39,7 +53,6 @@ export function Board() {
           </button>
         </div>
         <div className={`flex-grow overflow-x-hidden overflow-y-hidden`}>
-          <ToastContainer theme={theme} />
           <Droppable droppableId="board" type="list" direction="horizontal">
             {(provided, snapshot) => (
               <div
