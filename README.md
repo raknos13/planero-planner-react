@@ -1,5 +1,7 @@
 # Planero - A Trello-inspired Project Management App
 
+[![Watch the demo video](https://img.youtube.com/vi/PsPuVJGiQ_w/hqdefault.jpg)](https://www.youtube.com/watch?v=PsPuVJGiQ_w)
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
