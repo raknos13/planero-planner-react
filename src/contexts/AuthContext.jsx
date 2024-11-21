@@ -197,6 +197,8 @@ export const AuthProvider = ({ children }) => {
         // Sign-out successful.
         setIsLoggedIn(false);
         setCurrentUser(null);
+
+        localStorage.removeItem("hasShownWelcomeToast");
       })
       .catch((error) => {
         // An error happened.
