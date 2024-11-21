@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { AutoResizeTextarea } from "../shared";
+import { toast } from "react-toastify";
 
 export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   const [isAddingNew, setIsAddingNew] = useState(false);
@@ -27,6 +28,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
         handleAddNew(newTitle);
       }
       setNewTitle("");
+      toast.success(`New ${type} added successfully`, { autoClose: 2000 });
     }
     if (multiAddMode) {
       inputRef.current?.focus();
@@ -63,7 +65,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     return (
       <button
         onClick={() => setIsAddingNew(true)}
-        className="flex items-center gap-2 p-2 bg-primary text-text-primary rounded-md w-full text-sm hover:bg-bg-card"
+        className="flex w-full items-center gap-2 rounded-md bg-primary p-2 text-sm text-text-primary hover:bg-bg-card"
       >
         <AiOutlinePlus />
         <span>Add new {type}</span>
@@ -72,7 +74,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
   }
 
   return (
-    <div className="flex flex-col p-1 text-text-primary h-min rounded-lg w-full space-y-1">
+    <div className="flex h-min w-full flex-col space-y-1 rounded-lg p-1 text-text-primary">
       <AutoResizeTextarea
         placeholder="Enter a title..."
         value={newTitle}
@@ -80,7 +82,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
         onChange={(e) => setNewTitle(e.target.value)}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className="mb-1 p-2 rounded-md text-sm resize-none border-border bg-bg-card focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="mb-1 resize-none rounded-md border-border bg-bg-card p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       {/* {type === "card" ? ( */}
       {/*   <AutoResizeTextarea */}
@@ -107,13 +109,13 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-accent hover:bg-accent-hover text-primary rounded-md text-sm"
+          className="flex-grow rounded-md bg-accent px-3 py-1.5 text-sm text-primary hover:bg-accent-hover"
         >
           Add {type}
         </button>
         <button
           onClick={handleCancel}
-          className="px-3 py-1.5 bg-secondary rounded-md hover:bg-primary text-sm"
+          className="rounded-md bg-secondary px-3 py-1.5 text-sm hover:bg-primary"
         >
           <AiOutlineClose />
         </button>
