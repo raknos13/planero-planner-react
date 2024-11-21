@@ -1,13 +1,24 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { EmptyBoard, List, AddNew } from "./";
-import { useBoardContext, useTheme } from "../../contexts/";
+import { useAuth, useBoardContext, useTheme } from "../../contexts/";
 import { FiStar } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect } from "react";
 
 export function Board() {
   const { boards, lists, cards, activeBoardId, addNewList, onDragEnd } =
     useBoardContext();
+  const { currentUser } = useAuth();
 
   const { theme } = useTheme();
+
+  useEffect(() => {
+    toast.dismiss();
+    toast.info(`Welcome ${currentUser.displayName}! 😊`, { autoClose: 5000 });
+    setTimeout(() => {
+      toast.info("Take your time and explore around.. ✨");
+    }, 5000);
+  }, [currentUser]);
 
   const activeBoard = boards[activeBoardId];
 
@@ -17,9 +28,9 @@ export function Board() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="boardContainer flex flex-col w-full overflow-y-hidden">
+      <div className="boardContainer flex w-full flex-col overflow-y-hidden">
         <div
-          className={`boardHeader h-10 flex gap-4 pl-6 text-white font-bold text-xl py-6 justify-start items-center 
+          className={`boardHeader flex h-10 items-center justify-start gap-4 py-6 pl-6 text-xl font-bold text-white 
                 ${theme === "dark" ? "bg-black/60" : "bg-black/40"}`}
         >
           {activeBoard.title}
@@ -28,12 +39,13 @@ export function Board() {
           </button>
         </div>
         <div className={`flex-grow overflow-x-hidden overflow-y-hidden`}>
+          <ToastContainer theme={theme} />
           <Droppable droppableId="board" type="list" direction="horizontal">
             {(provided, snapshot) => (
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`flex flex-nowrap p-4 h-full w-full overflow-x-scroll text-text-primary`}
+                className={`flex h-full w-full flex-nowrap overflow-x-scroll p-4 text-text-primary`}
                 style={{
                   // Dim the board background color for light and dark modes
                   background:
@@ -55,7 +67,7 @@ export function Board() {
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          className="snap-start h-min mr-3 w-64"
+                          className="mr-3 h-min w-64 snap-start"
                         >
                           <List
                             list={list}
@@ -68,7 +80,7 @@ export function Board() {
                   );
                 })}
                 {provided.placeholder}
-                <div className="flex-shrink-0 w-64 bg-primary h-min rounded-lg p-2">
+                <div className="h-min w-64 flex-shrink-0 rounded-lg bg-primary p-2">
                   <AddNew
                     type="list"
                     multiAddMode={true}
