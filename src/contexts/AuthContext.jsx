@@ -11,6 +11,8 @@ import {
   linkWithCredential,
 } from "firebase/auth";
 import { auth } from "../services/firebase.config.js";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
@@ -89,7 +91,22 @@ export const AuthProvider = ({ children }) => {
   const handleGoogleSignIn = async () => {
     try {
       const googleProvider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, googleProvider);
+
+      const result = await toast.promise(
+        signInWithPopup(auth, googleProvider),
+        {
+          pending: "Logging in with Google...",
+          success: "Successfully logged in!",
+          error: "Error signing in with Google",
+        },
+        {
+          position: "top-right",
+          autoClose: 3000,
+        },
+      );
+
+      // const result = await signInWithPopup(auth, googleProvider);
+
       setCurrentUser(result.user);
       // console.log(result.user);
       // console.log(Object.keys(result.user));
@@ -108,13 +125,26 @@ export const AuthProvider = ({ children }) => {
 
       await handleAccountLinking(result.user);
     } catch (error) {
+      // Close any existing loading toast
+      toast.dismiss();
+
+      // Show error toast
+      const errorMessage =
+        error.code === "auth/popup-closed-by-user"
+          ? "Login cancelled. Try again?"
+          : `Error signing in with Google: ${error.message}`;
+
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+      });
       // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
       console.error(
         "Error signing in with Google",
-        errorCode,
-        errorMessage,
-        email,
+        error.code,
+        error.message,
+        error.email,
         credential,
       );
     }

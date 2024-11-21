@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "@/contexts";
+import { useAuth, useTheme } from "@/contexts";
 import { FcGoogle } from "react-icons/fc";
+import { ToastContainer } from "react-toastify";
 
 const AuthPage = ({ login = true }) => {
   const [isLogin, setIsLogin] = useState(login);
@@ -8,6 +9,7 @@ const AuthPage = ({ login = true }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { handleEmailSignUp, handleGoogleSignIn } = useAuth();
+  const { theme } = useTheme();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +25,8 @@ const AuthPage = ({ login = true }) => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-primary py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-center justify-center bg-primary px-4 py-12 sm:px-6 lg:px-8">
+      <ToastContainer position="top-right" theme={theme} />
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-text-primary">
@@ -55,8 +58,9 @@ const AuthPage = ({ login = true }) => {
                   autoComplete="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="mt-2 block w-full rounded-md bg-secondary p-2 text-text-primary"
+                  className="mt-2 block w-full cursor-not-allowed rounded-md bg-secondary p-2 text-text-primary"
                   required={!isLogin}
+                  disabled
                 />
               </div>
             )}
@@ -72,8 +76,9 @@ const AuthPage = ({ login = true }) => {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-2 block w-full rounded-md bg-secondary p-2 text-text-primary"
+                className="mt-2 block w-full cursor-not-allowed rounded-md bg-secondary p-2 text-text-primary"
                 required
+                disabled
               />
             </div>
 
@@ -88,8 +93,9 @@ const AuthPage = ({ login = true }) => {
                 autoComplete={isLogin ? "current-password" : "new-password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-2 block w-full rounded-md bg-secondary p-2 text-text-primary"
+                className="mt-2 block w-full cursor-not-allowed rounded-md bg-secondary p-2 text-text-primary"
                 required
+                disabled
               />
             </div>
 
@@ -124,7 +130,7 @@ const AuthPage = ({ login = true }) => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-accent py-2 px-4 text-primary hover:bg-accent-hover"
+                className="flex w-full justify-center rounded-md bg-accent px-4 py-2 text-primary hover:bg-accent-hover"
               >
                 {isLogin ? "Sign in" : "Create account"}
               </button>
@@ -146,7 +152,7 @@ const AuthPage = ({ login = true }) => {
             <div className="mt-4 flex gap-3">
               <button
                 type="button"
-                className="flex w-full items-center justify-center rounded-lg border border-border bg-primary py-2 px-4 text-text-primary hover:bg-secondary"
+                className="flex w-full items-center justify-center rounded-lg border border-border bg-primary px-4 py-2 text-text-primary hover:bg-secondary"
                 onClick={handleGoogleSignIn}
               >
                 <FcGoogle className="mr-2" />
