@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth, useTheme } from "@/contexts";
 import { FcGoogle } from "react-icons/fc";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 const AuthPage = ({ login = true }) => {
   const [isLogin, setIsLogin] = useState(login);
@@ -10,6 +10,10 @@ const AuthPage = ({ login = true }) => {
   const [password, setPassword] = useState("");
   const { handleEmailSignUp, handleGoogleSignIn } = useAuth();
   const { theme } = useTheme();
+
+  useEffect(() => {
+    toast.info("Please use Google to sign in.", { autoClose: 10000 });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
