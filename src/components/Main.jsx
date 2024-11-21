@@ -9,11 +9,10 @@ export default function Main() {
   const { boards, activeBoardId } = useBoardContext();
 
   const activeBoard = boards[activeBoardId];
-  console.log(activeBoardId);
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center bg-black text-white h-screen w-screen">
+      <div className="flex h-screen w-screen items-center justify-center bg-black text-white">
         Loading...
       </div>
     );
@@ -21,9 +20,9 @@ export default function Main() {
 
   return (
     <div
-      className={`h-screen w-screen flex flex-col bg-bg-primary`}
+      className={`flex h-screen w-screen flex-col bg-primary`}
       style={{
-        background: activeBoardId && activeBoard.color,
+        background: isLoggedIn && activeBoardId && activeBoard.color,
       }}
     >
       <BrowserRouter>

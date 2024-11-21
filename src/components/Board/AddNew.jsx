@@ -63,7 +63,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
     return (
       <button
         onClick={() => setIsAddingNew(true)}
-        className="flex items-center gap-2 p-2 bg-bg-primary text-text-primary rounded-md w-full text-sm hover:bg-bg-card"
+        className="flex items-center gap-2 p-2 bg-primary text-text-primary rounded-md w-full text-sm hover:bg-bg-card"
       >
         <AiOutlinePlus />
         <span>Add new {type}</span>
@@ -90,7 +90,7 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       {/*     onChange={(e) => setNewTitle(e.target.value)} */}
       {/*     onKeyDown={handleKeyDown} */}
       {/*     onBlur={handleBlur} */}
-      {/*     className="mb-1 p-2 px-4 rounded-lg text-sm min-h-[60px] resize-none bg-secondary text-text" */}
+      {/*     className="mb-1 p-2 px-4 rounded-lg text-sm min-h-[60px] resize-none secondary text-text" */}
       {/*   /> */}
       {/* ) : ( */}
       {/*   <input */}
@@ -107,13 +107,13 @@ export const AddNew = ({ type, multiAddMode = true, handleAddNew, id }) => {
       <div className="flex gap-2">
         <button
           onClick={handleSubmit}
-          className="flex-grow px-3 py-1.5 bg-accent hover:bg-accent-hover text-bg-primary rounded-md text-sm"
+          className="flex-grow px-3 py-1.5 bg-accent hover:bg-accent-hover text-primary rounded-md text-sm"
         >
           Add {type}
         </button>
         <button
           onClick={handleCancel}
-          className="px-3 py-1.5 bg-bg-secondary rounded-md hover:bg-bg-primary text-sm"
+          className="px-3 py-1.5 bg-secondary rounded-md hover:bg-primary text-sm"
         >
           <AiOutlineClose />
         </button>

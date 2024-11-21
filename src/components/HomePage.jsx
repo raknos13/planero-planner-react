@@ -17,7 +17,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen overflow-y-scroll bg-gradient-to-b from-bg-secondary to-bg-primary">
+    <div className="min-h-screen overflow-y-scroll bg-gradient-to-b from-secondary to-primary">
       {/* Hero Section */}
       <div className="relative">
         {/* Background Image */}
@@ -99,13 +99,13 @@ export default function HomePage() {
               {
                 title: "Login to save your data",
                 description:
-                  "Signup and login with email or your Google account to saveguard your data",
+                  "Signup and login with email or your Google account to safeguard your data",
                 image: ssSignin,
               },
             ].map((feature, index) => (
               <div
                 key={index}
-                className="bg-bg-primary flex flex-col md:flex-row items-center rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
+                className="bg-primary flex flex-col md:flex-row items-center rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
               >
                 <div
                   className={`p-6 flex-1 md:order-1`}

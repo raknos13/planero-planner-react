@@ -13,8 +13,8 @@
 }
 
 .light {
-  --color-bg-primary: 0 8% 98%;
-  --color-bg-secondary: 0 0% 94%;
+  --color-primary: 0 8% 98%;
+  --color-secondary: 0 0% 94%;
   --color-hover: 210 12% 83%;
   --color-bg-card: 0 0% 88%;
   --color-bg-card-hover: 0 0% 92%;
@@ -24,13 +24,18 @@
   --color-border-hover: 0 0% 35%;
   --color-accent: 211 100% 50%;
   --color-accent-hover: 213 100% 50%;
-  --bg-sidebar-overlay: rgba(255, 255, 255, 0.15);
+
+  --color-text-transparent: 100 100% 100%;
+  --color-border-transparent: 0 0% 75%;
+  --color-bg-transparent: 0 0% 0% 0.6;
+
+  /* --bg-sidebar-overlay: rgba(255, 255, 255, 0.15); */
   /* --color-border: 222 226 230; */
   /* --color-border-hover: 210 215 220; */
 }
 .dark {
-  --color-bg-primary: 0 0% 12%;
-  --color-bg-secondary: 0 0% 16%;
+  --color-primary: 0 0% 12%;
+  --color-secondary: 0 0% 16%;
   --color-hover: 204 11% 31%;
   --color-bg-card: 0 0% 21%;
   --color-bg-card-hover: 0 0% 16%;
@@ -40,6 +45,11 @@
   --color-border-hover: 0 0% 35%;
   --color-accent: 210 100% 65%;
   --color-accent-hover: 210 90% 61%;
+
+  --color-text-transparent: 100 100% 100%;
+  --color-border-transparent: 0 0% 75%;
+  --color-bg-transparent: 0 0% 0% 0.6;
+
   --bg-sidebar-overlay: rgba(
     0,
     0,

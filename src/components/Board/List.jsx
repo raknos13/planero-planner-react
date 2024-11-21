@@ -49,11 +49,8 @@ export function List({ list, listCards, dragHandleProps }) {
   }
 
   return (
-    <div
-      className="listContainer relative p-2 w-64 max-h-[calc(100vh-8rem)] rounded-lg flex flex-col
-      border-1 border-border hover:border-border-hover text-text-primary bg-bg-primary"
-    >
-      <div className="listHeader w-full gap-1 mb-2 p-1">
+    <div className="listContainer border-1 relative flex max-h-[calc(100vh-8rem)] w-64 flex-col rounded-lg border-border bg-primary p-2 text-text-primary hover:border-border-hover">
+      <div className="listHeader mb-2 w-full gap-1 p-1">
         {isEditing ? (
           <AutoResizeTextarea
             ref={inputRef}
@@ -62,15 +59,15 @@ export function List({ list, listCards, dragHandleProps }) {
             onChange={(e) => setEditedTitle(e.target.value)}
             onKeyDown={handleKeyDown}
             onBlur={handleBlur}
-            className="px-2 py-1 w-full text-sm rounded-md"
+            className="w-full rounded-md px-2 py-1 text-sm"
           />
         ) : (
           <div {...dragHandleProps} className="relative flex w-full">
-            <span className="pr-8 break-words text-sm font-bold min-w-0 flex-1">
+            <span className="min-w-0 flex-1 break-words pr-8 text-sm font-bold">
               {list.title}
             </span>
             <button
-              className="absolute top-0 right-0 p-1 rounded-md hover:bg-text-secondary hover:text-bg-primary hover:opacity-50 transition-colors"
+              className="absolute right-0 top-0 rounded-md p-1 transition-colors hover:bg-text-secondary hover:text-primary hover:opacity-50"
               onClick={() => setShowPopover(true)}
               ref={showPopoverRef}
             >
@@ -87,7 +84,7 @@ export function List({ list, listCards, dragHandleProps }) {
           callButtonRef={showPopoverRef}
         />
       </div>
-      <div className="flex flex-col flex-1 min-h-0">
+      <div className="flex min-h-0 flex-1 flex-col">
         <div className="flex-1 overflow-y-auto scroll-smooth">
           <Droppable droppableId={list.id}>
             {(provided, snapshot) => (
@@ -96,7 +93,7 @@ export function List({ list, listCards, dragHandleProps }) {
                 {...provided.droppableProps}
                 // bind ref to DOM element
                 ref={provided.innerRef}
-                className={`min-h-1 rounded-lg scroll-smooth`}
+                className={`min-h-1 scroll-smooth rounded-lg`}
                 style={{
                   backgroundColor: snapshot.isDraggingOver
                     ? boardColor.replace("1)", "0.1)")

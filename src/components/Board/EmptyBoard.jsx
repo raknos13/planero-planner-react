@@ -14,7 +14,7 @@ export const EmptyBoard = () => {
   }
 
   return (
-    <div className="relative flex flex-col justify-start items-center w-svw space-y-4 px-4 overflow-x-auto bg-bg-primary text-text-primary">
+    <div className="relative flex flex-col justify-start items-center w-svw space-y-4 px-4 overflow-x-auto bg-primary text-text-primary">
       <figure>
         <img src={notFound} alt="Not found svg" className="h-64 mt-10" />
       </figure>

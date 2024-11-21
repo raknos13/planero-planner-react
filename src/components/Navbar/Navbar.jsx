@@ -14,7 +14,7 @@ export const Navbar = () => {
   return (
     <div
       className={`flex justify-between items-center max-h-12 px-3 py-2 backdrop-blur-sm opacity-100 border-b border-border z-30 shadow-sm
-        ${theme === "dark" ? "text-white" : activeBoardId ? "text-white" : "text-black"} `}
+        ${theme === "dark" ? "text-white" : activeBoardId ? "text-white" : "text-text-primary border-gray-300"} `}
       style={{
         backgroundColor:
           activeBoardId !== null
@@ -53,7 +53,7 @@ export const Navbar = () => {
           />
         ) : (
           <button
-            className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-base font-medium rounded-md text-bg-primary bg-text-primary hover:bg-text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-base font-medium rounded-md text-primary bg-text-primary hover:bg-text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             onClick={() => navigate("/auth")}
           >
             Log in

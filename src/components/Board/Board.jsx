@@ -68,7 +68,7 @@ export function Board() {
                   );
                 })}
                 {provided.placeholder}
-                <div className="flex-shrink-0 w-64 bg-bg-primary h-min rounded-lg p-2">
+                <div className="flex-shrink-0 w-64 bg-primary h-min rounded-lg p-2">
                   <AddNew
                     type="list"
                     multiAddMode={true}

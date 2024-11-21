@@ -48,30 +48,32 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`z-20 flex-shrink-0 ${isCollapsed ? "w-4" : "w-52"} text-white/70 h-full bg-bg-primary backdrop-blur-sm border-r border-border shadow-md transition-width duration-300 ease-in-out`}
+      className={`z-20 flex-shrink-0 ${isCollapsed ? "w-4" : "w-52"} transition-width h-full border-r border-border bg-primary shadow-md backdrop-blur-sm duration-300 ease-in-out ${theme === "dark" ? "text-white" : activeBoardId ? "text-white" : "border-gray-300 text-text-primary"} `}
       style={{
         backgroundColor:
-          theme === "dark" ? "hsla(0, 0%, 0%, 0.8)" : "hsla(0, 0%, 0%, 0.6)",
+          activeBoardId !== null
+            ? theme === "dark"
+              ? "hsla(0, 0%, 0%, 0.8)"
+              : "hsla(0, 0%, 0%, 0.6)"
+            : "",
       }}
     >
       {isCollapsed ? (
         <div
-          className={`h-full flex-shrink-0 w-4 cursor-pointer`}
+          className={`h-full w-4 flex-shrink-0 cursor-pointer`}
           onClick={() => setIsCollapsed(false)}
         >
           <div className="mt-2">
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className={`absolute z-30 opacity-100 text-gray-200 border-2
-            border-border p-1 rounded-full
-                ${theme === "dark" ? "bg-black/80 hover:bg-black/90" : "bg-black/50 hover:bg-black/60"}`}
+              className={`absolute z-30 rounded-full border-2 border-border p-1 text-gray-200 opacity-100 ${theme === "dark" ? "bg-black/80 hover:bg-black/90" : "bg-black/50 hover:bg-black/60"}`}
             >
               <FiChevronRight size={16} />
             </button>
           </div>
         </div>
       ) : (
-        <div className="flex flex-col justify-between h-full">
+        <div className="flex h-full flex-col justify-between">
           <SidebarHeader
             isCollapsed={isCollapsed}
             setIsCollapsed={setIsCollapsed}
@@ -99,7 +101,7 @@ export const Sidebar = () => {
             <EmptyBoardMessage />
           )}
           <div className="mt-auto">
-            <GithubButton link="https://github.com/mksonkar/planero-planner-react" />
+            <GithubButton link="https://github.com/mksonkar/planero-trello-clone-react" />
           </div>
         </div>
       )}
@@ -109,7 +111,7 @@ export const Sidebar = () => {
 
 const EmptyBoardMessage = () => {
   return (
-    <span className="p-3 text-xs text-text-secondary ml-5">
+    <span className="ml-5 p-3 text-xs text-text-secondary">
       {/* If no boards exist show this message */}
       Click{" "}
       <span className="inline-block">

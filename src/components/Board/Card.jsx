@@ -72,7 +72,7 @@ export const Card = forwardRef(function Card(
                 setEditedTitle(e.target.value);
               }}
               onKeyDown={handleKeyDown}
-              className="resize-none w-full p-2 border-border rounded-md bg-bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="resize-none w-full p-2 border-border rounded-md bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {/* <textarea */}
             {/*   value={editedTitle} */}
