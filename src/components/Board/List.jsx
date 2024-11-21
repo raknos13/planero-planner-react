@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Card, AddNew } from "./";
 import { AutoResizeTextarea, MoreOptionsPopover } from "../shared";
 import { useBoardContext } from "../../contexts";
+import { toast } from "react-toastify";
 
 export function List({ list, listCards, dragHandleProps }) {
   const { deleteList, editList, addNewCard, boards, activeBoardId } =
@@ -80,7 +81,10 @@ export function List({ list, listCards, dragHandleProps }) {
           isOpen={showPopover}
           onClose={() => setShowPopover(false)}
           onEdit={handleEdit}
-          onDelete={() => deleteList(list.id)}
+          onDelete={() => {
+            deleteList(list.id);
+            toast.error("List deleted successfully 🗑️", { autoClose: 2000 });
+          }}
           callButtonRef={showPopoverRef}
         />
       </div>
