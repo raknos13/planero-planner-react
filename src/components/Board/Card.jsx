@@ -4,7 +4,7 @@ import { useBoardContext } from "../../contexts";
 import { AutoResizeTextarea } from "../shared";
 
 export const Card = forwardRef(function Card(
-  { listId, card, draggableProps, dragHandleProps },
+  { listId, card, draggableProps, dragHandleProps, isDragging },
   ref,
 ) {
   const { deleteCard, editCard } = useBoardContext();
@@ -46,13 +46,14 @@ export const Card = forwardRef(function Card(
   }
 
   return (
-    <div className="relative w-full group">
-      <li
-        ref={ref}
-        {...draggableProps}
+    <div
+      ref={ref}
+      {...draggableProps}
+      className={`group relative mb-1.5 w-full ${isDragging ? "z-50" : ""}`}
+    >
+      <div
         {...dragHandleProps}
-        className="text-sm border-box mb-1.5 p-2 rounded-lg shadow flex items-center justify-between 
-                  bg-bg-card border-1 border-border hover:border-border-hover text-text-primary hover:bg-bg-card-hover hover:border-blue-500"
+        className={`border-1 mb-1.5 rounded-lg border-border bg-bg-card p-2 text-sm text-text-primary shadow hover:border-border-hover hover:bg-bg-card-hover ${isDragging ? "shadow-lg" : ""}`}
       >
         {/* <input */}
         {/*   type="checkbox" */}
@@ -63,7 +64,7 @@ export const Card = forwardRef(function Card(
         {isEditing ? (
           <form
             onSubmit={handleSubmit}
-            className="flex gap-2 items-center w-full"
+            className="flex w-full items-center gap-2"
           >
             <AutoResizeTextarea
               value={editedTitle}
@@ -72,7 +73,7 @@ export const Card = forwardRef(function Card(
                 setEditedTitle(e.target.value);
               }}
               onKeyDown={handleKeyDown}
-              className="resize-none w-full p-2 border-border rounded-md bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full resize-none rounded-md border-border bg-secondary p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {/* <textarea */}
             {/*   value={editedTitle} */}
@@ -88,7 +89,7 @@ export const Card = forwardRef(function Card(
             {/* /> */}
             <button
               type="submit"
-              className="text-green-600 p-1 rounded-md hover:bg-green-400 hover:text-white"
+              className="rounded-md p-1 text-green-600 hover:bg-green-400 hover:text-white"
             >
               <FiCheck size={16} /> {/* confirm edit */}
             </button>
@@ -97,13 +98,13 @@ export const Card = forwardRef(function Card(
                 setIsEditing(false);
                 setEditedTitle(card.title);
               }}
-              className="text-red-600 p-1 rounded-md hover:bg-red-400 hover:text-white"
+              className="rounded-md p-1 text-red-600 hover:bg-red-400 hover:text-white"
             >
               <FiX size={16} /> {/* cancel edit */}
             </button>
           </form>
         ) : (
-          <div className="flex justify-between items-center w-full max-w-full">
+          <div className="flex w-full max-w-full items-center justify-between">
             <div className="w-full max-w-full">
               <span
                 // className={`${card.completed ? "line-through text-gray-500" : ""}`}
@@ -114,25 +115,25 @@ export const Card = forwardRef(function Card(
             </div>
             {/* Hide buttons by default, show on hover */}
             <div
-              className="absolute top-1.5 right-2 gap-0 hidden group-hover:flex transition-opacity duration-300 
-                  text-text-secondary bg-bg-card-hover rounded-md"
+              className="absolute right-2 top-1.5 hidden gap-0 rounded-md bg-bg-card-hover text-text-secondary 
+                  transition-opacity duration-300 group-hover:flex"
             >
               <button
                 onClick={() => setIsEditing(true)}
-                className="hover:bg-bg-card rounded-md p-1 transition-colors duration-200"
+                className="rounded-md p-1 transition-colors duration-200 hover:bg-bg-card"
               >
                 <FiEdit size={15} />
               </button>{" "}
               <button
                 onClick={() => deleteCard(listId, card.id)}
-                className="hover:bg-bg-card hover:text-red-500 rounded-md p-1 transition-colors duration-200"
+                className="rounded-md p-1 transition-colors duration-200 hover:bg-bg-card hover:text-red-500"
               >
                 <FiTrash size={15} />
               </button>
             </div>
           </div>
         )}
-      </li>
+      </div>
     </div>
   );
 });
