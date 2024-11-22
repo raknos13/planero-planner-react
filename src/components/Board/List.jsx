@@ -50,8 +50,8 @@ export function List({ list, listCards, dragHandleProps }) {
   }
 
   return (
-    <div className="listContainer border-1 relative flex max-h-[calc(100vh-8rem)] w-64 flex-col rounded-lg border-border bg-primary p-2 text-text-primary hover:border-border-hover">
-      <div className="listHeader mb-2 w-full gap-1 p-1">
+    <div className="listContainer border-1 flex h-full max-h-[calc(100vh-8rem)] w-64 flex-col rounded-lg border-border bg-primary p-2 text-text-primary hover:border-border-hover">
+      <div className="listHeader mb-2 flex items-center justify-between p-1">
         {isEditing ? (
           <AutoResizeTextarea
             ref={inputRef}
@@ -87,49 +87,53 @@ export function List({ list, listCards, dragHandleProps }) {
           callButtonRef={showPopoverRef}
         />
       </div>
-      <div className="flex min-h-0 flex-1 flex-col">
-        <div className="flex-1 overflow-y-auto scroll-smooth">
-          <Droppable droppableId={list.id}>
-            {(provided, snapshot) => (
-              <ul
-                // pass necessary props to make the list droppable
-                {...provided.droppableProps}
-                // bind ref to DOM element
-                ref={provided.innerRef}
-                className={`min-h-1 scroll-smooth rounded-lg`}
-                style={{
-                  backgroundColor: snapshot.isDraggingOver
-                    ? boardColor.replace("1)", "0.1)")
-                    : "",
-                }}
-              >
-                {listCards.map((card, index) => (
-                  <Draggable key={card.id} draggableId={card.id} index={index}>
-                    {(provided) => (
-                      <Card
-                        ref={provided.innerRef}
-                        draggableProps={provided.draggableProps}
-                        dragHandleProps={provided.dragHandleProps}
-                        listId={list.id}
-                        card={card}
-                      />
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </div>
-        <div className="flex-shrink-0">
-          <AddNew
-            type="card"
-            multiAddMode={true}
-            id={list.id}
-            handleAddNew={addNewCard}
-          />
-        </div>
-      </div>
+      <Droppable droppableId={list.id} type="card">
+        {(provided, snapshot) => (
+          <div className="flex min-h-0 flex-1 flex-col">
+            <div
+              // bind ref to DOM element
+              ref={provided.innerRef}
+              // pass necessary props to make the list droppable
+              {...provided.droppableProps}
+              className={`min-h-4 mb-1 flex-1 overflow-y-auto scroll-smooth rounded-lg`}
+              style={{
+                backgroundColor: snapshot.isDraggingOver
+                  ? boardColor.replace("1)", "0.1)")
+                  : "transparent",
+              }}
+            >
+              {listCards.map((card, index) => (
+                <Draggable
+                  key={card.id}
+                  draggableId={card.id}
+                  index={index}
+                  type="card"
+                >
+                  {(provided, snapshot) => (
+                    <Card
+                      ref={provided.innerRef}
+                      draggableProps={provided.draggableProps}
+                      dragHandleProps={provided.dragHandleProps}
+                      listId={list.id}
+                      card={card}
+                      isDragging={snapshot.isDragging}
+                    />
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+            <div className="">
+              <AddNew
+                type="card"
+                multiAddMode={true}
+                id={list.id}
+                handleAddNew={addNewCard}
+              />
+            </div>
+          </div>
+        )}
+      </Droppable>
     </div>
   );
 }
