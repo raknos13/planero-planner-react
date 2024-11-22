@@ -42,7 +42,7 @@ export function Board() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <ToastContainer theme={theme} closeOnClick className="mt-10" />
-      <div className="boardContainer flex w-full flex-col overflow-y-hidden">
+      <div className="boardContainer flex h-full w-full flex-col">
         <div
           className={`boardHeader flex h-10 items-center justify-start gap-4 py-6 pl-6 text-xl font-bold text-white 
                 ${theme === "dark" ? "bg-black/60" : "bg-black/40"}`}
@@ -52,13 +52,13 @@ export function Board() {
             <FiStar />
           </button>
         </div>
-        <div className={`flex-grow overflow-x-hidden overflow-y-hidden`}>
+        <div className={`relative flex-1`}>
           <Droppable droppableId="board" type="list" direction="horizontal">
             {(provided, snapshot) => (
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`flex h-full w-full flex-nowrap overflow-x-scroll p-4 text-text-primary`}
+                className="absolute inset-0 flex flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth p-4 text-text-primary"
                 style={{
                   // Dim the board background color for light and dark modes
                   background:
@@ -80,7 +80,7 @@ export function Board() {
                         <div
                           ref={provided.innerRef}
                           {...provided.draggableProps}
-                          className="mr-3 h-min w-64 snap-start"
+                          className="mr-3 h-min w-64 flex-shrink-0"
                         >
                           <List
                             list={list}
